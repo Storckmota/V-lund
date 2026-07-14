@@ -1,0 +1,49 @@
+/* Tokens — sistema tinta e papel da Vólund */
+:root {
+  /* Cor */
+  --paper: #FAF8F4;
+  --ink: #17150F;
+  --hairline: #E4E0D6;
+  --muted: #8B8578;
+  --ember-light: #A03D2D;
+  --ember-dark: #C45543;
+  --body: #33302A;
+
+  /* Variantes sobre tinta */
+  --paper-muted: rgba(241, 237, 226, 0.64);
+  --hairline-ink: rgba(241, 237, 226, 0.18);
+
+  /* Tipografia */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-sans: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, monospace;
+
+  /* Escala tipográfica fluida */
+  --fs-display: clamp(2.5rem, 1.1rem + 6vw, 5.5rem);
+  --fs-display-sm: clamp(1.9rem, 1rem + 3.6vw, 3.4rem);
+  --fs-h2: clamp(1.85rem, 1.05rem + 3.2vw, 3.2rem);
+  --fs-h3: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
+  --fs-lead: clamp(1.0625rem, 0.95rem + 0.5vw, 1.3rem);
+  --fs-body: 1.0625rem;
+  --fs-mono: 0.8125rem;
+  --fs-mono-sm: 0.75rem;
+
+  /* Espaço */
+  --space-section: clamp(5.5rem, 4rem + 8vw, 11rem);
+  --space-block: clamp(2.5rem, 2rem + 2.5vw, 4.5rem);
+  --gutter: clamp(1.25rem, 5vw, 5rem);
+  --container-max: 1400px;
+
+  /* Movimento */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 0.7s;
+  --dur-slow: 1s;
+
+  /* Camadas */
+  --z-header: 50;
+  --z-menu: 60;
+  --z-skip: 100;
+
+  /* Header */
+  --header-h: 4.25rem;
+}

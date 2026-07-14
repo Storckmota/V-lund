@@ -1,0 +1,161 @@
+/* Componentes — botões, links vivos, fichas, listas editoriais */
+
+/* Botão principal (tinta sobre papel) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 1rem 1.9rem;
+  min-height: 44px;
+  border: 1px solid var(--ink);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.btn::after {
+  content: '→';
+  transition: transform 0.3s var(--ease-out);
+}
+
+.btn:hover::after,
+.btn:focus-visible::after {
+  transform: translateX(0.3rem);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: var(--ember-light);
+  border-color: var(--ember-light);
+  color: var(--paper);
+}
+
+/* Botão papel (sobre tinta) */
+.btn-paper {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+
+.btn-paper:hover,
+.btn-paper:focus-visible {
+  background: var(--ember-dark);
+  border-color: var(--ember-dark);
+  color: var(--paper);
+}
+
+/* Botão fantasma (contorno) */
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+/* Link vivo (brasa) */
+.live {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-weight: 500;
+  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.4rem);
+  color: var(--ember-light);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1px;
+}
+
+.live span {
+  transition: transform 0.3s var(--ease-out);
+}
+
+.live:hover span,
+.live:focus-visible span {
+  transform: translateX(0.3rem);
+}
+
+/* Hint de scroll */
+.scroll-hint {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  transition: color 0.25s ease;
+}
+
+.scroll-hint:hover,
+.scroll-hint:focus-visible {
+  color: var(--ember-light);
+}
+
+/* Ficha técnica */
+.ficha {
+  border-top: 1px solid var(--hairline);
+}
+
+.ficha-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-block: 0.8rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.ficha-row dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-sm);
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.ficha-row dd {
+  color: var(--ink);
+  font-size: 0.9375rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ember-light);
+}
+
+/* Lista editorial com índice (momentos, princípios) */
+.momentos li,
+.principios li {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding-block: 1.4rem;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.momentos li:first-child,
+.principios li:first-child {
+  border-top: 1px solid var(--hairline);
+}
+
+.momento-idx {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+  color: var(--muted);
+}
+
+.momentos p,
+.principios p {
+  font-size: var(--fs-lead);
+  color: var(--ink);
+  line-height: 1.5;
+}
