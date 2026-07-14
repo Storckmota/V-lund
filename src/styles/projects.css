@@ -1,0 +1,173 @@
+/* Projetos — sistema 2: imersão em tinta.
+   O case ocupa a sala; o nome atravessa a imagem; dois planos da mesma obra. */
+.projetos {
+  padding-block: var(--space-room);
+  overflow: clip;
+}
+
+.projetos-title {
+  font-family: var(--font-display);
+  font-size: var(--type-title);
+  color: var(--fg);
+  max-width: 14ch;
+}
+
+.case-opening {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  margin-top: clamp(2.5rem, 6vh, 4.5rem);
+}
+
+.case-figure-main {
+  grid-column: 3 / -1;
+  grid-row: 1;
+  margin-right: calc(-1 * var(--gutter));
+}
+
+.case-figure-main img {
+  width: 100%;
+  height: auto;
+}
+
+.case-figure-alt {
+  grid-column: 1 / 4;
+  grid-row: 1;
+  align-self: end;
+  z-index: 2;
+  width: clamp(150px, 17vw, 250px);
+  margin-bottom: -14%;
+  border: 1px solid var(--line);
+}
+
+.case-name {
+  position: absolute;
+  left: 0;
+  top: clamp(1rem, 8%, 4rem);
+  z-index: 3;
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 1rem + 6.5vw, 7.5rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: var(--paper);
+}
+
+.case-name span {
+  display: block;
+}
+
+.case-name .case-name-b {
+  margin-left: 0.9em;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.case-tese {
+  margin-top: clamp(6rem, 16vh, 10rem);
+  margin-left: clamp(0rem, 32%, 32rem);
+}
+
+.case-tese p {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1rem + 2.6vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--paper);
+}
+
+.case-body {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: clamp(2.5rem, 8vw, 8rem);
+  margin-top: clamp(3.5rem, 9vh, 6rem);
+}
+
+.case-narrativa {
+  display: grid;
+  gap: clamp(2rem, 5vh, 3.5rem);
+}
+
+.case-block h4 {
+  font-family: var(--font-sans);
+  font-size: var(--type-small);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.case-block p {
+  margin-top: 0.85rem;
+  max-width: 46ch;
+  font-size: var(--type-lead);
+  line-height: 1.6;
+}
+
+.case-ficha {
+  align-self: start;
+  position: sticky;
+  top: 7rem;
+}
+
+.ficha {
+  font-family: var(--font-mono);
+  font-size: var(--type-mono);
+}
+
+.ficha-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.8rem;
+  border-top: 1px solid var(--line);
+}
+
+.ficha-row:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.ficha dt {
+  color: var(--fg-muted);
+}
+
+.ficha dd {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--paper);
+  text-align: right;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--ember-dark);
+}
+
+.case-live {
+  display: inline-block;
+  margin-top: 2.25rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 1rem + 1vw, 1.75rem);
+  color: var(--paper);
+  border-bottom: 1px solid var(--paper);
+  padding-bottom: 0.2rem;
+  transition: color 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
+}
+
+.case-live span {
+  display: inline-block;
+  transition: translate 0.25s var(--ease-out);
+}
+
+.case-live:hover,
+.case-live:focus-visible {
+  color: var(--ember-dark);
+  border-color: var(--ember-dark);
+}
+
+.case-live:hover span {
+  translate: 0.3rem 0;
+}

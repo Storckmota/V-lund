@@ -1,0 +1,164 @@
+/* Header e menu mobile */
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: var(--z-header);
+  transition: background-color 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+.header.is-solid {
+  background: var(--paper);
+  box-shadow: 0 1px 0 var(--hairline);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.1rem var(--gutter);
+}
+
+.header.is-solid .header-inner {
+  padding-block: 0.8rem;
+}
+
+.brand {
+  margin-right: auto;
+}
+
+.brand-wm {
+  width: 108px;
+  height: 26px;
+  color: var(--ink);
+}
+
+.header-nav ul {
+  display: flex;
+  gap: 1.9rem;
+}
+
+.header-nav a {
+  position: relative;
+  font-size: var(--type-small);
+  font-weight: 500;
+  color: var(--ink);
+  padding-block: 0.35rem;
+}
+
+.header-nav a::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 2px;
+  background: var(--ember-light);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.header-nav a:hover::after,
+.header-nav a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.header-cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.6rem;
+  padding: 0.45rem 1.2rem;
+  border: 1px solid var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--type-small);
+  font-weight: 500;
+  color: var(--ink);
+  transition: background-color 0.25s var(--ease-out), color 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
+}
+
+.header-cta:hover,
+.header-cta:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.menu-toggle {
+  display: none;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  padding: 0.4rem 0.2rem;
+  font-size: var(--type-small);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.menu-toggle::after {
+  content: "";
+  width: 1.5rem;
+  height: 2px;
+  background: currentColor;
+  box-shadow: 0 6px 0 currentColor;
+  transition: box-shadow 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+}
+
+/* Menu mobile — sala de tinta em tela cheia */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-menu);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.menu-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 6rem var(--gutter) 2.5rem;
+}
+
+.menu-list a {
+  display: block;
+  padding-block: 0.55rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 11vw, 4rem);
+  line-height: 1.1;
+  color: var(--paper);
+  transition: color 0.2s var(--ease-out);
+}
+
+.menu-list a:hover,
+.menu-list a:focus-visible,
+.menu-list a:active {
+  color: var(--ember-dark);
+}
+
+.menu-foot {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.menu-foot .btn {
+  width: 100%;
+}
+
+.menu-sign {
+  font-size: var(--type-small);
+  color: var(--fg-muted, var(--muted));
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+body.menu-open .header {
+  z-index: calc(var(--z-menu) + 1);
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+body.menu-open .brand-wm,
+body.menu-open .menu-toggle {
+  color: var(--paper);
+}

@@ -1,6 +1,6 @@
-/* Tokens — sistema tinta e papel da Vólund */
+/* Tokens — identidade travada Vólund (não alterar paleta/fontes) */
 :root {
-  /* Cor */
+  /* Paleta */
   --paper: #FAF8F4;
   --ink: #17150F;
   --hairline: #E4E0D6;
@@ -9,41 +9,50 @@
   --ember-dark: #C45543;
   --body: #33302A;
 
-  /* Variantes sobre tinta */
-  --paper-muted: rgba(241, 237, 226, 0.64);
-  --hairline-ink: rgba(241, 237, 226, 0.18);
+  /* Derivados de contexto (sala tinta) */
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --fg-body: var(--body);
+  --fg-muted: var(--muted);
+  --line: var(--hairline);
+  --ember: var(--ember-light);
 
   /* Tipografia */
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-sans: 'Space Grotesk', system-ui, sans-serif;
-  --font-mono: 'Space Mono', ui-monospace, monospace;
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-sans: "Space Grotesk", "Helvetica Neue", sans-serif;
+  --font-mono: "Space Mono", "Courier New", monospace;
 
-  /* Escala tipográfica fluida */
-  --fs-display: clamp(2.5rem, 1.1rem + 6vw, 5.5rem);
-  --fs-display-sm: clamp(1.9rem, 1rem + 3.6vw, 3.4rem);
-  --fs-h2: clamp(1.85rem, 1.05rem + 3.2vw, 3.2rem);
-  --fs-h3: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
-  --fs-lead: clamp(1.0625rem, 0.95rem + 0.5vw, 1.3rem);
-  --fs-body: 1.0625rem;
-  --fs-mono: 0.8125rem;
-  --fs-mono-sm: 0.75rem;
+  /* Escala de display */
+  --type-hero: clamp(2.75rem, 1rem + 8vw, 8.75rem);
+  --type-gesto: clamp(2.5rem, 0.75rem + 7.4vw, 8rem);
+  --type-canto: clamp(2.25rem, 1rem + 5.4vw, 6rem);      /* fechamento, nome do case */
+  --type-index: clamp(1.75rem, 1rem + 3.2vw, 4rem);      /* serviços, etapas */
+  --type-title: clamp(1.6rem, 1.1rem + 2vw, 3rem);       /* títulos de sala */
+  --type-lead: clamp(1.06rem, 1rem + 0.45vw, 1.35rem);
+  --type-body: 1.0625rem;
+  --type-small: 0.9375rem;
+  --type-mono: 0.8125rem;
 
-  /* Espaço */
-  --space-section: clamp(5.5rem, 4rem + 8vw, 11rem);
-  --space-block: clamp(2.5rem, 2rem + 2.5vw, 4.5rem);
-  --gutter: clamp(1.25rem, 5vw, 5rem);
-  --container-max: 1400px;
+  /* Ritmo */
+  --space-room: clamp(6rem, 4rem + 10vw, 13rem);         /* entre salas */
+  --space-block: clamp(2.5rem, 2rem + 3vw, 5rem);
+  --gutter: clamp(1.25rem, 4vw, 4.5rem);                 /* margem lateral da página */
+  --measure: 34em;
 
   /* Movimento */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --dur: 0.7s;
-  --dur-slow: 1s;
 
   /* Camadas */
-  --z-header: 50;
-  --z-menu: 60;
-  --z-skip: 100;
+  --z-header: 40;
+  --z-menu: 50;
+}
 
-  /* Header */
-  --header-h: 4.25rem;
+.room-ink {
+  --bg: var(--ink);
+  --fg: var(--paper);
+  --fg-body: #CFC9BC;
+  --fg-muted: #8B8578;
+  --line: rgba(250, 248, 244, 0.16);
+  --ember: var(--ember-dark);
 }

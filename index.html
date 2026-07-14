@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,8 @@
   <link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Space+Grotesk:wght@400;500&family=Space+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Space+Grotesk:wght@400;500&family=Space+Mono&display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.replace('no-js','js');</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -42,12 +43,12 @@
     <symbol id="vsym" viewBox="290 52 276 316"><path fill="currentColor" d="M487.6 61.3Q487.6 60.8 488.0 60.4Q488.4 60.0 489.1 60.0H558.1Q558.8 60.0 559.2 60.4Q559.6 60.8 559.6 61.3Q559.6 61.8 559.1 62.1Q558.7 62.5 557.8 62.8L548.8 65.6Q541.6 68.2 535.5 75.5Q529.5 82.7 525.6 95.8L453.5 332.2Q452.6 335.7 452.3 338.9Q452.0 342.2 452.0 346.1V357.6Q452.0 358.7 451.6 359.4Q451.2 360.0 450.1 360.0H404.4Q403.3 360.0 402.8 359.4Q402.3 358.7 402.3 357.6V346.2Q402.3 343.5 401.5 340.4Q400.8 337.3 399.5 333.4L316.6 73.9Q315.3 70.1 314.1 68.3Q312.9 66.4 310.6 65.8L299.6 63.0Q297.3 62.0 297.3 61.3Q297.3 60.8 297.8 60.4Q298.2 60.0 299.0 60.0H398.5Q399.4 60.0 399.8 60.4Q400.2 60.8 400.2 61.3Q400.2 61.8 399.6 62.1Q399.1 62.5 397.9 62.8L377.7 65.4Q373.1 66.3 372.1 68.8Q371.0 71.4 372.4 76.1L452.1 329.9L446.2 343.5L521.6 96.2Q525.0 85.0 521.2 76.7Q517.5 68.5 502.3 64.9L489.5 62.8Q488.4 62.5 488.0 62.1Q487.6 61.8 487.6 61.3Z"/></symbol>
   </svg>
 
-  <header class="site-header" data-header>
-    <div class="container header-inner">
+  <header class="header" data-header>
+    <div class="header-inner">
       <a class="brand" href="#inicio" aria-label="Vólund, voltar ao início">
         <svg class="brand-wm" aria-hidden="true" focusable="false"><use href="#wm"/></svg>
       </a>
-      <nav class="site-nav" aria-label="Navegação principal">
+      <nav class="header-nav" aria-label="Navegação principal">
         <ul>
           <li><a href="#projetos">Projetos</a></li>
           <li><a href="#servicos">Serviços</a></li>
@@ -56,373 +57,287 @@
         </ul>
       </nav>
       <a class="header-cta" data-evt="click_whatsapp" data-sec="header" href="https://wa.me/5527999555259?text=Ol%C3%A1!%20Conheci%20o%20site%20da%20V%C3%B3lund%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">Falar sobre meu projeto</a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-mobile" data-nav-toggle>
-        <span class="nav-toggle-text" data-toggle-text>Menu</span>
-        <span class="nav-toggle-lines" aria-hidden="true"><span></span><span></span></span>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
+        <span data-menu-label>Menu</span>
       </button>
     </div>
   </header>
 
-  <nav class="menu-mobile" id="menu-mobile" data-menu hidden aria-label="Navegação móvel">
-    <div class="menu-mobile-inner">
-      <p class="label menu-label">[ navegação ]</p>
+  <div class="menu" id="menu" data-menu hidden>
+    <nav class="menu-inner" aria-label="Navegação móvel">
       <ul class="menu-list">
-        <li><span class="menu-idx">01</span><a href="#projetos" data-menu-link>Projetos</a></li>
-        <li><span class="menu-idx">02</span><a href="#servicos" data-menu-link>Serviços</a></li>
-        <li><span class="menu-idx">03</span><a href="#estudio" data-menu-link>Estúdio</a></li>
-        <li><span class="menu-idx">04</span><a href="#contato" data-menu-link>Contato</a></li>
+        <li><a href="#projetos" data-menu-link>Projetos</a></li>
+        <li><a href="#servicos" data-menu-link>Serviços</a></li>
+        <li><a href="#estudio" data-menu-link>Estúdio</a></li>
+        <li><a href="#contato" data-menu-link>Contato</a></li>
       </ul>
       <div class="menu-foot">
         <a class="btn btn-paper" data-evt="click_whatsapp" data-sec="menu" href="https://wa.me/5527999555259?text=Ol%C3%A1!%20Conheci%20o%20site%20da%20V%C3%B3lund%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">Falar sobre meu projeto</a>
         <p class="menu-sign">Estúdio de presença digital</p>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </div>
 
   <main id="conteudo">
 
-    <!-- 01 · Hero -->
+    <!-- Movimento 1 · Hero: tipografia cinética em planos -->
     <section class="hero" id="inicio" aria-labelledby="hero-title">
-      <div class="container">
-        <div class="masthead" data-reveal="mast" aria-hidden="true">
-          <svg class="masthead-wm" focusable="false"><use href="#wm"/></svg>
-          <div class="masthead-row">
-            <span>[ estúdio de presença digital ]</span>
-            <span class="masthead-row-mid">sites · landing pages · experiências web</span>
-            <span>[ v1 · 2026 ]</span>
+      <p class="hero-eyebrow">Estúdio de presença digital</p>
+      <h1 class="hero-title" id="hero-title">
+        <span class="hl hl-1"><span class="hl-in">Sites, landing</span></span>
+        <span class="hl hl-2"><span class="hl-in">pages e experiências</span></span>
+        <span class="hl hl-3"><span class="hl-in">web <em>à altura</em></span></span>
+        <span class="hl hl-4"><span class="hl-in">da sua marca.</span></span>
+      </h1>
+      <a class="hero-figure" href="#projetos" aria-label="Ver os projetos da Vólund" data-plane>
+        <img src="/projects/allure-home-1440.webp"
+             srcset="/projects/allure-home-760.webp 760w, /projects/allure-home-1440.webp 1440w"
+             sizes="(max-width: 768px) 100vw, 46vw"
+             width="1440" height="900" fetchpriority="high" decoding="async"
+             alt="Primeira dobra do site da Alluré Branding, projeto da Vólund: headline Sua marca é realmente sua? sobre fotografia escura">
+        <span class="hero-figure-hint" aria-hidden="true">ver o trabalho ↓</span>
+      </a>
+      <div class="hero-intro">
+        <span class="hero-tick" aria-hidden="true"></span>
+        <p class="hero-lead">Criamos páginas e experiências web bem construídas e conectamos o que cada projeto precisa para mensurar resultados e organizar melhor a entrada comercial.</p>
+        <a class="btn" data-evt="click_cta" data-sec="hero" href="https://wa.me/5527999555259?text=Ol%C3%A1!%20Conheci%20o%20site%20da%20V%C3%B3lund%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">Falar sobre meu projeto</a>
+      </div>
+    </section>
+
+    <!-- Movimento 2 · Projetos: imersão em tinta -->
+    <section class="projetos room-ink" id="projetos" aria-labelledby="projetos-title">
+      <h2 class="projetos-title" id="projetos-title">Projetos em destaque.</h2>
+
+      <article class="case">
+        <header class="case-opening">
+          <div class="case-figure-main" data-reveal="clip" data-plane>
+            <img src="/projects/allure-home-1440.webp"
+                 srcset="/projects/allure-home-760.webp 760w, /projects/allure-home-1440.webp 1440w"
+                 sizes="(max-width: 768px) 100vw, 72vw"
+                 width="1440" height="900" loading="lazy" decoding="async"
+                 alt="Site da Alluré Branding em desktop: primeira dobra com a headline Sua marca é realmente sua?">
           </div>
-        </div>
-        <div class="hero-grid">
-          <aside class="hero-side" data-reveal="rise">
-            <ul class="hero-index" aria-label="O que a Vólund constrói">
-              <li><span>01</span> site institucional</li>
-              <li><span>02</span> landing page</li>
-              <li><span>03</span> experiência web</li>
-            </ul>
+          <div class="case-figure-alt" data-reveal="clip" data-plane-slow>
+            <img src="/projects/allure-mobile-390.webp"
+                 width="390" height="844" loading="lazy" decoding="async"
+                 alt="Site da Alluré Branding em um celular: composição própria para telas pequenas">
+          </div>
+          <h3 class="case-name"><span>Alluré</span> <span class="case-name-b">Branding</span></h3>
+        </header>
+
+        <blockquote class="case-tese" data-reveal="rise">
+          <p>A marca já tinha nível.<br>O site não acompanhava.</p>
+        </blockquote>
+
+        <div class="case-body">
+          <div class="case-narrativa">
+            <div class="case-block" data-reveal="rise">
+              <h4>Contexto</h4>
+              <p>A Alluré Branding cuida de registro de marcas. O atendimento sempre foi de alto nível, mas o que existia na internet não mostrava isso. O pedido: um site à altura do que a cliente entrega pessoalmente.</p>
+            </div>
+            <div class="case-block" data-reveal="rise">
+              <h4>O que foi construído</h4>
+              <p>Um site de página única com direção visual criada do zero: tipografia com peso, texto organizado a partir do conteúdo real da Alluré, movimento contido e composição própria para o celular.</p>
+            </div>
+            <div class="case-block" data-reveal="rise">
+              <h4>Consequência</h4>
+              <p>O site tirou a Alluré do padrão do segmento e adiantou o ponto onde a confiança começa: o que dependia do primeiro atendimento agora acontece já na primeira visita.</p>
+            </div>
+          </div>
+          <aside class="case-ficha" data-reveal="rise">
+            <dl class="ficha">
+              <div class="ficha-row"><dt>formato</dt><dd>site one page</dd></div>
+              <div class="ficha-row"><dt>direção visual</dt><dd>criada do zero</dd></div>
+              <div class="ficha-row"><dt>mobile</dt><dd>composição própria</dd></div>
+              <div class="ficha-row"><dt>status</dt><dd><span class="dot" aria-hidden="true"></span>no ar</dd></div>
+            </dl>
+            <a class="case-live" data-evt="click_project" data-sec="projetos" href="https://allure-pink.vercel.app" target="_blank" rel="noopener">Ver o projeto no ar <span aria-hidden="true">→</span></a>
           </aside>
-          <div class="hero-main">
-            <span class="tick" data-reveal="tick"></span>
-            <h1 class="display" id="hero-title" data-reveal="lines">
-              <span class="line"><span>Sites, landing pages</span></span>
-              <span class="line"><span>e experiências web</span></span>
-              <span class="line"><span><em>à altura</em> da sua marca.</span></span>
-            </h1>
-            <p class="lead" data-reveal="rise">Criamos páginas e experiências web bem construídas e conectamos o que cada projeto precisa para mensurar resultados e organizar melhor a entrada comercial.</p>
-            <div class="hero-actions" data-reveal="rise">
-              <a class="btn" data-evt="click_cta" data-sec="hero" href="https://wa.me/5527999555259?text=Ol%C3%A1!%20Conheci%20o%20site%20da%20V%C3%B3lund%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">Falar sobre meu projeto</a>
-              <a class="scroll-hint" href="#projetos">ver o trabalho ↓</a>
-            </div>
-          </div>
         </div>
-      </div>
+      </article>
     </section>
 
-    <!-- 02 · Contexto -->
-    <section class="contexto" id="contexto" aria-labelledby="contexto-title">
-      <div class="container">
-        <header class="sec-head" data-reveal="rise">
-          <p class="label">[ onde você está hoje ]</p>
-          <p class="sec-idx">01</p>
-        </header>
-        <h2 class="h2" id="contexto-title" data-reveal="lines">
-          <span class="line"><span>Cada empresa está num</span></span>
-          <span class="line"><span>momento diferente no digital.</span></span>
-        </h2>
-        <ol class="momentos" data-reveal="group">
-          <li data-reveal="rise"><span class="momento-idx">01</span><p>Talvez você ainda não tenha um site.</p></li>
-          <li data-reveal="rise"><span class="momento-idx">02</span><p>Talvez tenha um que já não acompanha o momento da empresa.</p></li>
-          <li data-reveal="rise"><span class="momento-idx">03</span><p>Ou talvez a página exista, mas falte clareza sobre o que acontece depois que alguém acessa.</p></li>
-        </ol>
-        <p class="contexto-fecho" data-reveal="rise">Em qualquer um desses casos, a gente pode ajudar.</p>
+    <!-- Movimento 3 · Posicionamento: gesto tipográfico de borda -->
+    <section class="posicionamento" aria-labelledby="posicionamento-title">
+      <h2 class="gesto" id="posicionamento-title">
+        <span class="gesto-l gesto-l1" data-reveal="rise">O Instagram</span>
+        <span class="gesto-l gesto-l2" data-reveal="rise">é a vitrine.</span>
+        <span class="gesto-l gesto-l3" data-reveal="rise">O site sustenta</span>
+        <span class="gesto-l gesto-l4" data-reveal="rise"><em>a decisão.</em></span>
+      </h2>
+      <div class="posicionamento-apoio" data-reveal="rise">
+        <p>Muita marca resolve o Instagram e para por aí. A gente constrói a outra metade: o site que recebe quem pesquisa, explica o negócio e dá base para a decisão.</p>
+        <p>Antes de chamar no WhatsApp, quase todo mundo dá uma olhada. O site é o que responde por você nessa hora.</p>
       </div>
-    </section>
-
-    <!-- 03 · Projetos selecionados -->
-    <section class="projetos" id="projetos" aria-labelledby="projetos-title">
-      <div class="container">
-        <header class="sec-head" data-reveal="rise">
-          <p class="label">[ projetos selecionados ]</p>
-          <p class="sec-idx">02</p>
-        </header>
-        <h2 class="h2" id="projetos-title" data-reveal="lines">
-          <span class="line"><span>Projetos em destaque.</span></span>
-        </h2>
-
-        <article class="case">
-          <div class="case-head" data-reveal="rise">
-            <p class="case-idx" aria-hidden="true">01</p>
-            <div class="case-id">
-              <p class="label">[ case real ] [ site one page ]</p>
-              <h3 class="case-nome">Alluré Branding</h3>
-            </div>
-          </div>
-          <p class="case-tese display-sm" data-reveal="lines">
-            <span class="line"><span>A marca já tinha nível.</span></span>
-            <span class="line"><span>O site não acompanhava.</span></span>
-          </p>
-          <div class="case-grid">
-            <a class="case-figure" data-reveal="clip" data-evt="click_project" data-sec="projetos" href="https://allure-pink.vercel.app" target="_blank" rel="noopener" aria-label="Abrir o site da Alluré Branding em nova aba">
-              <img src="/projects/allure-home-1440.webp"
-                   srcset="/projects/allure-home-760.webp 760w, /projects/allure-home-1440.webp 1440w"
-                   sizes="(max-width: 768px) 100vw, 58vw"
-                   width="1440" height="900" loading="lazy" decoding="async"
-                   alt="Primeira dobra do site da Alluré Branding: headline Sua marca é realmente sua? sobre fotografia escura">
-              <span class="case-figure-tag" aria-hidden="true">visitar →</span>
-            </a>
-            <div class="case-body">
-              <div class="case-block" data-reveal="rise">
-                <p class="label">[ contexto ]</p>
-                <p>A Alluré Branding cuida de registro de marcas. O atendimento sempre foi de alto nível, mas o que existia na internet não mostrava isso. O pedido: um site à altura do que a cliente entrega pessoalmente.</p>
-              </div>
-              <div class="case-block" data-reveal="rise">
-                <p class="label">[ o que foi construído ]</p>
-                <p>Um site de página única com direção visual criada do zero: tipografia com peso, texto organizado a partir do conteúdo real da Alluré, movimento contido e composição própria para o celular.</p>
-              </div>
-              <div class="case-block" data-reveal="rise">
-                <p class="label">[ consequência ]</p>
-                <p>O site tirou a Alluré do padrão do segmento e adiantou o ponto onde a confiança começa: o que dependia do primeiro atendimento agora acontece já na primeira visita.</p>
-              </div>
-              <dl class="ficha" data-reveal="rise">
-                <div class="ficha-row"><dt>formato</dt><dd>site one page</dd></div>
-                <div class="ficha-row"><dt>direção visual</dt><dd>criada do zero</dd></div>
-                <div class="ficha-row"><dt>mobile</dt><dd>composição própria</dd></div>
-                <div class="ficha-row"><dt>status</dt><dd><span class="dot" aria-hidden="true"></span>no ar</dd></div>
-              </dl>
-              <a class="live" data-evt="click_project" data-sec="projetos" href="https://allure-pink.vercel.app" target="_blank" rel="noopener">Ver o projeto no ar <span aria-hidden="true">→</span></a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- 04 · Manifesto -->
-    <section class="manifesto ink" aria-labelledby="manifesto-title">
-      <div class="container">
-        <header class="sec-head" data-reveal="rise">
-          <p class="label">[ presença digital ]</p>
-          <p class="sec-idx">03</p>
-        </header>
-        <h2 class="display manifesto-tese" id="manifesto-title" data-reveal="lines" data-parallax>
-          <span class="line"><span>O Instagram é a vitrine.</span></span>
-          <span class="line"><span>O site sustenta <em>a decisão.</em></span></span>
-        </h2>
-        <div class="manifesto-apoio">
-          <p data-reveal="rise">Muita marca resolve o Instagram e para por aí. A gente constrói a outra metade: o site que recebe quem pesquisa, explica o negócio e dá base para a decisão.</p>
-          <p data-reveal="rise">Antes de chamar no WhatsApp, quase todo mundo dá uma olhada. O site é o que responde por você nessa hora.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 05 · Serviços -->
-    <section class="servicos" id="servicos" aria-labelledby="servicos-title">
-      <div class="container">
-        <header class="sec-head" data-reveal="rise">
-          <p class="label">[ serviços ]</p>
-          <p class="sec-idx">04</p>
-        </header>
-        <h2 class="h2" id="servicos-title" data-reveal="lines">
-          <span class="line"><span>O que entregamos.</span></span>
-        </h2>
-        <ul class="serv-list">
-          <li class="serv-item" data-reveal="rise">
-            <span class="serv-idx" aria-hidden="true">01</span>
-            <h3 class="serv-nome">Site institucional</h3>
-            <p class="serv-desc">Para marcas que precisam traduzir identidade, organizar conteúdo, apresentar serviços e transmitir confiança.</p>
-          </li>
-          <li class="serv-item" data-reveal="rise">
-            <span class="serv-idx" aria-hidden="true">02</span>
-            <h3 class="serv-nome">Landing page</h3>
-            <p class="serv-desc">Para ofertas que precisam de argumento claro e uma ação principal. Estrutura pensada para converter.</p>
-          </li>
-          <li class="serv-item" data-reveal="rise">
-            <span class="serv-idx" aria-hidden="true">03</span>
-            <h3 class="serv-nome">Experiência web</h3>
-            <p class="serv-desc">Para projetos que exigem interação, diferenciação, narrativa ou funcionalidade específica.</p>
-          </li>
+      <div class="momentos-wrap">
+        <h3 class="momentos-title" data-reveal="rise">Cada empresa está num momento diferente no digital.</h3>
+        <ul class="momentos">
+          <li data-reveal="rise">Talvez você ainda não tenha um site.</li>
+          <li data-reveal="rise">Talvez tenha um que já não acompanha o momento da empresa.</li>
+          <li data-reveal="rise">Ou talvez a página exista, mas falte clareza sobre o que acontece depois que alguém acessa.</li>
         </ul>
-        <p class="serv-piso" data-reveal="rise">Design, clareza, SEO, performance e responsividade não são adicionais. São o piso de qualquer entrega.</p>
+        <p class="momentos-fecho" data-reveal="rise">Em qualquer um desses casos, a gente pode ajudar.</p>
       </div>
     </section>
 
-    <!-- 06 · Como trabalhamos -->
-    <section class="como" aria-labelledby="como-title">
-      <div class="container">
-        <header class="sec-head" data-reveal="rise">
-          <p class="label">[ como trabalhamos ]</p>
-          <p class="sec-idx">05</p>
-        </header>
-        <div class="como-grid">
-          <h2 class="h2" id="como-title" data-reveal="lines">
-            <span class="line"><span>Cada projeto começa</span></span>
-            <span class="line"><span>entendendo o <em>seu</em> negócio.</span></span>
-          </h2>
-          <div class="como-body">
-            <p data-reveal="rise">Antes de propor uma solução, entendemos a empresa: a marca, a oferta, o público, os materiais que você já tem e o problema que precisa resolver. A solução vem dessa leitura, não de um pacote pronto.</p>
-            <a class="btn btn-ghost" data-reveal="rise" data-evt="click_cta" data-sec="como" href="https://wa.me/5527999555259?text=Ol%C3%A1!%20Conheci%20o%20site%20da%20V%C3%B3lund%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">Falar sobre meu projeto</a>
+    <!-- Movimento 4 · Serviços e capacidades: índice interativo -->
+    <section class="servicos" id="servicos" aria-labelledby="servicos-title">
+      <h2 class="servicos-title" id="servicos-title" data-reveal="rise">O que entregamos.</h2>
+      <ul class="serv" data-serv>
+        <li class="serv-item">
+          <h3 class="serv-head">
+            <button class="serv-toggle" type="button" id="serv-b1" aria-expanded="true" aria-controls="serv-p1" data-serv-toggle>
+              <span class="serv-num" aria-hidden="true">01</span>
+              <span class="serv-name">Site institucional</span>
+              <span class="serv-sign" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="serv-panel" id="serv-p1" role="region" aria-labelledby="serv-b1">
+            <p>Para marcas que precisam traduzir identidade, organizar conteúdo, apresentar serviços e transmitir confiança.</p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 07 · Método -->
-    <section class="metodo" aria-labelledby="metodo-title">
-      <div class="container">
-        <header class="sec-head" data-reveal="rise">
-          <p class="label">[ método ]</p>
-          <p class="sec-idx">06</p>
-        </header>
-        <h2 class="h2" id="metodo-title" data-reveal="lines">
-          <span class="line"><span>Um processo claro,</span></span>
-          <span class="line"><span>do início à entrega.</span></span>
-        </h2>
-        <ol class="steps" data-steps>
-          <li class="step" data-reveal="rise">
-            <span class="step-n" aria-hidden="true">01</span>
-            <h3 class="step-nome">Leitura</h3>
-            <p class="step-desc">Entendemos o negócio, a marca, o público e o cenário atual.</p>
-          </li>
-          <li class="step" data-reveal="rise">
-            <span class="step-n" aria-hidden="true">02</span>
-            <h3 class="step-nome">Estrutura</h3>
-            <p class="step-desc">Definimos o que precisa ser construído, conectado ou melhorado.</p>
-          </li>
-          <li class="step" data-reveal="rise">
-            <span class="step-n" aria-hidden="true">03</span>
-            <h3 class="step-nome">Criação</h3>
-            <p class="step-desc">Organizamos mensagem, experiência e direção visual.</p>
-          </li>
-          <li class="step" data-reveal="rise">
-            <span class="step-n" aria-hidden="true">04</span>
-            <h3 class="step-nome">Implementação</h3>
-            <p class="step-desc">Construímos com cuidado técnico, performance, responsividade e SEO.</p>
-          </li>
-          <li class="step" data-reveal="rise">
-            <span class="step-n" aria-hidden="true">05</span>
-            <h3 class="step-nome">Conexões</h3>
-            <p class="step-desc">Integramos as ferramentas e automações necessárias para o projeto.</p>
-          </li>
-          <li class="step" data-reveal="rise">
-            <span class="step-n" aria-hidden="true">06</span>
-            <h3 class="step-nome">Validação</h3>
-            <p class="step-desc">Testamos tudo antes da entrega.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- 08 · Capacidades complementares -->
-    <section class="capacidades" aria-labelledby="capacidades-title">
-      <div class="container">
-        <header class="sec-head" data-reveal="rise">
-          <p class="label">[ quando o projeto pede mais ]</p>
-          <p class="sec-idx">07</p>
-        </header>
-        <div class="cap-grid">
-          <div class="cap-intro">
-            <h2 class="h2" id="capacidades-title" data-reveal="lines">
-              <span class="line"><span>Quando o projeto</span></span>
-              <span class="line"><span>exige mais controle.</span></span>
-            </h2>
-            <p data-reveal="rise">Nem toda página precisa da mesma estrutura. Quando faz sentido, conectamos camadas que ajudam a enxergar o que acontece depois da publicação e a organizar a entrada de contatos.</p>
+        </li>
+        <li class="serv-item">
+          <h3 class="serv-head">
+            <button class="serv-toggle" type="button" id="serv-b2" aria-expanded="true" aria-controls="serv-p2" data-serv-toggle>
+              <span class="serv-num" aria-hidden="true">02</span>
+              <span class="serv-name">Landing page</span>
+              <span class="serv-sign" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="serv-panel" id="serv-p2" role="region" aria-labelledby="serv-b2">
+            <p>Para ofertas que precisam de argumento claro e uma ação principal. Estrutura pensada para converter.</p>
           </div>
-          <dl class="cap-list" data-reveal="group">
-            <div class="cap-item" data-reveal="rise"><dt>[ SEO ]</dt><dd>Estrutura pensada para busca desde o código.</dd></div>
-            <div class="cap-item" data-reveal="rise"><dt>[ mensuração ]</dt><dd>Quantas pessoas acessaram, de onde vieram e o que fizeram.</dd></div>
-            <div class="cap-item" data-reveal="rise"><dt>[ formulários ]</dt><dd>Entrada de contatos simples, sem fricção.</dd></div>
-            <div class="cap-item" data-reveal="rise"><dt>[ whatsapp ]</dt><dd>O clique vira conversa, com origem identificada.</dd></div>
-            <div class="cap-item" data-reveal="rise"><dt>[ crm ]</dt><dd>Contatos organizados, sem perder informação no caminho.</dd></div>
-            <div class="cap-item" data-reveal="rise"><dt>[ automações leves ]</dt><dd>Menos tarefa manual quando existe ganho real.</dd></div>
-            <div class="cap-item" data-reveal="rise"><dt>[ ia aplicada ]</dt><dd>Chatbots e fluxos para necessidades concretas do negócio.</dd></div>
-          </dl>
+        </li>
+        <li class="serv-item">
+          <h3 class="serv-head">
+            <button class="serv-toggle" type="button" id="serv-b3" aria-expanded="true" aria-controls="serv-p3" data-serv-toggle>
+              <span class="serv-num" aria-hidden="true">03</span>
+              <span class="serv-name">Experiência web</span>
+              <span class="serv-sign" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="serv-panel" id="serv-p3" role="region" aria-labelledby="serv-b3">
+            <p>Para projetos que exigem interação, diferenciação, narrativa ou funcionalidade específica.</p>
+          </div>
+        </li>
+      </ul>
+      <p class="serv-piso" data-reveal="rise">Design, clareza, SEO, performance e responsividade não são adicionais. São o piso de qualquer entrega.</p>
+
+      <div class="capacidades">
+        <div class="cap-intro">
+          <h3 class="cap-title" data-reveal="rise">Quando o projeto exige mais controle.</h3>
+          <p data-reveal="rise">Nem toda página precisa da mesma estrutura. Quando faz sentido, conectamos camadas que ajudam a enxergar o que acontece depois da publicação e a organizar a entrada de contatos.</p>
         </div>
+        <dl class="cap-list" data-reveal="rise">
+          <div class="cap-item"><dt>seo</dt><dd>Estrutura pensada para busca desde o código.</dd></div>
+          <div class="cap-item"><dt>mensuração</dt><dd>Quantas pessoas acessaram, de onde vieram e o que fizeram.</dd></div>
+          <div class="cap-item"><dt>formulários</dt><dd>Entrada de contatos simples, sem fricção.</dd></div>
+          <div class="cap-item"><dt>whatsapp</dt><dd>O clique vira conversa, com origem identificada.</dd></div>
+          <div class="cap-item"><dt>crm</dt><dd>Contatos organizados, sem perder informação no caminho.</dd></div>
+          <div class="cap-item"><dt>automações leves</dt><dd>Menos tarefa manual quando existe ganho real.</dd></div>
+          <div class="cap-item"><dt>ia aplicada</dt><dd>Chatbots e fluxos para necessidades concretas do negócio.</dd></div>
+        </dl>
         <p class="cap-fecho" data-reveal="rise">Essas camadas entram quando resolvem um problema real. Não como pacote.</p>
       </div>
     </section>
 
-    <!-- 09 · Estúdio -->
-    <section class="estudio" id="estudio" aria-labelledby="estudio-title">
-      <div class="container">
-        <header class="sec-head" data-reveal="rise">
-          <p class="label">[ estúdio ]</p>
-          <p class="sec-idx">08</p>
-        </header>
-        <div class="estudio-grid">
-          <div class="estudio-main">
-            <h2 class="h2" id="estudio-title" data-reveal="lines">
-              <span class="line"><span>Uma operação enxuta,</span></span>
-              <span class="line"><span>com critério de estúdio.</span></span>
-            </h2>
-            <p class="estudio-lead" data-reveal="rise">A Vólund desenha e constrói o que a sua marca mostra quando alguém resolve procurar por ela. Sem pacote automático: a gente lê o cenário e recomenda o que faz sentido para o momento.</p>
-            <p class="estudio-pull display-sm" data-reveal="lines">
-              <span class="line"><span><em>Presença digital</em></span></span>
-              <span class="line"><span>não é decoração.</span></span>
-            </p>
-          </div>
-          <ul class="principios" data-reveal="group">
-            <li data-reveal="rise"><span class="momento-idx">01</span><p>Cada projeto começa por leitura, não por modelo pronto.</p></li>
-            <li data-reveal="rise"><span class="momento-idx">02</span><p>Design importa. E design bom também precisa funcionar.</p></li>
-            <li data-reveal="rise"><span class="momento-idx">03</span><p>Tecnologia explicada pelo benefício, não pela sigla.</p></li>
-            <li data-reveal="rise"><span class="momento-idx">04</span><p>Escopo proporcional ao problema. Sem pacote inflado.</p></li>
-          </ul>
+    <!-- Movimento 5 · Método: progressão espacial -->
+    <section class="metodo room-ink" id="metodo" aria-labelledby="metodo-title">
+      <div class="metodo-intro">
+        <h2 class="metodo-title" id="metodo-title" data-reveal="rise">Cada projeto começa entendendo o <em>seu</em> negócio.</h2>
+        <div class="metodo-intro-body" data-reveal="rise">
+          <p>Antes de propor uma solução, entendemos a empresa: a marca, a oferta, o público, os materiais que você já tem e o problema que precisa resolver. A solução vem dessa leitura, não de um pacote pronto.</p>
+          <p class="metodo-processo">Um processo claro, do início à entrega.</p>
+        </div>
+      </div>
+      <div class="metodo-track" data-metodo>
+        <div class="metodo-stage">
+          <p class="metodo-count" aria-hidden="true"><span data-metodo-atual>01</span> / 06</p>
+          <div class="metodo-progress" aria-hidden="true"><span class="metodo-bar" data-metodo-bar></span></div>
+          <ol class="metodo-steps">
+            <li class="metodo-step is-active" data-step>
+              <h3 class="metodo-step-nome">Leitura</h3>
+              <p class="metodo-step-desc">Entendemos o negócio, a marca, o público e o cenário atual.</p>
+            </li>
+            <li class="metodo-step" data-step>
+              <h3 class="metodo-step-nome">Estrutura</h3>
+              <p class="metodo-step-desc">Definimos o que precisa ser construído, conectado ou melhorado.</p>
+            </li>
+            <li class="metodo-step" data-step>
+              <h3 class="metodo-step-nome">Criação</h3>
+              <p class="metodo-step-desc">Organizamos mensagem, experiência e direção visual.</p>
+            </li>
+            <li class="metodo-step" data-step>
+              <h3 class="metodo-step-nome">Implementação</h3>
+              <p class="metodo-step-desc">Construímos com cuidado técnico, performance, responsividade e SEO.</p>
+            </li>
+            <li class="metodo-step" data-step>
+              <h3 class="metodo-step-nome">Conexões</h3>
+              <p class="metodo-step-desc">Integramos as ferramentas e automações necessárias para o projeto.</p>
+            </li>
+            <li class="metodo-step" data-step>
+              <h3 class="metodo-step-nome">Validação</h3>
+              <p class="metodo-step-desc">Testamos tudo antes da entrega.</p>
+            </li>
+          </ol>
         </div>
       </div>
     </section>
 
-    <!-- 10 · Fechamento -->
-    <section class="fechamento ink" id="contato" aria-labelledby="fechamento-title">
-      <div class="container">
-        <header class="sec-head" data-reveal="rise">
-          <p class="label">[ próximo passo ]</p>
-          <p class="sec-idx">09</p>
-        </header>
-        <h2 class="display fechamento-tese" id="fechamento-title" data-reveal="lines">
-          <span class="line"><span>Conte o que precisa resolver.</span></span>
-          <span class="line"><span>A gente pensa o próximo</span></span>
-          <span class="line"><span>passo <em>com você.</em></span></span>
-        </h2>
-        <div class="fechamento-grid">
-          <p class="fechamento-apoio" data-reveal="rise">Você apresenta o momento da empresa, o que já existe e onde quer chegar. A gente entende o cenário e indica uma direção clara para o projeto.</p>
-          <div class="fechamento-acao" data-reveal="rise">
-            <a class="btn btn-paper" data-evt="click_cta" data-sec="fechamento" href="https://wa.me/5527999555259?text=Ol%C3%A1!%20Conheci%20o%20site%20da%20V%C3%B3lund%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">Falar sobre meu projeto</a>
-            <p class="fechamento-num">+55 27 99955-5259 · WhatsApp</p>
-          </div>
+    <!-- Movimento 6 · Estúdio: notas de margem -->
+    <section class="estudio" id="estudio" aria-labelledby="estudio-title">
+      <h2 class="estudio-title" id="estudio-title" data-reveal="rise">Uma operação enxuta, com critério de estúdio.</h2>
+      <p class="estudio-lead" data-reveal="rise">A Vólund desenha e constrói o que a sua marca mostra quando alguém resolve procurar por ela. Sem pacote automático: a gente lê o cenário e recomenda o que faz sentido para o momento.</p>
+      <p class="estudio-pull" data-reveal="rise"><em>Presença digital</em> não é decoração.</p>
+      <ul class="principios">
+        <li data-reveal="rise">Cada projeto começa por leitura, não por modelo pronto.</li>
+        <li data-reveal="rise">Design importa. E design bom também precisa funcionar.</li>
+        <li data-reveal="rise">Tecnologia explicada pelo benefício, não pela sigla.</li>
+        <li data-reveal="rise">Escopo proporcional ao problema. Sem pacote inflado.</li>
+      </ul>
+    </section>
+
+    <!-- Movimento 7 · Fechamento -->
+    <section class="fechamento room-ink" id="contato" aria-labelledby="fechamento-title">
+      <h2 class="fechamento-title" id="fechamento-title">
+        <span data-reveal="rise">Conte o que precisa resolver.</span>
+        <span data-reveal="rise">A gente pensa o próximo passo <em>com você.</em></span>
+      </h2>
+      <div class="fechamento-acao">
+        <p class="fechamento-apoio" data-reveal="rise">Você apresenta o momento da empresa, o que já existe e onde quer chegar. A gente entende o cenário e indica uma direção clara para o projeto.</p>
+        <div class="fechamento-cta" data-reveal="rise">
+          <a class="btn btn-paper" data-evt="click_cta" data-sec="fechamento" href="https://wa.me/5527999555259?text=Ol%C3%A1!%20Conheci%20o%20site%20da%20V%C3%B3lund%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">Falar sobre meu projeto</a>
+          <p class="fechamento-num">+55 27 99955-5259 · WhatsApp</p>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer ink">
-    <div class="container">
-      <div class="footer-wm" data-reveal="rise">
-        <svg class="footer-wm-svg" role="img" aria-label="Vólund"><use href="#wm"/></svg>
+  <footer class="footer room-ink">
+    <div class="footer-grid">
+      <nav class="footer-col" aria-label="Navegação do rodapé">
+        <h2 class="footer-heading">Navegação</h2>
+        <ul class="footer-nav">
+          <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#estudio">Estúdio</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h2 class="footer-heading">Contato</h2>
+        <ul class="footer-nav">
+          <li><a data-evt="click_whatsapp" data-sec="footer" href="https://wa.me/5527999555259?text=Ol%C3%A1!%20Conheci%20o%20site%20da%20V%C3%B3lund%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+        <p class="footer-num">+55 27 99955-5259</p>
       </div>
-      <div class="footer-grid">
-        <div class="footer-col">
-          <p class="label">[ navegação ]</p>
-          <ul class="footer-nav">
-            <li><a href="#projetos">Projetos</a></li>
-            <li><a href="#servicos">Serviços</a></li>
-            <li><a href="#estudio">Estúdio</a></li>
-            <li><a href="#contato">Contato</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <p class="label">[ contato ]</p>
-          <ul class="footer-nav">
-            <li><a data-evt="click_whatsapp" data-sec="footer" href="https://wa.me/5527999555259?text=Ol%C3%A1!%20Conheci%20o%20site%20da%20V%C3%B3lund%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">WhatsApp</a></li>
-          </ul>
-          <p class="footer-num">+55 27 99955-5259</p>
-        </div>
-        <div class="footer-col footer-assina">
-          <p class="label">[ este site ]</p>
-          <p class="footer-frase">Feito pela Vólund, no mesmo padrão que a gente entrega. Este site é a nossa própria prova.</p>
-        </div>
+      <div class="footer-col footer-meta">
+        <p>© 2026 Vólund</p>
+        <p>estúdio de presença digital</p>
       </div>
-      <div class="footer-base">
-        <span>© 2026 Vólund</span>
-        <span class="footer-base-mid">estúdio de presença digital</span>
-        <span>[ v1 · 2026 ]</span>
-      </div>
+    </div>
+    <div class="footer-masthead" aria-hidden="true">
+      <svg class="footer-wm" focusable="false"><use href="#wm"/></svg>
     </div>
   </footer>
 </body>

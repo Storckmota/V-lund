@@ -1,105 +1,242 @@
-/* Responsivo — composição própria por faixa, não desktop comprimido */
+/* Responsivo — mobile é composição própria, não desktop comprimido */
 
-/* ------------------------------------------------------------- até 1024px */
 @media (max-width: 1024px) {
-  .serv-item {
-    grid-template-columns: 3.5rem 1fr;
-  }
-
-  .serv-desc {
-    grid-column: 2;
-  }
-
-  .step {
-    grid-template-columns: 5rem 1fr;
-  }
-
-  .step-desc {
-    grid-column: 2;
-    margin-top: 0.35rem;
-  }
-
-  .como-grid,
-  .cap-grid,
-  .estudio-grid {
+  .case-body {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: var(--space-block);
   }
 
-  .case-grid {
+  .case-ficha {
+    position: static;
+    max-width: 30rem;
+  }
+
+  .capacidades {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
 
-  .fechamento-grid {
-    grid-template-columns: 1fr;
-    align-items: start;
-  }
-
-  .fechamento-acao {
-    justify-self: start;
+  .cap-fecho {
+    grid-column: 1;
   }
 }
 
-/* -------------------------------------------------------------- até 768px */
-@media (max-width: 768px) {
-  .site-nav,
+@media (max-width: 900px) {
+  .header-nav,
   .header-cta {
     display: none;
   }
 
-  .nav-toggle {
+  .menu-toggle {
     display: inline-flex;
   }
 
-  .hero {
-    min-height: auto;
-  }
-
-  .hero-grid {
+  .metodo-intro,
+  .fechamento-acao {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
-    padding-top: 2.25rem;
   }
 
-  /* No mobile, o índice lateral vem depois da headline */
-  .hero-side {
-    order: 2;
-    align-self: start;
-    max-width: 22rem;
+  .fechamento-cta {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Hero: headline própria, trabalho vira faixa de base */
+  .hero {
+    padding-top: 5.5rem;
   }
 
-  .hero-main {
-    order: 1;
+  .hero-title {
+    font-size: clamp(2.6rem, 11.5vw, 4.5rem);
   }
 
-  .hero-main .display {
-    font-size: clamp(2.35rem, 9.5vw, 3.4rem);
+  .hl-2 { margin-left: 6vw; }
+  .hl-3 { margin-left: 0; }
+  .hl-4 { margin-left: 12vw; }
+
+  .hero-intro {
+    max-width: 100%;
+    margin-bottom: 2.5rem;
   }
 
-  .hero-actions {
-    gap: 1.25rem;
+  .hero-intro .btn {
+    width: 100%;
   }
 
-  .masthead-row {
-    font-size: 0.65rem;
+  .hero-figure {
+    position: static;
+    order: 4;
+    width: auto;
+    margin-top: auto;
+    margin-inline: calc(-1 * var(--gutter));
+    aspect-ratio: 4 / 3;
   }
 
-  .masthead-row-mid {
+  /* Case: o crop mobile real assume o segundo plano por sobreposição */
+  .case-opening {
+    display: block;
+  }
+
+  .case-figure-main {
+    margin-inline: calc(-1 * var(--gutter)) 0;
+  }
+
+  .case-figure-alt {
+    width: 38vw;
+    margin: -22% var(--gutter) 0 auto;
+    position: relative;
+  }
+
+  .case-name {
+    position: static;
+    margin-bottom: 1.5rem;
+  }
+
+  .case-name .case-name-b {
+    margin-left: 0.45em;
+  }
+
+  .case-tese {
+    margin-left: 0;
+    margin-top: 3.5rem;
+  }
+
+  /* Posicionamento: gesto recomposto, margens curtas */
+  .gesto-l2 { margin-left: 7vw; }
+  .gesto-l3 { margin-left: 0; }
+  .gesto-l4 { margin-left: 14vw; }
+
+  .posicionamento-apoio {
+    margin-left: 0;
+    max-width: var(--measure);
+  }
+
+  .momentos li:nth-child(2) { margin-left: 9%; }
+  .momentos li:nth-child(3) { margin-left: 18%; }
+
+  .momentos-fecho {
+    margin-left: 18%;
+  }
+
+  /* Serviços: painel alinhado à margem, toque confortável */
+  .serv-toggle {
+    grid-template-columns: 2.4rem 1fr auto;
+    padding-block: 1.25rem;
+  }
+
+  .serv-panel > p {
+    margin-left: 2.4rem;
+  }
+
+  .cap-list {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Método: progressão vertical, sem palco sticky */
+  .metodo-track {
+    height: auto;
+  }
+
+  .metodo-stage {
+    position: static;
+    height: auto;
+    padding-block: var(--space-block);
+  }
+
+  .metodo-count,
+  .metodo-progress {
     display: none;
   }
 
-  /* Case: imagem primeiro, menos molduras */
-  .case-head {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+  .metodo-steps {
+    display: grid;
+    gap: calc(var(--space-block) * 0.9);
+    margin-top: 0;
+    min-height: 0;
   }
 
-  .case-idx {
-    font-size: 3rem;
+  .js .metodo-step {
+    position: static;
+    opacity: 1;
+    translate: 0 0;
   }
 
-  .manifesto-apoio {
+  .metodo-step-nome {
+    font-size: clamp(2.3rem, 10vw, 3.6rem);
+  }
+
+  .metodo-step-desc {
+    margin-left: 0;
+  }
+
+  .principios {
+    margin-left: 0;
+  }
+
+  /* Estúdio e fechamento */
+  .estudio-pull {
+    margin-left: 8%;
+  }
+
+  .principios {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .principios li:nth-child(2),
+  .principios li:nth-child(4) {
+    margin-top: 0;
+  }
+
+  .principios li:nth-child(even) {
+    margin-left: 12%;
+  }
+
+  .fechamento-title span + span {
+    margin-left: 6%;
+  }
+
+  .fechamento-cta {
+    width: 100%;
+  }
+
+  .fechamento-cta .btn {
+    width: 100%;
+  }
+
+  /* Footer empilhado, masthead recalculado */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-meta {
+    justify-self: start;
+    text-align: left;
+  }
+
+  .footer-wm {
+    translate: 0 30%;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-figure {
+    aspect-ratio: 1 / 1;
+  }
+
+  .case-figure-alt {
+    width: 44vw;
+  }
+
+  .momentos li:nth-child(2),
+  .momentos li:nth-child(3) {
+    margin-left: 0;
+  }
+
+  .momentos-fecho {
     margin-left: 0;
   }
 
@@ -107,68 +244,14 @@
     margin-left: 0;
   }
 
-  .cap-list {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-
-  .footer-base {
-    flex-wrap: wrap;
-    row-gap: 0.5rem;
-  }
-
-  .footer-base-mid {
-    order: 3;
-    width: 100%;
+  .estudio-pull {
+    margin-left: 0;
   }
 }
 
-/* -------------------------------------------------------------- até 480px */
-@media (max-width: 480px) {
-  :root {
-    --fs-body: 1rem;
-  }
-
-  .momentos li,
-  .principios li {
-    gap: 1rem;
-  }
-
-  .momentos p,
-  .principios p {
-    font-size: 1.0625rem;
-  }
-
-  .btn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .hero-actions .scroll-hint {
-    margin-inline: auto;
-  }
-
-  .serv-item:hover {
-    padding-left: 0;
-  }
-
-  .ficha-row {
-    flex-direction: row;
-  }
-}
-
-/* Telas touch: informação essencial nunca depende de hover */
+/* Touch: sem dependência de hover */
 @media (hover: none) {
-  .case-figure-tag {
-    opacity: 1;
-    transform: none;
-  }
-
-  .serv-item:hover {
-    padding-left: 0;
+  .hero-figure img {
+    transition: none;
   }
 }

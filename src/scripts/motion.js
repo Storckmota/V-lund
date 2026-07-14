@@ -1,71 +1,147 @@
-// Motion: reveals com IntersectionObserver, etapa corrente do método
-// e parallax muito leve no manifesto. Apenas transform e opacity.
-export function initMotion() {
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (reduced.matches) return;
+/* Motion — revelar por recorte, deslocar planos, progressão do método.
+   Tudo desativado com prefers-reduced-motion. */
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const desktop = window.matchMedia('(min-width: 769px)');
+const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 
-  // Reveals
-  const revealed = document.querySelectorAll('[data-reveal]');
+export function initMotion() {
+  if (reducedMotion.matches) return;
+
+  initReveals();
+  initPlanes();
+  initHeroCursor();
+  initMetodo();
+}
+
+function initReveals() {
+  const targets = document.querySelectorAll('[data-reveal]');
+  if (!targets.length || !('IntersectionObserver' in window)) {
+    targets.forEach((el) => el.classList.add('is-in'));
+    return;
+  }
+
+  // threshold 0: elementos com clip-path têm intersectionRatio sempre 0,
+  // então o disparo precisa ser pela entrada do bounding box no viewport.
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('in');
-        io.unobserve(entry.target);
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        }
       });
     },
-    { rootMargin: '0px 0px -10% 0px', threshold: 0.05 }
+    { threshold: 0, rootMargin: '0px 0px -12% 0px' }
   );
 
-  // Stagger leve para grupos: irmãos data-reveal ganham atraso incremental.
-  document.querySelectorAll('[data-reveal="group"]').forEach((group) => {
-    group.querySelectorAll('[data-reveal="rise"]').forEach((el, i) => {
-      el.style.setProperty('--reveal-delay', `${Math.min(i * 90, 450)}ms`);
+  targets.forEach((el) => io.observe(el));
+}
+
+/* Parallax leve: planos do case deslocam em velocidades diferentes */
+function initPlanes() {
+  const planes = [
+    ...document.querySelectorAll('.case-opening [data-plane]'),
+    ...document.querySelectorAll('.case-opening [data-plane-slow]'),
+  ];
+  if (!planes.length) return;
+
+  let ticking = false;
+
+  const update = () => {
+    ticking = false;
+    const mid = window.innerHeight / 2;
+    planes.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      const offset = (rect.top + rect.height / 2 - mid) / window.innerHeight;
+      const factor = el.hasAttribute('data-plane-slow') ? -60 : -28;
+      el.style.setProperty('--plane-y', `${(offset * factor).toFixed(1)}px`);
     });
-    group.classList.add('in');
+  };
+
+  const onScroll = () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  };
+
+  update();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+}
+
+/* O plano de projeto do hero responde ao cursor (somente ponteiro fino) */
+function initHeroCursor() {
+  if (!finePointer.matches) return;
+
+  const hero = document.querySelector('.hero');
+  const figure = document.querySelector('.hero-figure');
+  if (!hero || !figure) return;
+
+  let raf = 0;
+
+  hero.addEventListener('pointermove', (event) => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const x = (event.clientX / window.innerWidth - 0.5) * -14;
+      const y = (event.clientY / window.innerHeight - 0.5) * -10;
+      figure.style.setProperty('--plane-x', `${x.toFixed(1)}px`);
+      figure.style.setProperty('--plane-y', `${y.toFixed(1)}px`);
+    });
   });
 
-  revealed.forEach((el) => {
-    if (el.dataset.reveal !== 'group') io.observe(el);
+  hero.addEventListener('pointerleave', () => {
+    cancelAnimationFrame(raf);
+    figure.style.setProperty('--plane-x', '0px');
+    figure.style.setProperty('--plane-y', '0px');
   });
+}
 
-  // Método: destaca uma única etapa, a mais próxima do centro da viewport.
-  const steps = document.querySelectorAll('[data-steps] .step');
-  if (steps.length) {
-    const stepIO = new IntersectionObserver(
-      (entries) => {
-        const entering = entries.find((entry) => entry.isIntersecting);
-        if (!entering) return;
-        steps.forEach((step) => {
-          step.classList.toggle('current', step === entering.target);
-        });
-      },
-      { rootMargin: '-46% 0px -46% 0px' }
-    );
-    steps.forEach((step) => stepIO.observe(step));
-  }
+/* Método: a etapa ativa acompanha o avanço do scroll no palco sticky */
+function initMetodo() {
+  const track = document.querySelector('[data-metodo]');
+  if (!track) return;
 
-  // Parallax muito leve, apenas com ponteiro fino (desktop).
-  const plxTargets = document.querySelectorAll('[data-parallax]');
-  if (plxTargets.length && window.matchMedia('(pointer: fine)').matches) {
-    let raf = null;
-    const update = () => {
-      raf = null;
-      const vh = window.innerHeight;
-      plxTargets.forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        if (rect.bottom < 0 || rect.top > vh) return;
-        const progress = (rect.top + rect.height / 2 - vh / 2) / vh;
-        el.style.setProperty('--plx', `${(-progress * 0.06 * vh).toFixed(1)}px`);
-      });
-    };
-    window.addEventListener(
-      'scroll',
-      () => {
-        if (raf === null) raf = requestAnimationFrame(update);
-      },
-      { passive: true }
-    );
-    update();
-  }
+  const steps = [...track.querySelectorAll('[data-step]')];
+  const bar = track.querySelector('[data-metodo-bar]');
+  const count = track.querySelector('[data-metodo-atual]');
+  if (steps.length < 2) return;
+
+  let active = 0;
+  let ticking = false;
+
+  const update = () => {
+    ticking = false;
+    if (!desktop.matches) return;
+
+    const rect = track.getBoundingClientRect();
+    const range = rect.height - window.innerHeight;
+    if (range <= 0) return;
+
+    const progress = Math.min(1, Math.max(0, -rect.top / range));
+    const index = Math.min(steps.length - 1, Math.floor(progress * steps.length));
+
+    if (index !== active) {
+      steps[active].classList.remove('is-active');
+      steps[index].classList.add('is-active');
+      active = index;
+      if (count) count.textContent = String(index + 1).padStart(2, '0');
+    }
+
+    if (bar) {
+      const fill = (index + 1) / steps.length;
+      bar.style.transform = `scaleX(${fill.toFixed(3)})`;
+    }
+  };
+
+  const onScroll = () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  };
+
+  update();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
 }

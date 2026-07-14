@@ -1,114 +1,94 @@
-/* Motion — reveals, progressões e estados.
-   Tudo condicionado a html.js: sem JavaScript, o conteúdo fica 100% visível.
-   prefers-reduced-motion desliga transforms e transitions. */
+/* Motion — tese: revelar por recorte, deslocar planos.
+   Estados aplicados por IntersectionObserver (scripts/motion.js). */
+.js [data-reveal="rise"] {
+  opacity: 0;
+  translate: 0 1.75rem;
+  transition: opacity var(--dur) var(--ease-out), translate var(--dur) var(--ease-out);
+}
 
-@media (prefers-reduced-motion: no-preference) {
-  /* Blocos que sobem */
-  html.js [data-reveal='rise'] {
-    opacity: 0;
-    transform: translateY(1.6rem);
-    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
-    transition-delay: var(--reveal-delay, 0s);
+.js [data-reveal="clip"] {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.9s var(--ease-out);
+}
+
+.js [data-reveal].is-in {
+  opacity: 1;
+  translate: 0 0;
+  clip-path: inset(0 0 0 0);
+}
+
+/* Planos com parallax leve (transform aplicado via JS em --plane-y) */
+.js [data-plane],
+.js [data-plane-slow] {
+  will-change: transform;
+  transform: translate3d(var(--plane-x, 0px), var(--plane-y, 0px), 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 
-  html.js [data-reveal='rise'].in {
+  .js [data-reveal] {
     opacity: 1;
+    translate: 0 0;
+    clip-path: none;
+  }
+
+  .js [data-plane],
+  .js [data-plane-slow] {
     transform: none;
   }
 
-  /* Linhas de headline com máscara */
-  html.js [data-reveal='lines'] .line {
-    display: block;
-    overflow: hidden;
+  /* Método vira lista estática, todas as etapas visíveis */
+  .metodo-track {
+    height: auto;
   }
 
-  html.js [data-reveal='lines'] .line > span {
-    display: block;
-    transform: translateY(110%);
-    transition: transform 0.9s var(--ease-out);
+  .metodo-stage {
+    position: static;
+    height: auto;
+    padding-block: var(--space-block);
   }
 
-  html.js [data-reveal='lines'].in .line > span {
-    transform: none;
+  .metodo-count,
+  .metodo-progress {
+    display: none;
   }
 
-  html.js [data-reveal='lines'].in .line:nth-child(2) > span {
-    transition-delay: 0.09s;
-  }
-
-  html.js [data-reveal='lines'].in .line:nth-child(3) > span {
-    transition-delay: 0.18s;
-  }
-
-  /* Filete de brasa */
-  html.js [data-reveal='tick'] {
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.9s var(--ease-out) 0.15s;
-  }
-
-  html.js [data-reveal='tick'].in {
-    transform: none;
-  }
-
-  /* Masthead por recorte (clip no filho: clip total no alvo zeraria a
-     interseção e o IntersectionObserver nunca dispararia) */
-  html.js [data-reveal='mast'] .masthead-wm {
-    clip-path: inset(0 0 100% 0);
-    transition: clip-path 1.1s var(--ease-out);
-  }
-
-  html.js [data-reveal='mast'].in .masthead-wm {
-    clip-path: inset(0 0 0 0);
-  }
-
-  html.js [data-reveal='mast'] .masthead-row {
-    opacity: 0;
-    transition: opacity 0.7s ease 0.55s;
-  }
-
-  html.js [data-reveal='mast'].in .masthead-row {
+  .js .metodo-step {
+    position: static;
     opacity: 1;
+    translate: 0 0;
   }
 
-  /* Imagem do case por recorte */
-  html.js [data-reveal='clip'] {
-    clip-path: inset(0 0 18% 0);
-    opacity: 0;
-    transition: clip-path 1s var(--ease-out), opacity 0.7s ease;
-  }
-
-  html.js [data-reveal='clip'].in {
-    clip-path: inset(0 0 0 0);
-    opacity: 1;
-  }
-
-  /* Parallax leve (fator aplicado via JS em --plx) */
-  html.js [data-parallax] {
-    transform: translateY(var(--plx, 0));
-    will-change: transform;
+  .metodo-steps {
+    display: grid;
+    gap: var(--space-block);
   }
 }
 
-/* Reduced motion: nada se move, nada fica oculto */
-@media (prefers-reduced-motion: reduce) {
-  html.js [data-reveal],
-  html.js [data-reveal] * {
-    opacity: 1 !important;
-    transform: none !important;
-    clip-path: none !important;
-    transition: none !important;
-  }
+/* Fallback sem JS: mesma composição estática do método */
+.no-js .metodo-track {
+  height: auto;
+}
 
-  .case-figure img,
-  .serv-item,
-  .btn::after,
-  .live span {
-    transition: none !important;
-  }
+.no-js .metodo-stage {
+  position: static;
+  height: auto;
+  padding-block: var(--space-block);
+}
 
-  .case-figure-tag {
-    opacity: 1;
-    transform: none;
-  }
+.no-js .metodo-count,
+.no-js .metodo-progress {
+  display: none;
+}
+
+.no-js .metodo-steps {
+  display: grid;
+  gap: var(--space-block);
 }

@@ -1,0 +1,149 @@
+/* Hero — sistema 1: tipografia cinética em planos.
+   A headline é a composição; o trabalho entra por baixo dela. */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  padding-top: clamp(6rem, 5rem + 4vh, 9rem);
+  padding-bottom: 0;
+  overflow: clip;
+}
+
+.hero-eyebrow {
+  font-size: var(--type-small);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hero-title {
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(1.5rem, 4vh, 3.5rem);
+  font-family: var(--font-display);
+  font-size: var(--type-hero);
+  font-weight: 500;
+  line-height: 0.99;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.hero-title em {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.hl {
+  display: block;
+  overflow: clip;
+}
+
+.hl-in {
+  display: inline-block;
+}
+
+.hl-2 { margin-left: 9vw; }
+.hl-3 { margin-left: 1.5vw; }
+.hl-4 { margin-left: 24vw; }
+
+/* O plano de projeto: entra pela borda inferior direita, atrás da headline */
+.hero-figure {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: min(50vw, 780px);
+  aspect-ratio: 16 / 10;
+  overflow: clip;
+}
+
+.hero-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
+  transition: scale 0.8s var(--ease-out);
+}
+
+.hero-figure:hover img,
+.hero-figure:focus-visible img {
+  scale: 1.03;
+}
+
+.hero-figure-hint {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 0.55rem 0.9rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: var(--type-mono);
+}
+
+.hero-intro {
+  position: relative;
+  z-index: 2;
+  max-width: 26rem;
+  margin-top: clamp(2rem, 6vh, 4.5rem);
+  margin-bottom: clamp(2.5rem, 8vh, 5rem);
+  display: grid;
+  gap: 1.5rem;
+  justify-items: start;
+}
+
+.hero-tick {
+  width: 2.75rem;
+  height: 3px;
+  background: var(--ember-light);
+}
+
+.hero-lead {
+  font-size: var(--type-lead);
+  line-height: 1.55;
+}
+
+/* Entrada do hero — só com JS e sem reduced motion */
+.js .hero .hl-in {
+  animation: hero-line 0.9s var(--ease-out) backwards;
+}
+
+.js .hero .hl-1 .hl-in { animation-delay: 0.05s; }
+.js .hero .hl-2 .hl-in { animation-delay: 0.13s; }
+.js .hero .hl-3 .hl-in { animation-delay: 0.21s; }
+.js .hero .hl-4 .hl-in { animation-delay: 0.29s; }
+
+.js .hero-figure {
+  animation: hero-plane 1s var(--ease-out) 0.45s backwards;
+}
+
+.js .hero-intro,
+.js .hero-eyebrow {
+  animation: hero-fade 0.8s var(--ease-out) 0.55s backwards;
+}
+
+@keyframes hero-line {
+  from { translate: 0 105%; }
+  to { translate: 0 0; }
+}
+
+@keyframes hero-plane {
+  from { clip-path: inset(100% 0 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes hero-fade {
+  from { opacity: 0; translate: 0 1rem; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .hero .hl-in,
+  .js .hero-figure,
+  .js .hero-intro,
+  .js .hero-eyebrow {
+    animation: none;
+  }
+}
