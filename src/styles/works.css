@@ -1,0 +1,330 @@
+/* Movimento 2 · Trabalhos selecionados — três cases no mesmo sistema:
+   superfície de tinta em escala, nome sobreposto, informação mínima.
+   As paletas internas pertencem aos projetos; a moldura é Vólund. */
+
+.works {
+  padding-top: var(--space-mov);
+}
+
+.works-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+}
+
+.works-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: var(--type-small);
+  font-weight: 500;
+  color: var(--fg);
+}
+
+.works-title::before {
+  content: "";
+  width: 1.1rem;
+  height: 2px;
+  background: var(--ember);
+}
+
+.works-index {
+  display: flex;
+  gap: 1.75rem;
+}
+
+.works-index a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: var(--type-small);
+  font-weight: 500;
+  color: var(--fg-muted);
+  transition: color var(--dur-micro) var(--ease-out);
+}
+
+.works-index a:hover,
+.works-index a:focus-visible {
+  color: var(--ember);
+}
+
+.wi-n {
+  font-family: var(--font-mono);
+  font-size: var(--type-mono);
+}
+
+/* O case */
+.case {
+  margin-top: clamp(4rem, 3rem + 6vw, 8rem);
+  scroll-margin-top: 4.5rem;
+}
+
+.case-media {
+  position: relative;
+  height: clamp(320px, 74vh, 760px);
+  background: var(--ink);
+}
+
+.case-media > img:first-child {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.case-media-alt {
+  position: absolute;
+  right: clamp(1rem, 5vw, 4.5rem);
+  bottom: clamp(-3.5rem, -4vw, -2rem);
+  width: clamp(110px, 15vw, 210px);
+  height: auto;
+  border: 1px solid var(--paper);
+  z-index: 2;
+}
+
+.case-head {
+  position: relative;
+  z-index: 3;
+  margin-top: -0.55em;
+  font-size: var(--type-case);
+  padding-inline: clamp(0rem, 1vw, 1rem);
+}
+
+.case-n {
+  font-family: var(--font-mono);
+  font-size: var(--type-mono);
+  color: var(--fg-muted);
+  margin-bottom: 0.35rem;
+}
+
+.case-name {
+  font-family: var(--font-display);
+  font-size: 1em;
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+.case-meta {
+  margin-top: 0.9rem;
+  font-size: var(--type-small);
+  font-weight: 500;
+  color: var(--fg-muted);
+}
+
+.case-live-dot .tick {
+  width: 0.65rem;
+  margin-right: 0.35rem;
+}
+
+.case-info {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: clamp(1rem, 2vw, 2rem);
+  row-gap: 1.5rem;
+  margin-top: clamp(1.75rem, 3vw, 3rem);
+  padding-inline: clamp(0rem, 1vw, 1rem);
+}
+
+.case-line {
+  grid-column: 1 / 6;
+  font-family: var(--font-display);
+  font-size: var(--type-line);
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--fg);
+  max-width: 14em;
+}
+
+.case-col {
+  grid-column: 7 / 13;
+  display: grid;
+  gap: 1.1rem;
+  align-content: start;
+}
+
+.case-sum {
+  max-width: var(--measure);
+}
+
+.case-serv {
+  font-size: var(--type-small);
+  color: var(--fg-muted);
+}
+
+.case-out {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  color: var(--fg);
+  border-bottom: 1px solid var(--fg);
+  padding-bottom: 0.15rem;
+  transition: color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+}
+
+.case-out:hover,
+.case-out:focus-visible {
+  color: var(--ember);
+  border-color: var(--ember);
+}
+
+/* ------------------------------------------------------------------
+   Superfícies sintéticas dos placeholders (Projeto 02 e 03).
+   Material criado no repositório; substituível por screenshots reais. */
+
+.syn-02 { background: #22301F; color: #EDE6D6; }
+.syn-03 { background: #E7E1D4; color: #232838; }
+
+.syn-full {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: clamp(1.5rem, 4vw, 4rem) clamp(1.5rem, 5vw, 5.5rem);
+}
+
+.syn-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.syn-word {
+  font-family: var(--font-mono);
+  font-size: var(--type-mono);
+  margin-right: auto;
+}
+
+.syn-nav i {
+  width: 2.2rem;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.45;
+}
+
+.syn-display {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 1rem + 4.6vw, 5.4rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+}
+
+.syn-display em {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.syn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.75rem, 2vw, 2rem);
+  max-width: 62%;
+}
+
+.syn-card {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.syn-card i {
+  aspect-ratio: 4 / 5;
+  border: 1px solid currentColor;
+  opacity: 0.4;
+}
+
+.syn-card b {
+  width: 55%;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+.syn-form {
+  display: flex;
+  gap: 0.75rem;
+  max-width: 30rem;
+}
+
+.syn-field {
+  flex: 1;
+  min-height: 3.2rem;
+  border: 1px solid currentColor;
+  opacity: 0.55;
+}
+
+.syn-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.9rem 1.6rem;
+  background: #232838;
+  color: #E7E1D4;
+  font-family: var(--font-sans);
+  font-size: var(--type-small);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.syn-note {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.syn-note i {
+  width: 4rem;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+/* Versão compacta nas lâminas da hero */
+.panel-syn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: clamp(0.7rem, 1.4vw, 1.3rem);
+}
+
+.panel-syn .syn-nav { gap: 0.5rem; }
+.panel-syn .syn-nav i { width: 1rem; }
+
+.panel-syn .syn-display {
+  font-size: clamp(0.95rem, 1.4vw, 1.5rem);
+}
+
+.panel-syn .syn-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.panel-syn .syn-row i {
+  width: 2.4rem;
+  aspect-ratio: 4 / 5;
+  border: 1px solid currentColor;
+  opacity: 0.4;
+}
+
+.panel-syn .syn-form {
+  gap: 0.4rem;
+}
+
+.panel-syn .syn-form i {
+  flex: 1;
+  min-height: 1.3rem;
+  border: 1px solid currentColor;
+  opacity: 0.55;
+}
+
+.panel-syn .syn-form b {
+  width: 2.2rem;
+  min-height: 1.3rem;
+  background: currentColor;
+  opacity: 0.9;
+}

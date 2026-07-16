@@ -1,8 +1,7 @@
-/* Header, menu mobile e índice de serviços */
+/* Header e menu mobile */
 export function initNavigation() {
   initHeader();
   initMenu();
-  initServicos();
 }
 
 function initHeader() {
@@ -48,30 +47,5 @@ function initMenu() {
       setOpen(false, { focus: false });
       toggle.focus();
     }
-  });
-}
-
-function initServicos() {
-  const toggles = document.querySelectorAll('[data-serv-toggle]');
-
-  toggles.forEach((toggle, index) => {
-    const panel = document.getElementById(toggle.getAttribute('aria-controls'));
-    if (!panel) return;
-
-    // Estado inicial: primeiro item aberto, demais recolhidos
-    if (index > 0) {
-      toggle.setAttribute('aria-expanded', 'false');
-      panel.setAttribute('data-collapsed', '');
-    }
-
-    toggle.addEventListener('click', () => {
-      const expanded = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!expanded));
-      if (expanded) {
-        panel.setAttribute('data-collapsed', '');
-      } else {
-        panel.removeAttribute('data-collapsed');
-      }
-    });
   });
 }

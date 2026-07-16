@@ -1,25 +1,4 @@
-/* Responsivo — mobile é composição própria, não desktop comprimido */
-
-@media (max-width: 1024px) {
-  .case-body {
-    grid-template-columns: 1fr;
-    gap: var(--space-block);
-  }
-
-  .case-ficha {
-    position: static;
-    max-width: 30rem;
-  }
-
-  .capacidades {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-
-  .cap-fecho {
-    grid-column: 1;
-  }
-}
+/* Responsivo — mobile é composição própria, não desktop comprimido. */
 
 @media (max-width: 900px) {
   .header-nav,
@@ -30,228 +9,182 @@
   .menu-toggle {
     display: inline-flex;
   }
+}
 
-  .metodo-intro,
-  .fechamento-acao {
-    grid-template-columns: 1fr;
-  }
-
-  .fechamento-cta {
-    justify-self: start;
+@media (min-width: 901px) {
+  .menu {
+    display: none;
   }
 }
 
-@media (max-width: 768px) {
-  /* Hero: headline própria, trabalho vira faixa de base */
+@media (max-width: 820px) {
+  /* Hero mobile: leitura primeiro, as três lâminas viram uma faixa
+     de antecipação do portfólio logo abaixo */
   .hero {
+    min-height: auto;
     padding-top: 5.5rem;
   }
 
   .hero-title {
-    font-size: clamp(2.6rem, 11.5vw, 4.5rem);
+    font-size: clamp(2.4rem, 10.5vw, 4rem);
   }
 
-  .hl-2 { margin-left: 6vw; }
-  .hl-3 { margin-left: 0; }
-  .hl-4 { margin-left: 12vw; }
-
-  .hero-intro {
-    max-width: 100%;
-    margin-bottom: 2.5rem;
+  .hero-ground {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+    margin-top: 2rem;
   }
 
-  .hero-intro .btn {
-    width: 100%;
+  .hero-foot {
+    padding-bottom: 0;
   }
 
-  .hero-figure {
-    position: static;
-    order: 4;
-    width: auto;
-    margin-top: auto;
-    margin-inline: calc(-1 * var(--gutter));
-    aspect-ratio: 4 / 3;
-  }
-
-  /* Case: o crop mobile real assume o segundo plano por sobreposição */
-  .case-opening {
-    display: block;
-  }
-
-  .case-figure-main {
-    margin-inline: calc(-1 * var(--gutter)) 0;
-  }
-
-  .case-figure-alt {
-    width: 38vw;
-    margin: -22% var(--gutter) 0 auto;
-    position: relative;
-  }
-
-  .case-name {
-    position: static;
-    margin-bottom: 1.5rem;
-  }
-
-  .case-name .case-name-b {
-    margin-left: 0.45em;
-  }
-
-  .case-tese {
-    margin-left: 0;
-    margin-top: 3.5rem;
-  }
-
-  /* Posicionamento: gesto recomposto, margens curtas */
-  .gesto-l2 { margin-left: 7vw; }
-  .gesto-l3 { margin-left: 0; }
-  .gesto-l4 { margin-left: 14vw; }
-
-  .posicionamento-apoio {
-    margin-left: 0;
-    max-width: var(--measure);
-  }
-
-  .momentos li:nth-child(2) { margin-left: 9%; }
-  .momentos li:nth-child(3) { margin-left: 18%; }
-
-  .momentos-fecho {
-    margin-left: 18%;
-  }
-
-  /* Serviços: painel alinhado à margem, toque confortável */
-  .serv-toggle {
-    grid-template-columns: 2.4rem 1fr auto;
-    padding-block: 1.25rem;
-  }
-
-  .serv-panel > p {
-    margin-left: 2.4rem;
-  }
-
-  .cap-list {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  /* Método: progressão vertical, sem palco sticky */
-  .metodo-track {
-    height: auto;
-  }
-
-  .metodo-stage {
-    position: static;
-    height: auto;
-    padding-block: var(--space-block);
-  }
-
-  .metodo-count,
-  .metodo-progress {
-    display: none;
-  }
-
-  .metodo-steps {
+  .hero-panels {
     display: grid;
-    gap: calc(var(--space-block) * 0.9);
-    margin-top: 0;
-    min-height: 0;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    height: auto;
   }
 
-  .js .metodo-step {
-    position: static;
+  .panel {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: clamp(120px, 34vw, 190px);
+    opacity: 1;
+  }
+
+  .panel-tag {
     opacity: 1;
     translate: 0 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.72rem;
+    padding: 0.25rem 0.45rem;
   }
 
-  .metodo-step-nome {
-    font-size: clamp(2.3rem, 10vw, 3.6rem);
+  .hero-hint {
+    position: static;
+    justify-self: end;
+    grid-column: 3;
+    margin-top: 0.5rem;
+    text-align: right;
   }
 
-  .metodo-step-desc {
-    margin-left: 0;
+  /* Cases */
+  .case-media {
+    height: clamp(260px, 58vw, 420px);
   }
 
-  .principios {
-    margin-left: 0;
+  .case-media-alt {
+    width: clamp(84px, 22vw, 130px);
+    bottom: -1.5rem;
   }
 
-  /* Estúdio e fechamento */
-  .estudio-pull {
-    margin-left: 8%;
+  .case-head {
+    margin-top: -0.45em;
   }
 
-  .principios {
+  .case-info {
+    display: grid;
     grid-template-columns: 1fr;
-    gap: 1.75rem;
+    gap: 1.25rem;
   }
 
-  .principios li:nth-child(2),
-  .principios li:nth-child(4) {
-    margin-top: 0;
+  .case-line,
+  .case-col {
+    grid-column: auto;
   }
 
-  .principios li:nth-child(even) {
-    margin-left: 12%;
+  /* Movimento 3 */
+  .offer-title {
+    grid-column: 1 / -1;
   }
 
-  .fechamento-title span + span {
-    margin-left: 6%;
+  .offer-apoio,
+  .offer-momentos {
+    grid-column: 1 / -1;
   }
 
-  .fechamento-cta {
-    width: 100%;
+  .offer-momentos {
+    padding-left: 1.1rem;
   }
 
-  .fechamento-cta .btn {
-    width: 100%;
+  .serv {
+    grid-column: 1 / -1;
   }
 
-  /* Footer empilhado, masthead recalculado */
-  .footer-grid {
+  .serv-plane {
+    display: none; /* decorativo; a informação completa segue visível */
+  }
+
+  .caps-intro,
+  .caps-list,
+  .caps-fecho {
+    grid-column: 1 / -1;
+  }
+
+  /* Movimento 4 */
+  .process-title {
+    grid-column: 1 / -1;
+  }
+
+  .process-intro-body {
+    grid-column: 1 / -1;
+  }
+
+  .trace {
+    padding-left: 1.5rem;
+  }
+
+  .step {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    row-gap: 0.4rem;
   }
 
-  .footer-meta {
-    justify-self: start;
-    text-align: left;
+  .studio-lead,
+  .studio-pull,
+  .studio-principios {
+    grid-column: 1 / -1;
   }
 
-  .footer-wm {
-    translate: 0 30%;
+  /* Movimento 5 */
+  .close-apoio,
+  .close-cta-row {
+    grid-column: 1 / -1;
+  }
+
+  .ft-contact {
+    margin-left: 0;
   }
 }
 
 @media (max-width: 560px) {
-  .hero-figure {
-    aspect-ratio: 1 / 1;
+  .works-head {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .case-figure-alt {
-    width: 44vw;
+  .works-index {
+    gap: 1.1rem;
+    flex-wrap: wrap;
   }
 
-  .momentos li:nth-child(2),
-  .momentos li:nth-child(3) {
-    margin-left: 0;
+  .caps-list {
+    grid-template-columns: 1fr;
   }
 
-  .momentos-fecho {
-    margin-left: 0;
+  .syn-grid {
+    max-width: 100%;
   }
 
-  .serv-piso {
-    margin-left: 0;
+  .syn-form {
+    flex-direction: column;
   }
 
-  .estudio-pull {
-    margin-left: 0;
-  }
-}
-
-/* Touch: sem dependência de hover */
-@media (hover: none) {
-  .hero-figure img {
-    transition: none;
+  .close-cta-row .btn {
+    width: 100%;
   }
 }

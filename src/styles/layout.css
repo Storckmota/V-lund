@@ -1,26 +1,98 @@
-/* Layout — salas, gutter, medidas. Sem container único centralizado:
-   cada sala compõe a própria largura a partir do gutter da página. */
-main {
+/* Layout — uma única folha contínua. O fundo pertence ao body (papel que
+   mergulha na tinta no encerramento); as seções são transparentes e o
+   campo (canvas fixo) atravessa a página inteira atrás do conteúdo. */
+
+body {
   background: var(--paper);
+  transition: background-color 0.9s var(--ease-mask);
+}
+
+body.is-ink {
+  background: var(--ink);
+}
+
+/* Enquanto a folha está imersa, qualquer trecho de leitura ainda
+   visível inverte junto (a folha inteira mergulha, não só uma seção) */
+body.is-ink main section:not(.surface-ink) {
+  --fg: var(--paper);
+  --fg-body: #CFC9BC;
+  --fg-muted: #9A9384;
+  --line: rgba(250, 248, 244, 0.16);
+  --ember: var(--ember-dark);
+}
+
+main section,
+main section h2,
+main section h3,
+main section h4,
+main section p,
+main section li,
+main section dt,
+main section dd {
+  transition: color 0.9s var(--ease-mask);
+}
+
+/* Campo visual compartilhado */
+.field {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-field);
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.9s var(--ease-out);
+}
+
+body.has-field .field {
+  opacity: 1;
+}
+
+main,
+.footer {
+  position: relative;
+  z-index: var(--z-content);
 }
 
 section {
-  background: var(--bg);
-  color: var(--fg-body);
   padding-inline: var(--gutter);
+  color: var(--fg-body);
 }
 
-.room-ink {
-  background: var(--bg);
-  color: var(--fg-body);
+/* Superfícies de tinta: sólidas por padrão (sem JS o ciclo não roda);
+   com o campo ativo o fundo passa ao body e as seções ficam transparentes. */
+.close-cta,
+.footer {
+  background: var(--ink);
+}
+
+body.has-field .close-cta,
+body.has-field .footer {
+  background: transparent;
 }
 
 .measure {
   max-width: var(--measure);
 }
 
+/* Lâmina: o recorte-assinatura do site (canto superior direito cortado) */
+.lamina {
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
+}
+
+/* Tick de brasa: o menor estado da ignição */
+.tick {
+  display: inline-block;
+  width: 1.1rem;
+  height: 2px;
+  background: var(--ember);
+  vertical-align: middle;
+}
+
 /* Sem JS, todo conteúdo revelável fica visível */
-.no-js [data-reveal] {
+.no-js [data-reveal],
+.no-js [data-stage],
+.no-js [data-stage-line] {
   opacity: 1 !important;
   transform: none !important;
   clip-path: none !important;

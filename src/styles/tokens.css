@@ -9,7 +9,7 @@
   --ember-dark: #C45543;
   --body: #33302A;
 
-  /* Derivados de contexto (sala tinta) */
+  /* Derivados de contexto (superfície de tinta) */
   --bg: var(--paper);
   --fg: var(--ink);
   --fg-body: var(--body);
@@ -23,36 +23,49 @@
   --font-mono: "Space Mono", "Courier New", monospace;
 
   /* Escala de display */
-  --type-hero: clamp(2.75rem, 1rem + 8vw, 8.75rem);
-  --type-gesto: clamp(2.5rem, 0.75rem + 7.4vw, 8rem);
-  --type-canto: clamp(2.25rem, 1rem + 5.4vw, 6rem);      /* fechamento, nome do case */
-  --type-index: clamp(1.75rem, 1rem + 3.2vw, 4rem);      /* serviços, etapas */
-  --type-title: clamp(1.6rem, 1.1rem + 2vw, 3rem);       /* títulos de sala */
+  --type-hero: clamp(2.5rem, 1.1rem + 5.6vw, 6rem);
+  --type-gesto: clamp(2rem, 0.9rem + 4.6vw, 5.2rem);      /* manifesto, fechamento */
+  --type-case: clamp(2.2rem, 1rem + 5vw, 6rem);           /* nome do case */
+  --type-index: clamp(1.6rem, 1rem + 2.6vw, 3.4rem);      /* serviços, etapas */
+  --type-line: clamp(1.35rem, 1.1rem + 1.4vw, 2.2rem);    /* tese do case */
   --type-lead: clamp(1.06rem, 1rem + 0.45vw, 1.35rem);
   --type-body: 1.0625rem;
   --type-small: 0.9375rem;
   --type-mono: 0.8125rem;
 
   /* Ritmo */
-  --space-room: clamp(6rem, 4rem + 10vw, 13rem);         /* entre salas */
+  --space-mov: clamp(7rem, 5rem + 11vw, 15rem);           /* entre movimentos */
   --space-block: clamp(2.5rem, 2rem + 3vw, 5rem);
-  --gutter: clamp(1.25rem, 4vw, 4.5rem);                 /* margem lateral da página */
+  --gutter: clamp(1.25rem, 4vw, 4.5rem);
   --measure: 34em;
 
-  /* Movimento */
+  /* Vocabulário de recorte: a lâmina (canto superior direito cortado) */
+  --cut: clamp(14px, 1.6vw, 26px);
+
+  /* Gramática de motion — únicos valores permitidos no site inteiro */
+  --dur-micro: 0.3s;    /* estados de interação */
+  --dur-reveal: 0.8s;   /* revelação por máscara */
+  --dur-large: 1.2s;    /* planos grandes, preloader */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur: 0.7s;
+  --ease-mask: cubic-bezier(0.65, 0, 0.35, 1);
+  --rise: 1.25rem;      /* amplitude de revelação */
+  --drift: 6px;         /* amplitude de suspensão */
 
   /* Camadas */
+  --z-field: 0;
+  --z-content: 1;
   --z-header: 40;
   --z-menu: 50;
+  --z-preloader: 60;
 }
 
-.room-ink {
+/* Superfície de tinta: mesmo sistema, polo de peso.
+   O fundo vem do body (transição de ciclo) — aqui só o contexto de cor. */
+.surface-ink {
   --bg: var(--ink);
   --fg: var(--paper);
   --fg-body: #CFC9BC;
-  --fg-muted: #8B8578;
+  --fg-muted: #9A9384;
   --line: rgba(250, 248, 244, 0.16);
   --ember: var(--ember-dark);
 }

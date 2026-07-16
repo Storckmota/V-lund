@@ -1,94 +1,52 @@
-/* Motion — tese: revelar por recorte, deslocar planos.
-   Estados aplicados por IntersectionObserver (scripts/motion.js). */
-.js [data-reveal="rise"] {
-  opacity: 0;
-  translate: 0 1.75rem;
-  transition: opacity var(--dur) var(--ease-out), translate var(--dur) var(--ease-out);
-}
+/* Gramática de motion — quatro primitivas, valores únicos (ver tokens):
+   1. suspensão (GSAP, planos da hero)
+   2. deslocamento e rastro (campo/canvas, masthead)
+   3. revelação por máscara (aqui)
+   4. traço de brasa (progresso, seleção, estados)
+   Nada além disso. */
 
-.js [data-reveal="clip"] {
+/* Revelação por máscara: display, mídia, planos */
+.js [data-reveal="mask"] {
   clip-path: inset(0 0 100% 0);
-  transition: clip-path 0.9s var(--ease-out);
+  transition: clip-path var(--dur-reveal) var(--ease-mask);
 }
 
-.js [data-reveal].is-in {
-  opacity: 1;
-  translate: 0 0;
+.js [data-reveal="mask"].is-in {
   clip-path: inset(0 0 0 0);
 }
 
-/* Planos com parallax leve (transform aplicado via JS em --plane-y) */
-.js [data-plane],
-.js [data-plane-slow] {
-  will-change: transform;
-  transform: translate3d(var(--plane-x, 0px), var(--plane-y, 0px), 0);
+/* Revelação de leitura: sobe pouco, aparece */
+.js [data-reveal="rise"] {
+  opacity: 0;
+  transform: translateY(var(--rise));
+  transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out);
 }
 
+.js [data-reveal="rise"].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Reduced motion: a composição estática é a experiência completa */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  .js [data-reveal],
+  .js [data-stage],
+  .js [data-stage-line] .ht-in {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
   }
 
-  .js [data-reveal] {
-    opacity: 1;
-    translate: 0 0;
-    clip-path: none;
+  .field {
+    transition: none;
   }
 
-  .js [data-plane],
-  .js [data-plane-slow] {
-    transform: none;
+  body {
+    transition: none;
   }
 
-  /* Método vira lista estática, todas as etapas visíveis */
-  .metodo-track {
-    height: auto;
+  .preloader {
+    display: none !important;
   }
-
-  .metodo-stage {
-    position: static;
-    height: auto;
-    padding-block: var(--space-block);
-  }
-
-  .metodo-count,
-  .metodo-progress {
-    display: none;
-  }
-
-  .js .metodo-step {
-    position: static;
-    opacity: 1;
-    translate: 0 0;
-  }
-
-  .metodo-steps {
-    display: grid;
-    gap: var(--space-block);
-  }
-}
-
-/* Fallback sem JS: mesma composição estática do método */
-.no-js .metodo-track {
-  height: auto;
-}
-
-.no-js .metodo-stage {
-  position: static;
-  height: auto;
-  padding-block: var(--space-block);
-}
-
-.no-js .metodo-count,
-.no-js .metodo-progress {
-  display: none;
-}
-
-.no-js .metodo-steps {
-  display: grid;
-  gap: var(--space-block);
 }

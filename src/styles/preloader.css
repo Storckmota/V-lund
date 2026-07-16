@@ -1,0 +1,64 @@
+/* Preloader — fragmentos em suspensão montam o V; a brasa acende;
+   os fragmentos se dispersam para o campo da hero. Só existe quando o
+   head decidiu html.intro (primeira visita da sessão, motion permitido). */
+
+.preloader {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-preloader);
+  background: var(--paper);
+}
+
+.intro .preloader {
+  display: block;
+}
+
+.pre-stage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.pre-frag {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 3px;
+  height: var(--fl, 60px);
+  margin: calc(var(--fl, 60px) / -2) 0 0 -1.5px;
+  background: var(--ink);
+  transform: translate(var(--fx), var(--fy)) rotate(var(--fr));
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.pre-v {
+  width: clamp(72px, 10vw, 128px);
+  height: auto;
+  aspect-ratio: 276 / 316;
+  color: var(--ink);
+  clip-path: inset(100% 0 0 0);
+  will-change: clip-path, transform, opacity;
+}
+
+.pre-ember {
+  position: absolute;
+  left: calc(50% - 3.5px);
+  top: calc(50% + clamp(42px, 5.5vw, 72px)); /* vértice inferior do V */
+  width: 7px;
+  height: 7px;
+  background: var(--ember-light);
+  transform: scale(0);
+  will-change: transform, opacity;
+}
+
+/* Enquanto a intro roda, o palco da hero espera a passagem de bastão */
+.intro .hero [data-stage] {
+  opacity: 0;
+}
+
+.intro .hero .ht-in {
+  transform: translateY(110%);
+}

@@ -33,7 +33,7 @@ body {
   color: var(--paper);
 }
 
-.room-ink ::selection {
+.surface-ink ::selection {
   background: var(--paper);
   color: var(--ink);
 }
@@ -66,8 +66,7 @@ a {
   text-decoration: none;
 }
 
-p a,
-.footer-nav a {
+p a {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
