@@ -1,0 +1,161 @@
+/* Hero: coluna de copy contra o V monumental cortado pela borda.
+   Mobile primeiro: V no alto, copy ancorada na base da dobra. */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--s-6) + var(--s-2)) var(--gutter) 0;
+}
+
+.hero-field {
+  display: flex;
+  justify-content: flex-end;
+  height: clamp(150px, 32vh, 360px);
+  margin-right: calc(var(--gutter) * -1);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-v {
+  height: 100%;
+  aspect-ratio: 276 / 316;
+  color: var(--ink);
+  margin-right: max(-16vw, -110px);
+  will-change: transform;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  padding-top: var(--s-4);
+}
+
+.hero-eyebrow {
+  font: 0.75rem/1 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink);
+}
+
+.hero-title {
+  margin-top: var(--s-3);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.125rem, 8.8vw, 2.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.ht {
+  display: block;
+  overflow: hidden;
+}
+
+.ht-in {
+  display: block;
+  will-change: transform;
+}
+
+.hero-support {
+  margin-top: var(--s-4);
+  max-width: 46ch;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--body);
+}
+
+.hero-actions {
+  margin-top: var(--s-4);
+}
+
+.hero-actions .btn {
+  width: 100%;
+  max-width: 430px;
+}
+
+.hero-scroll {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-2);
+  margin-top: var(--s-5);
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.hero-scroll-label {
+  font: 0.6875rem/1 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: var(--s-4);
+  background: var(--ink);
+  transform-origin: top;
+  transition: transform var(--dur-micro) var(--ease-out);
+}
+
+.hero-scroll:hover .hero-scroll-line {
+  transform: scaleY(1.4);
+}
+
+@media (min-width: 900px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding-top: var(--s-6);
+    padding-bottom: var(--s-6);
+  }
+
+  .hero-field {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(42vw, 620px);
+    height: auto;
+    margin: 0;
+    align-items: center;
+  }
+
+  .hero-v {
+    height: min(72vh, 660px);
+    margin-right: max(-8vw, -130px);
+  }
+
+  .hero-copy {
+    margin-top: 0;
+    padding-top: 0;
+    max-width: min(61.8%, 760px);
+  }
+
+  .hero-title {
+    font-size: clamp(3.25rem, 6vw, 5.5rem);
+  }
+
+  .hero-support {
+    font-size: 1.125rem;
+  }
+
+  .hero-actions .btn {
+    width: auto;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    left: var(--gutter);
+    bottom: 0;
+    margin: 0;
+  }
+
+  .hero-scroll-line {
+    height: var(--s-5);
+  }
+}

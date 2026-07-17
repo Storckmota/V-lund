@@ -1,5 +1,12 @@
 html {
   color-scheme: light;
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -7,13 +14,125 @@ body {
   background: var(--paper);
   color: var(--body);
   font-family: var(--font-sans);
+  font-size: 1rem;
   line-height: 1.5;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-main {
-  padding: 2rem;
-}
-
+h1,
+h2,
 p {
   margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ember-light);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  top: var(--s-2);
+  left: var(--s-2);
+  z-index: calc(var(--z-preloader) + 1);
+  padding: var(--s-2) var(--s-3);
+  background: var(--ink);
+  color: var(--paper);
+  font: 500 0.875rem/1 var(--font-sans);
+  text-decoration: none;
+  border-radius: var(--radius);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 55px;
+  padding: 0 var(--s-4);
+  background: var(--ink);
+  color: var(--paper);
+  font: 500 0.9375rem/1.2 var(--font-sans);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  border: 0;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color var(--dur-micro) ease-out;
+}
+
+.btn:hover {
+  background: var(--ember-light);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* sinal funcional de brasa */
+.ember-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: var(--s-2);
+  background: var(--ember-light);
+  vertical-align: 8%;
+}
+
+/* revelação por rolagem: escondida apenas com JS ativo */
+html.js .rv {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
+}
+
+html.js .rv--mask {
+  transform: translateY(112%);
+  opacity: 1;
+}
+
+html.js .rv.in {
+  opacity: 1;
+  transform: none;
+}
+
+html.js .rv-d1 {
+  transition-delay: 0.12s;
+}
+
+html.js .rv-d2 {
+  transition-delay: 0.22s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .rv {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

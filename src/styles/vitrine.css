@@ -1,0 +1,58 @@
+/* Início da próxima ideia narrativa: a vitrine e a decisão.
+   A linha vertical continua a coluna do scroll cue da hero. */
+
+.vitrine {
+  position: relative;
+  padding: var(--s-7) var(--gutter) calc(var(--s-7) + var(--s-5));
+}
+
+.vitrine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--gutter);
+  width: 1px;
+  height: var(--s-6);
+  background: var(--ink);
+}
+
+.vitrine-inner {
+  padding-top: var(--s-6);
+}
+
+.vitrine-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.875rem, 5.4vw, 4.125rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.vt {
+  display: block;
+  overflow: hidden;
+}
+
+.vt-in {
+  display: block;
+}
+
+.vt--offset {
+  margin-left: clamp(var(--s-4), 8vw, var(--s-6));
+}
+
+.vitrine-support {
+  margin-top: var(--s-5);
+  margin-left: clamp(var(--s-4), 8vw, var(--s-6));
+  max-width: 46ch;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--body);
+}
+
+@media (min-width: 900px) {
+  .vitrine-support {
+    font-size: 1.125rem;
+  }
+}

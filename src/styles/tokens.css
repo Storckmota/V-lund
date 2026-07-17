@@ -10,4 +10,29 @@
   --font-display: "Fraunces", Georgia, serif;
   --font-sans: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "Space Mono", "Courier New", monospace;
+
+  /* escala silenciosa (Fibonacci) */
+  --s-1: 8px;
+  --s-2: 13px;
+  --s-3: 21px;
+  --s-4: 34px;
+  --s-5: 55px;
+  --s-6: 89px;
+  --s-7: 144px;
+
+  /* geometria do símbolo V: atan((276/2)/316) */
+  --v-angle: 23.6deg;
+  --v-ratio: 1.1449; /* 316/276 */
+
+  --radius: 3px;
+  --gutter: clamp(21px, 4.5vw, 64px);
+
+  --z-header: 40;
+  --z-menu: 60;
+  --z-preloader: 100;
+
+  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 0.3s;
+  --dur-reveal: 0.8s;
 }
