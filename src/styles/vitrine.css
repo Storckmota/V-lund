@@ -1,0 +1,86 @@
+.vitrine {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 82vh;
+  min-height: 82svh;
+  padding: var(--s-6) var(--gutter);
+  overflow: clip;
+  text-align: center;
+}
+
+.vitrine-inner {
+  width: min(100%, 1020px);
+  margin: 0 auto;
+}
+
+.vitrine-title {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 2.375rem;
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: 0;
+}
+
+.vt {
+  display: block;
+  overflow: hidden;
+}
+
+.vt-in {
+  display: block;
+}
+
+/* Primeira transição: linhas do título sobem da máscara, apoio entra depois. */
+html.js .vitrine .vt-in {
+  transition-duration: 0.95s;
+}
+
+.vitrine-support {
+  max-width: 58ch;
+  margin: var(--s-4) auto 0;
+  color: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+@media (min-width: 430px) {
+  .vitrine-title {
+    font-size: 2.875rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .vitrine {
+    min-height: 90vh;
+    min-height: 90svh;
+    padding-block: var(--s-7);
+  }
+
+  .vitrine-title {
+    font-size: 4.5rem;
+    line-height: 1.02;
+  }
+
+  .vitrine-support {
+    margin-top: var(--s-5);
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .vitrine-title {
+    font-size: 5.75rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .vitrine-inner {
+    width: min(100%, 1180px);
+  }
+
+  .vitrine-title {
+    font-size: 6.35rem;
+  }
+}

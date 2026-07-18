@@ -1,0 +1,218 @@
+/* Hero: copy contida no centro, wordmark monumental na base, atmosfera viva atrás. */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 96px 0 0;
+  overflow: clip;
+  isolation: isolate;
+}
+
+.hero-atmos {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Grão de papel: textura estática, quase subliminar. */
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+  background-size: 240px 240px;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: min(100%, 880px);
+  margin: auto 0;
+  padding: var(--s-5) var(--gutter) var(--s-4);
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  color: var(--ink);
+  font: 0.75rem/1.2 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+.hero-title {
+  margin-top: var(--s-3);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 6.5vw, 4.05rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+/* Máscara por linha: o clip precisa de folga para os descendentes da Fraunces. */
+.hml {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+.hml-in {
+  display: block;
+}
+
+.hl--em {
+  font-style: italic;
+}
+
+.hero-support {
+  max-width: 48ch;
+  margin-top: var(--s-4);
+  color: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+}
+
+.hero-actions {
+  margin-top: var(--s-4);
+}
+
+/* Wordmark monumental: gesto principal da dobra, cortado na base. */
+.hero-monument {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.monument-wordmark {
+  display: block;
+  width: 112vw;
+  max-width: none;
+  height: auto;
+  color: var(--ink);
+  margin-bottom: -1.6vw;
+}
+
+/* Glifos do monumento: reagem localmente ao ponteiro (monument.js). */
+.mw-g {
+  transform-box: fill-box;
+  transform-origin: 50% 62%;
+  will-change: transform;
+}
+
+/* Entrada coordenada: header desce, linhas do H1 saem da máscara,
+   apoio e CTA seguem, monumento assenta, atmosfera acende. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .site-header {
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: header-in 0.7s var(--ease-out) 0.02s forwards;
+  }
+
+  html.js .hero [data-rise] {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: hero-rise 0.75s var(--ease-out) forwards;
+  }
+
+  html.js .hero [data-rise="1"] { animation-delay: 0.1s; }
+  html.js .hero [data-rise="4"] { animation-delay: 0.42s; }
+  html.js .hero [data-rise="5"] { animation-delay: 0.52s; }
+
+  html.js .hml-in {
+    transform: translateY(114%);
+    animation: hero-mask 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  html.js [data-hline="1"] { animation-delay: 0.16s; }
+  html.js [data-hline="2"] { animation-delay: 0.27s; }
+
+  html.js .hero-monument {
+    opacity: 0;
+    transform: translateY(16%);
+    animation: monument-rise 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+  }
+
+  html.js .hero-atmos {
+    opacity: 0;
+    animation: atmos-in 1.5s ease-out 0.12s forwards;
+  }
+}
+
+@keyframes header-in {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-mask {
+  to {
+    transform: none;
+  }
+}
+
+@keyframes monument-rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes atmos-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding-top: 108px;
+  }
+
+  .hero-support {
+    font-size: 1.125rem;
+  }
+
+  .monument-wordmark {
+    width: 97vw;
+    margin-bottom: -1.1vw;
+  }
+}
+
+@media (min-width: 1600px) {
+  .hero-copy {
+    width: min(100%, 1000px);
+  }
+
+  .hero-title {
+    font-size: 4.4rem;
+  }
+}
