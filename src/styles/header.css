@@ -21,7 +21,7 @@
 
 .brand-wordmark {
   width: auto;
-  height: 21px;
+  height: 22px;
 }
 
 .site-nav {
@@ -38,9 +38,9 @@
   align-items: center;
   min-height: 44px;
   color: var(--ink);
-  font: 0.8125rem/1 var(--font-mono);
+  font: 0.84375rem/1 var(--font-mono);
   text-transform: uppercase;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.1em;
   text-decoration: none;
 }
 
@@ -73,8 +73,8 @@
 }
 
 .action-arrow {
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
   margin-left: 8px;
   transition: transform var(--dur-micro) var(--ease-out);
 }
@@ -106,9 +106,10 @@
 
   .site-nav {
     display: flex;
+    gap: 40px;
   }
 
   .brand-wordmark {
-    height: 24px;
+    height: 26px;
   }
 }

@@ -59,78 +59,54 @@ a {
   transform: none;
 }
 
-.btn {
-  position: relative;
+/* CTA dividido: corpo de tinta compacto + módulo de papel com a seta.
+   Um único link; o módulo é parte visual do mesmo alvo. */
+.btn-split {
+  display: inline-flex;
+  align-items: stretch;
+  min-height: 52px;
+  padding: 5px;
+  gap: 14px;
+  background: var(--ink);
+  color: var(--paper);
+  font: 500 0.9375rem/1.2 var(--font-sans);
+  letter-spacing: 0.015em;
+  text-decoration: none;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.btn-split-label {
+  display: inline-flex;
+  align-items: center;
+  padding-left: 19px;
+}
+
+.btn-split-cap {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 56px;
-  padding: 0 var(--s-4);
-  background: transparent;
-  color: var(--ink);
-  font: 500 0.9375rem/1.2 var(--font-sans);
-  letter-spacing: 0.01em;
-  text-decoration: none;
-  border: 1px solid var(--ink);
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition:
-    background-color var(--dur-micro) var(--ease-out),
-    color var(--dur-micro) var(--ease-out);
-}
-
-.btn-arrow {
-  width: 15px;
-  height: 10px;
-  margin-left: var(--s-2);
+  width: 42px;
+  background: var(--paper);
   color: var(--ember-light);
-  transition:
-    color var(--dur-micro) var(--ease-out),
-    transform var(--dur-micro) var(--ease-out);
+  border-radius: 5px;
+  transition: width var(--dur-micro) var(--ease-out);
 }
 
-.btn:hover,
-.btn:focus-visible {
-  background: var(--ink);
-  color: var(--paper);
+.btn-split-arrow {
+  width: 15px;
+  height: 11px;
+  transition: transform var(--dur-micro) var(--ease-out);
 }
 
-.btn:hover .btn-arrow,
-.btn:focus-visible .btn-arrow {
-  color: var(--ember-dark);
-  transform: translateX(4px);
+.btn-split:hover .btn-split-cap,
+.btn-split:focus-visible .btn-split-cap {
+  width: 52px;
 }
 
-.btn:active {
-  transform: translateY(1px);
-}
-
-/* CTA da hero: bloco de tinta, seta em brasa integrada. */
-.btn--hero {
-  min-height: 58px;
-  padding: 0 var(--s-5);
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-  font-size: 1rem;
-  letter-spacing: 0.015em;
-}
-
-.btn--hero .btn-arrow {
-  color: var(--ember-dark);
-}
-
-.btn--hero:hover,
-.btn--hero:focus-visible {
-  background: var(--ink-soft);
-  border-color: var(--ink-soft);
-  color: var(--paper);
-}
-
-.btn--hero:hover .btn-arrow,
-.btn--hero:focus-visible .btn-arrow {
-  color: var(--ember-dark);
-  transform: translateX(4px);
+.btn-split:hover .btn-split-arrow,
+.btn-split:focus-visible .btn-split-arrow {
+  transform: translateX(3px);
 }
 
 .ember-dot {

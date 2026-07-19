@@ -1,7 +1,10 @@
 // Atmosfera da hero em canvas 2D, duas camadas:
 // 1) campos suaves de tom de papel (deriva lenta + parallax sutil);
-// 2) retícula editorial latente — microcélulas sob o papel que despertam
-//    localmente na passagem do ponteiro e apagam com inércia.
+// 2) superfície editorial latente — microcélulas de tinta em posições
+//    levemente irregulares que despertam na passagem do ponteiro.
+// A ativação não é um círculo: cada célula tem peso, raio e desvio
+// próprios; o gesto deixa um rastro curto que apaga sozinho; células
+// despertas deslocam-se minimamente, como pressão de ar sob o papel.
 // Sem formas desenhadas, sem linhas, sem brilho.
 
 const LOBES = [
@@ -12,11 +15,13 @@ const LOBES = [
   { hue: '236, 229, 215', alpha: 0.45, r: 0.4, cx: 0.88, cy: 0.78, ax: 0.055, ay: 0.05, sp: 0.1, ph: 5.4, depth: 30 },
 ];
 
-// Retícula: espaçamento entre células e tinta das microcélulas.
-const CELL = 18;
+const CELL = 18; // espaçamento nominal entre células
 const DOT_INK = '52, 48, 41';
-const BASE_ALPHA = 0.045; // estado latente, quase subliminar
+const BASE_MIN = 0.014; // repouso: presença menor que antes, sem parecer grade
+const BASE_VAR = 0.022;
 const MAX_ALPHA = 0.17; // teto da célula desperta — contraste, nunca brilho
+const DECAY = 0.917; // memória curta do gesto
+const PUSH = 2.6; // deslocamento máximo da célula desperta, px
 
 export function initAtmosphere() {
   const canvas = document.querySelector('[data-atmos]');
@@ -41,13 +46,36 @@ export function initAtmosphere() {
   const pointer = { tx: 0, ty: 0, x: 0, y: 0 };
 
   // ponteiro em coordenadas do canvas, com inércia + velocidade
-  const cursor = { tx: -1e4, ty: -1e4, x: -1e4, y: -1e4, vx: 0, vy: 0, speed: 0 };
+  const cursor = { tx: -1e4, ty: -1e4, x: -1e4, y: -1e4, px: -1e4, py: -1e4, speed: 0 };
 
-  // grade de energia da retícula
+  // grade de células com identidade própria
   let cols = 0;
   let rows = 0;
   let energy = new Float32Array(0);
+  let jitX = new Float32Array(0); // desvio fixo da posição nominal
+  let jitY = new Float32Array(0);
+  let wgt = new Float32Array(0); // reatividade própria: nem toda célula responde igual
+  let rad = new Float32Array(0); // variação do raio de influência: limite difuso
+  let siz = new Float32Array(0); // tamanho próprio do ponto
   let baseLayer = null;
+
+  const buildCells = () => {
+    const n = cols * rows;
+    energy = new Float32Array(n);
+    jitX = new Float32Array(n);
+    jitY = new Float32Array(n);
+    wgt = new Float32Array(n);
+    rad = new Float32Array(n);
+    siz = new Float32Array(n);
+    for (let i = 0; i < n; i += 1) {
+      jitX[i] = (Math.random() - 0.5) * CELL * 0.62;
+      jitY[i] = (Math.random() - 0.5) * CELL * 0.62;
+      const r = Math.random();
+      wgt[i] = r < 0.18 ? 0.12 + r : 0.45 + Math.random() * 0.55; // ~18% quase não reagem
+      rad[i] = 0.72 + Math.random() * 0.56;
+      siz[i] = 0.55 + Math.random() * 0.5;
+    }
+  };
 
   const buildBase = () => {
     baseLayer = document.createElement('canvas');
@@ -56,11 +84,19 @@ export function initAtmosphere() {
     const bctx = baseLayer.getContext('2d');
     if (!bctx) return;
     bctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    bctx.fillStyle = `rgba(${DOT_INK}, ${BASE_ALPHA})`;
     for (let gy = 0; gy < rows; gy += 1) {
       for (let gx = 0; gx < cols; gx += 1) {
+        const i = gy * cols + gx;
+        bctx.globalAlpha = BASE_MIN + wgt[i] * BASE_VAR;
+        bctx.fillStyle = `rgb(${DOT_INK})`;
         bctx.beginPath();
-        bctx.arc(gx * CELL + CELL / 2, gy * CELL + CELL / 2, 0.8, 0, Math.PI * 2);
+        bctx.arc(
+          gx * CELL + CELL / 2 + jitX[i],
+          gy * CELL + CELL / 2 + jitY[i],
+          0.65 + siz[i] * 0.35,
+          0,
+          Math.PI * 2,
+        );
         bctx.fill();
       }
     }
@@ -77,7 +113,7 @@ export function initAtmosphere() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     cols = Math.ceil(w / CELL);
     rows = Math.ceil(h / CELL);
-    energy = new Float32Array(cols * rows);
+    buildCells();
     buildBase();
   };
 
@@ -96,43 +132,54 @@ export function initAtmosphere() {
     }
   };
 
+  // injeta energia ao longo do trecho percorrido pelo foco no quadro,
+  // com peso e raio próprios por célula: limite difuso, nunca um círculo
+  const stamp = (sx, sy, radius, gain) => {
+    if (sx < -radius || sx > w + radius || sy < -radius || sy > h + radius) return;
+    const gx0 = Math.max(0, Math.floor((sx - radius) / CELL));
+    const gx1 = Math.min(cols - 1, Math.ceil((sx + radius) / CELL));
+    const gy0 = Math.max(0, Math.floor((sy - radius) / CELL));
+    const gy1 = Math.min(rows - 1, Math.ceil((sy + radius) / CELL));
+    for (let gy = gy0; gy <= gy1; gy += 1) {
+      for (let gx = gx0; gx <= gx1; gx += 1) {
+        const i = gy * cols + gx;
+        const r = radius * rad[i];
+        const dx = gx * CELL + CELL / 2 + jitX[i] - sx;
+        const dy = gy * CELL + CELL / 2 + jitY[i] - sy;
+        const d = Math.hypot(dx, dy);
+        if (d < r) {
+          const fall = 1 - d / r;
+          const e = fall * fall * gain * wgt[i];
+          if (e > energy[i]) energy[i] = e;
+        }
+      }
+    }
+  };
+
   const drawReticle = (interactive) => {
     if (baseLayer) ctx.drawImage(baseLayer, 0, 0, w, h);
     if (!interactive) return;
 
-    // inércia do foco + leve ganho por velocidade
-    cursor.vx = cursor.tx - cursor.x;
-    cursor.vy = cursor.ty - cursor.y;
-    cursor.x += cursor.vx * 0.14;
-    cursor.y += cursor.vy * 0.14;
-    const rawSpeed = Math.hypot(cursor.vx, cursor.vy);
+    // inércia do foco
+    cursor.px = cursor.x;
+    cursor.py = cursor.y;
+    cursor.x += (cursor.tx - cursor.x) * 0.14;
+    cursor.y += (cursor.ty - cursor.y) * 0.14;
+    const rawSpeed = Math.hypot(cursor.x - cursor.px, cursor.y - cursor.py);
     cursor.speed += (rawSpeed - cursor.speed) * 0.08;
 
-    const radius = 165 + Math.min(cursor.speed * 0.6, 75);
-    const gain = 0.85 + Math.min(cursor.speed * 0.002, 0.15);
+    // rápido amplia a influência; lento revela detalhe local
+    const radius = 150 + Math.min(cursor.speed * 3.4, 85);
+    const gain = cursor.speed < 4 ? 1.0 : 0.86;
 
-    // injeta energia ao redor do foco
-    if (cursor.x > -radius && cursor.x < w + radius && cursor.y > -radius && cursor.y < h + radius) {
-      const gx0 = Math.max(0, Math.floor((cursor.x - radius) / CELL));
-      const gx1 = Math.min(cols - 1, Math.ceil((cursor.x + radius) / CELL));
-      const gy0 = Math.max(0, Math.floor((cursor.y - radius) / CELL));
-      const gy1 = Math.min(rows - 1, Math.ceil((cursor.y + radius) / CELL));
-      for (let gy = gy0; gy <= gy1; gy += 1) {
-        for (let gx = gx0; gx <= gx1; gx += 1) {
-          const dx = gx * CELL + CELL / 2 - cursor.x;
-          const dy = gy * CELL + CELL / 2 - cursor.y;
-          const d = Math.hypot(dx, dy);
-          if (d < radius) {
-            const fall = 1 - d / radius;
-            const e = fall * fall * gain;
-            const i = gy * cols + gx;
-            if (e > energy[i]) energy[i] = e;
-          }
-        }
-      }
+    // rastro: carimbos entre a posição anterior e a atual
+    if (cursor.px > -9e3) {
+      stamp(cursor.px + (cursor.x - cursor.px) * 0.5, cursor.py + (cursor.y - cursor.py) * 0.5, radius * 0.9, gain * 0.8);
     }
+    stamp(cursor.x, cursor.y, radius, gain);
 
-    // desenha células despertas e decai a energia
+    // desenha células despertas: cada uma com alpha, tamanho e um
+    // deslocamento mínimo para longe do foco — pressão, não spotlight
     ctx.fillStyle = `rgb(${DOT_INK})`;
     for (let i = 0; i < energy.length; i += 1) {
       const e = energy[i];
@@ -142,11 +189,17 @@ export function initAtmosphere() {
       }
       const gx = i % cols;
       const gy = (i / cols) | 0;
-      ctx.globalAlpha = e * MAX_ALPHA;
+      const cx = gx * CELL + CELL / 2 + jitX[i];
+      const cy = gy * CELL + CELL / 2 + jitY[i];
+      const ddx = cx - cursor.x;
+      const ddy = cy - cursor.y;
+      const dd = Math.hypot(ddx, ddy) || 1;
+      const push = e * PUSH * wgt[i];
+      ctx.globalAlpha = e * MAX_ALPHA * (0.6 + 0.4 * wgt[i]);
       ctx.beginPath();
-      ctx.arc(gx * CELL + CELL / 2, gy * CELL + CELL / 2, 0.8 + e * 0.85, 0, Math.PI * 2);
+      ctx.arc(cx + (ddx / dd) * push, cy + (ddy / dd) * push, 0.65 + siz[i] * 0.35 + e * 0.8, 0, Math.PI * 2);
       ctx.fill();
-      energy[i] = e * 0.915;
+      energy[i] = e * DECAY;
     }
     ctx.globalAlpha = 1;
   };
@@ -212,7 +265,7 @@ export function initAtmosphere() {
   }
 
   if (reduced.matches) {
-    drawFrame(0, false); // quadro único estático: campos + retícula latente
+    drawFrame(0, false); // quadro único estático: campos + textura latente
   } else {
     start();
   }
