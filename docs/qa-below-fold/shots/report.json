@@ -1,0 +1,15 @@
+{
+  "consoleErrors": [],
+  "pageErrors": [],
+  "overflow": [],
+  "notes": [
+    "reduced-motion is-scene: {\"teseScene\":false,\"prcScene\":false}",
+    ".tese-close: opacity=1 visibility=visible",
+    ".svc-name: opacity=1 visibility=visible",
+    ".prj-name: opacity=1 visibility=visible",
+    ".prc-step-name: opacity=1 visibility=visible",
+    ".std-title: opacity=1 visibility=visible",
+    ".close-mega: opacity=1 visibility=visible",
+    ".ft-mark: opacity=1 visibility=visible"
+  ]
+}

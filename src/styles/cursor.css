@@ -1,0 +1,33 @@
+/* Cursor próprio do site: seta tradicional em SVG, um pouco maior e mais
+   nítida que a do sistema. Ink sobre papel, paper sobre tinta. Sem follower,
+   sem círculo, sem sombra, sem labels. Só em ponteiro fino; em touch/coarse
+   o cursor nativo permanece. O keyword após o url() é o fallback nativo
+   garantido pela própria sintaxe de `cursor` caso o SVG não carregue. */
+
+@media (pointer: fine) {
+  html {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 24 24'%3E%3Cpath d='M5.5 2.8 L5.5 20 L9.7 16.2 L12.2 21.6 L14.9 20.4 L12.4 15 L18.2 14.4 Z' fill='%2317150F' stroke='%23FAF8F4' stroke-width='1.1' stroke-linejoin='round'/%3E%3C/svg%3E") 5 3, default;
+  }
+
+  /* interativos: mesma seta, escala discretamente maior */
+  a,
+  button,
+  select,
+  summary,
+  [role="button"] {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24'%3E%3Cpath d='M5.5 2.8 L5.5 20 L9.7 16.2 L12.2 21.6 L14.9 20.4 L12.4 15 L18.2 14.4 Z' fill='%2317150F' stroke='%23FAF8F4' stroke-width='1.1' stroke-linejoin='round'/%3E%3C/svg%3E") 6 3, pointer;
+  }
+
+  /* áreas em tinta: versão paper, mesma forma e escala */
+  .tese,
+  .close,
+  .ft {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 24 24'%3E%3Cpath d='M5.5 2.8 L5.5 20 L9.7 16.2 L12.2 21.6 L14.9 20.4 L12.4 15 L18.2 14.4 Z' fill='%23FAF8F4' stroke='%2317150F' stroke-width='1.1' stroke-linejoin='round'/%3E%3C/svg%3E") 5 3, default;
+  }
+
+  .tese :is(a, button, [role="button"]),
+  .close :is(a, button, [role="button"]),
+  .ft :is(a, button, [role="button"]) {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24'%3E%3Cpath d='M5.5 2.8 L5.5 20 L9.7 16.2 L12.2 21.6 L14.9 20.4 L12.4 15 L18.2 14.4 Z' fill='%23FAF8F4' stroke='%2317150F' stroke-width='1.1' stroke-linejoin='round'/%3E%3C/svg%3E") 6 3, pointer;
+  }
+}

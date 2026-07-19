@@ -4,6 +4,7 @@ import './styles/base.css';
 import './styles/header.css';
 import './styles/hero.css';
 import './styles/below-fold.css';
+import './styles/cursor.css';
 
 import { initPreloader } from './scripts/preloader.js';
 import { bindPointerField } from './scripts/pointer-field.js';
