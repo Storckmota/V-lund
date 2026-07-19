@@ -59,11 +59,15 @@ a {
   transform: none;
 }
 
-/* CTA dividido: módulo de papel com a seta à esquerda; no hover/focus o
-   módulo inteiro atravessa o corpo de tinta e assenta na extremidade
-   direita, com compensação discreta do texto. Só transform: o botão
-   nunca muda de dimensão. --cta-travel é medido em cta.js
-   (largura do botão − módulo − respiros laterais). */
+/* CTA dividido: módulo de papel com a seta à esquerda (também no DOM);
+   no hover/focus o corpo passa a brasa, o módulo atravessa até a
+   extremidade direita e a seta gira tarde para o alto-direita.
+   Só transform e cor: o botão nunca muda de dimensão. --cta-travel é
+   medido em cta.js (largura do botão − módulo − respiros laterais).
+   Coreografia em camadas — cor 360ms, módulo 760ms (ida) / 640ms
+   (retorno), seta gira só depois de ~35% da travessia. As regras de
+   repouso definem o retorno; as de hover, a ida: a interrupção reverte
+   a partir do estado atual, sem salto. */
 .btn-split {
   display: inline-flex;
   align-items: stretch;
@@ -76,6 +80,7 @@ a {
   text-decoration: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.36s ease;
 }
 
 .btn-split-cap {
@@ -88,8 +93,7 @@ a {
   background: var(--paper);
   color: var(--ember-light);
   border-radius: 3px;
-  /* aceleração curta, desaceleração longa: peça mudando de posição */
-  transition: transform 0.54s cubic-bezier(0.33, 0, 0.11, 1);
+  transition: transform 0.64s cubic-bezier(0.3, 0, 0.08, 1);
 }
 
 .btn-split-label {
@@ -98,29 +102,38 @@ a {
   /* o respiro à direita reserva o vão onde o módulo assenta no hover:
      com a compensação de -8px, o texto nunca colide com o módulo */
   padding: 0 42px 0 16px;
-  transition: transform 0.54s cubic-bezier(0.33, 0, 0.11, 1);
+  transition: transform 0.64s cubic-bezier(0.3, 0, 0.08, 1);
 }
 
 .btn-split-arrow {
   width: 15px;
   height: 11px;
-  transition: transform 0.54s cubic-bezier(0.33, 0, 0.11, 1);
+  transition: transform 0.42s cubic-bezier(0.3, 0, 0.12, 1);
+}
+
+.btn-split:hover,
+.btn-split:focus-visible {
+  background: var(--ember-light);
 }
 
 .btn-split:hover .btn-split-cap,
 .btn-split:focus-visible .btn-split-cap {
   transform: translateX(var(--cta-travel, 0px));
+  transition-duration: 0.76s;
 }
 
 .btn-split:hover .btn-split-label,
 .btn-split:focus-visible .btn-split-label {
   transform: translateX(-8px);
+  transition-duration: 0.76s;
 }
 
-/* microdeslocamento interno: a seta permanece vinculada ao módulo */
+/* a seta segue quase horizontal no primeiro trecho e consolida a
+   diagonal alto-direita na chegada; permanece dentro do módulo */
 .btn-split:hover .btn-split-arrow,
 .btn-split:focus-visible .btn-split-arrow {
-  transform: translateX(4px);
+  transform: translateX(2px) rotate(-42deg);
+  transition: transform 0.5s cubic-bezier(0.25, 0, 0.15, 1) 0.27s;
 }
 
 .ember-dot {
@@ -130,37 +143,6 @@ a {
   margin-right: var(--s-2);
   background: var(--ember-light);
   vertical-align: 8%;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  html,
-  body {
-    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'><path d='M4 2 L4 17 L8.2 13.1 L10.9 19 L13.8 17.7 L11.1 11.9 L16.7 11.9 Z' fill='%2317150F' stroke='%23FAF8F4' stroke-width='1'/></svg>") 4 2, default;
-  }
-
-  a,
-  button {
-    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'><path d='M4 2 L4 17 L8.2 13.1 L10.9 19 L13.8 17.7 L11.1 11.9 L16.7 11.9 Z' fill='%2317150F' stroke='%23FAF8F4' stroke-width='1'/></svg>") 4 2, pointer;
-  }
-
-  h1,
-  h2,
-  p,
-  input,
-  textarea,
-  select,
-  [contenteditable] {
-    cursor: text;
-  }
-
-  a h1,
-  a h2,
-  a p,
-  button h1,
-  button h2,
-  button p {
-    cursor: inherit;
-  }
 }
 
 html.js .rv {
@@ -202,5 +184,6 @@ html.js .rv-d2 {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
   }
 }
