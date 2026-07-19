@@ -117,9 +117,9 @@
             <div class="tese-cenarios" data-tese-cenarios>
               <p class="tese-cen-intro" data-tese-cen-intro>Cada empresa está num momento diferente no digital.</p>
               <ul class="tese-cen-lista" role="list">
-                <li class="tese-cen" data-tese-cen="1"><span class="tese-cen-num" aria-hidden="true">a</span>Talvez você ainda não tenha um site.</li>
-                <li class="tese-cen" data-tese-cen="2"><span class="tese-cen-num" aria-hidden="true">b</span>Talvez tenha um que já não acompanha o momento da empresa.</li>
-                <li class="tese-cen" data-tese-cen="3"><span class="tese-cen-num" aria-hidden="true">c</span>Ou talvez a página exista, mas falte clareza sobre o que acontece depois que alguém acessa.</li>
+                <li class="tese-cen" data-tese-cen="1"><span class="tese-cen-in">Talvez você ainda não tenha um site.</span></li>
+                <li class="tese-cen" data-tese-cen="2"><span class="tese-cen-in">Talvez tenha um que já não acompanha o momento da empresa.</span></li>
+                <li class="tese-cen" data-tese-cen="3"><span class="tese-cen-in">Ou talvez a página exista, mas falte clareza sobre o que acontece depois que alguém acessa.</span></li>
               </ul>
             </div>
             <p class="tese-close" data-tese-close><i class="tese-ember" aria-hidden="true"></i>Em qualquer um desses casos, a gente pode ajudar.</p>
@@ -127,177 +127,253 @@
         </div>
       </section>
 
-      <!-- 03 · SERVIÇOS — área de exploração: três grandes entradas -->
+      <!-- 03 · SERVIÇOS — índice vertical + palco visual compartilhado.
+           Um serviço ativo por vez: a ativação vem da progressão de scroll,
+           do hover e do foco de teclado (projects/services em below-fold-motion).
+           O palco é abstrato (tipografia, módulos, frames) e muda de composição
+           por estado: a=institucional, b=landing, c=experiência. -->
       <section class="svc" id="servicos" aria-labelledby="svc-title">
         <div class="svc-inner">
           <header class="svc-head">
             <p class="svc-kicker" data-svc-kicker>Serviços</p>
             <h2 class="svc-title" id="svc-title"><span class="svc-title-mask"><span class="svc-title-in" data-svc-title>O que entregamos.</span></span></h2>
+            <p class="svc-intro" data-svc-intro>Nem toda página precisa da mesma estrutura.</p>
           </header>
-          <div class="svc-list" data-svc-list>
-            <article class="svc-item" data-svc-item>
-              <span class="svc-rule" aria-hidden="true"></span>
-              <span class="svc-idx" aria-hidden="true">01</span>
-              <div class="svc-main">
+          <div class="svc-body">
+            <div class="svc-index" data-svc-index>
+              <article class="svc-item" data-svc-item="a" tabindex="0">
+                <span class="svc-item-rule" aria-hidden="true"></span>
+                <span class="svc-idx" aria-hidden="true">01</span>
                 <h3 class="svc-name">Site institucional</h3>
-                <span class="svc-ghost" aria-hidden="true">presença — presença — presença</span>
-              </div>
-              <p class="svc-desc">Para marcas que precisam traduzir identidade, organizar conteúdo, apresentar serviços e transmitir confiança.</p>
-            </article>
-            <article class="svc-item" data-svc-item>
-              <span class="svc-rule" aria-hidden="true"></span>
-              <span class="svc-idx" aria-hidden="true">02</span>
-              <div class="svc-main">
+                <p class="svc-desc">Para marcas que precisam traduzir identidade, organizar conteúdo, apresentar serviços e transmitir confiança.</p>
+                <span class="svc-mini" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              </article>
+              <article class="svc-item" data-svc-item="b" tabindex="0">
+                <span class="svc-item-rule" aria-hidden="true"></span>
+                <span class="svc-idx" aria-hidden="true">02</span>
                 <h3 class="svc-name">Landing page</h3>
-                <span class="svc-ghost" aria-hidden="true">conversão — conversão — conversão</span>
-              </div>
-              <p class="svc-desc">Para ofertas que precisam de argumento claro e uma ação principal. Estrutura pensada para converter.</p>
-            </article>
-            <article class="svc-item" data-svc-item>
-              <span class="svc-rule" aria-hidden="true"></span>
-              <span class="svc-idx" aria-hidden="true">03</span>
-              <div class="svc-main">
+                <p class="svc-desc">Para ofertas que precisam de argumento claro e uma ação principal. Estrutura pensada para converter.</p>
+                <span class="svc-mini" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              </article>
+              <article class="svc-item" data-svc-item="c" tabindex="0">
+                <span class="svc-item-rule" aria-hidden="true"></span>
+                <span class="svc-idx" aria-hidden="true">03</span>
                 <h3 class="svc-name">Experiência web</h3>
-                <span class="svc-ghost" aria-hidden="true">narrativa — narrativa — narrativa</span>
+                <p class="svc-desc">Para projetos que exigem interação, diferenciação, narrativa ou funcionalidade específica.</p>
+                <span class="svc-mini" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              </article>
+              <span class="svc-item-rule svc-item-rule--end" aria-hidden="true"></span>
+            </div>
+            <div class="svc-stage" data-svc-stage data-svc-state="a" aria-hidden="true">
+              <div class="svc-stage-frame">
+                <span class="svcs-el svcs-el--rule"></span>
+                <span class="svcs-el svcs-el--head"></span>
+                <span class="svcs-el svcs-el--sub"></span>
+                <span class="svcs-el svcs-el--img"></span>
+                <span class="svcs-el svcs-el--card"></span>
+                <span class="svcs-el svcs-el--ember"></span>
+                <span class="svcs-el svcs-el--axis"></span>
+                <span class="svcs-idx" data-svcs-idx>01</span>
+                <span class="svcs-word-mask"><span class="svcs-word" data-svcs-word>Site institucional</span></span>
               </div>
-              <p class="svc-desc">Para projetos que exigem interação, diferenciação, narrativa ou funcionalidade específica.</p>
-            </article>
-            <span class="svc-rule svc-rule--end" aria-hidden="true"></span>
+            </div>
           </div>
           <p class="svc-floor" data-svc-floor>Design, clareza, SEO, performance e responsividade não são adicionais. <em>São o piso de qualquer entrega.</em></p>
-
-          <div class="svc-layers" data-svc-layers>
-            <p class="svc-layers-lead"><strong>Quando o projeto exige mais controle,</strong> conectamos camadas que mostram o que acontece depois da publicação e organizam a entrada de contatos.</p>
-            <ul class="svc-tags" role="list">
-              <li class="svc-tag"><b>seo</b><span>estrutura pensada para busca desde o código</span></li>
-              <li class="svc-tag"><b>mensuração</b><span>quem acessou, de onde veio, o que fez</span></li>
-              <li class="svc-tag"><b>formulários</b><span>entrada de contatos sem fricção</span></li>
-              <li class="svc-tag"><b>whatsapp</b><span>o clique vira conversa, com origem identificada</span></li>
-              <li class="svc-tag"><b>crm</b><span>contatos organizados</span></li>
-              <li class="svc-tag"><b>automações leves</b><span>menos tarefa manual</span></li>
-              <li class="svc-tag"><b>ia aplicada</b><span>chatbots e fluxos para necessidades concretas</span></li>
-            </ul>
-            <p class="svc-layers-close">Essas camadas entram quando resolvem um problema real. <em>Não como pacote.</em></p>
+          <div class="svc-more" data-svc-more>
+            <p class="svc-more-lead">Quando o projeto exige mais controle</p>
+            <p class="svc-more-terms">mensuração · formulários · WhatsApp · CRM · automações leves · IA aplicada</p>
+            <p class="svc-more-close">Essas camadas entram quando resolvem um problema real. <em>Não como pacote.</em></p>
           </div>
         </div>
       </section>
 
-      <!-- 04 · PROJETOS — showcase compacto; cada case é um <article data-prj-case>.
-           Contrato do componente (escala para novos cases sem reconstruir a direção):
-           data-prj-case  → raiz; opcional data-theme="slug" para tema cromático.
-           .prj-media     → link para o projeto; contém .prj-shot--main (imagem principal),
-                            .prj-shot--alt e .prj-shot--mob (telas reais secundárias, hover).
-           .prj-facts     → nome (h3), meta (categoria · ano · status), resumo, link.
-           .prj-strip     → mesmas telas secundárias no fluxo, para touch. -->
+      <!-- 04 · PROJETOS — palco visual (desktop, sticky) + índice informativo.
+           CONTRATO — para adicionar um projeto:
+           1. Duplicar um <figure class="prj-visual" data-prj-visual="slug"> no palco
+              (imagem principal 1440/760 + tela interna alt-900 + versão mobile mob-390,
+              todas locais em /assets/projects/).
+           2. Duplicar o <li> correspondente no índice com data-prj-case="slug":
+              título (h3), segmento, meta (mono), resumo, link real e o bloco
+              .prj-media (fluxo mobile, sem hover).
+           3. Opcional: tema cromático em below-fold.css → .prj-visual[data-prj-visual="slug"]
+              { --prj-tint: ... } (tonalidade discreta do palco).
+           A ordem dos <li> define a ordem de leitura e das zonas de ativação. -->
       <section class="prj" id="projetos" aria-labelledby="prj-title">
         <div class="prj-inner">
           <header class="prj-header">
-            <h2 class="prj-title" id="prj-title"><span class="prj-title-mask"><span class="prj-title-in" data-prj-title>Projetos selecionados.</span></span></h2>
-            <p class="prj-count" data-prj-count aria-hidden="true">01</p>
+            <h2 class="prj-title" id="prj-title"><span class="prj-title-mask"><span class="prj-title-in" data-prj-title>Projetos</span></span></h2>
+            <p class="prj-count" data-prj-count aria-hidden="true">03</p>
           </header>
-          <div class="prj-list" data-prj-list>
-            <article class="prj-case" data-prj-case data-theme="allure">
-              <a class="prj-media" data-prj-media href="https://allure-pink.vercel.app" target="_blank" rel="noopener" aria-label="Abrir o site da Alluré Branding em nova aba">
-                <figure class="prj-shot prj-shot--main">
-                  <img src="/assets/projects/allure-home-1440.webp" srcset="/assets/projects/allure-home-760.webp 760w, /assets/projects/allure-home-1440.webp 1440w" sizes="(max-width: 899px) 100vw, 56vw" width="1440" height="900" alt="Página inicial do site da Alluré Branding no desktop" loading="lazy" decoding="async">
-                </figure>
-                <figure class="prj-shot prj-shot--alt" aria-hidden="true">
-                  <img src="/assets/projects/allure-process-900.jpg" width="900" height="563" alt="" loading="lazy" decoding="async">
-                </figure>
-                <figure class="prj-shot prj-shot--mob" aria-hidden="true">
-                  <img src="/assets/projects/allure-mobile-390.webp" width="390" height="800" alt="" loading="lazy" decoding="async">
-                </figure>
-                <span class="prj-media-hint" aria-hidden="true">ver telas</span>
-              </a>
-              <div class="prj-facts">
-                <p class="prj-meta" data-prj-fact>site institucional · one page · 2026 · no ar</p>
-                <h3 class="prj-name" data-prj-name>Alluré Branding</h3>
-                <p class="prj-sum" data-prj-fact>A marca já tinha nível; o site não acompanhava. Direção visual criada do zero, composição própria para o celular — um site à altura do que a cliente entrega pessoalmente.</p>
-                <a class="prj-link" data-prj-fact href="https://allure-pink.vercel.app" target="_blank" rel="noopener">Ver o projeto no ar<svg class="prj-link-arrow" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 12 L12 2 M5 2 H12 V9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
-              </div>
-              <div class="prj-strip">
-                <figure class="prj-strip-shot">
-                  <img src="/assets/projects/allure-process-900.jpg" width="900" height="563" alt="Seção de processo do site da Alluré Branding" loading="lazy" decoding="async">
-                </figure>
-                <figure class="prj-strip-shot prj-strip-shot--mob">
-                  <img src="/assets/projects/allure-mobile-390.webp" width="390" height="800" alt="Versão mobile do site da Alluré Branding" loading="lazy" decoding="async">
-                </figure>
-              </div>
-            </article>
+          <div class="prj-layout" data-prj-layout>
+            <div class="prj-stage" data-prj-stage>
+              <figure class="prj-visual" data-prj-visual="allure">
+                <a class="prj-vis-link" href="https://allure-pink.vercel.app" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+                  <span class="prj-vis-main"><img src="/assets/projects/allure-main-1440.webp" srcset="/assets/projects/allure-main-760.webp 760w, /assets/projects/allure-main-1440.webp 1440w" sizes="58vw" width="1440" height="900" alt="" loading="lazy" decoding="async"></span>
+                  <span class="prj-vis-alt"><img src="/assets/projects/allure-alt-900.webp" width="900" height="563" alt="" loading="lazy" decoding="async"></span>
+                  <span class="prj-vis-mob"><img src="/assets/projects/allure-mob-390.webp" width="390" height="844" alt="" loading="lazy" decoding="async"></span>
+                </a>
+              </figure>
+              <figure class="prj-visual" data-prj-visual="leonardo">
+                <a class="prj-vis-link" href="https://dr-leonardo-guarconi.vercel.app" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+                  <span class="prj-vis-main"><img src="/assets/projects/leonardo-main-1440.webp" srcset="/assets/projects/leonardo-main-760.webp 760w, /assets/projects/leonardo-main-1440.webp 1440w" sizes="58vw" width="1440" height="900" alt="" loading="lazy" decoding="async"></span>
+                  <span class="prj-vis-alt"><img src="/assets/projects/leonardo-alt-900.webp" width="900" height="563" alt="" loading="lazy" decoding="async"></span>
+                  <span class="prj-vis-mob"><img src="/assets/projects/leonardo-mob-390.webp" width="390" height="844" alt="" loading="lazy" decoding="async"></span>
+                </a>
+              </figure>
+              <figure class="prj-visual" data-prj-visual="aringleb">
+                <a class="prj-vis-link" href="https://aringleb.vercel.app" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+                  <span class="prj-vis-main"><img src="/assets/projects/aringleb-main-1440.webp" srcset="/assets/projects/aringleb-main-760.webp 760w, /assets/projects/aringleb-main-1440.webp 1440w" sizes="58vw" width="1440" height="900" alt="" loading="lazy" decoding="async"></span>
+                  <span class="prj-vis-alt"><img src="/assets/projects/aringleb-alt-900.webp" width="900" height="563" alt="" loading="lazy" decoding="async"></span>
+                  <span class="prj-vis-mob"><img src="/assets/projects/aringleb-mob-390.webp" width="390" height="844" alt="" loading="lazy" decoding="async"></span>
+                </a>
+              </figure>
+            </div>
+            <ol class="prj-index" data-prj-index role="list">
+              <li class="prj-entry">
+                <article class="prj-case" data-prj-case="allure">
+                  <span class="prj-case-rule" aria-hidden="true"></span>
+                  <p class="prj-meta"><span class="prj-idx">01</span>site institucional · one page · 2026 · no ar</p>
+                  <h3 class="prj-name">Alluré Branding</h3>
+                  <p class="prj-seg">registro de marcas</p>
+                  <p class="prj-sum">A marca já tinha nível; o site não acompanhava. Direção visual criada do zero, composição própria para o celular — um site à altura do que a cliente entrega pessoalmente.</p>
+                  <a class="prj-link" href="https://allure-pink.vercel.app" target="_blank" rel="noopener">Ver o projeto no ar<svg class="prj-link-arrow" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 12 L12 2 M5 2 H12 V9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+                  <div class="prj-media" aria-hidden="false">
+                    <figure class="prj-media-main"><img src="/assets/projects/allure-main-760.webp" width="760" height="475" alt="Página inicial do site da Alluré Branding no desktop" loading="lazy" decoding="async"></figure>
+                    <figure class="prj-media-alt"><img src="/assets/projects/allure-mob-390.webp" width="390" height="844" alt="Versão mobile do site da Alluré Branding" loading="lazy" decoding="async"></figure>
+                  </div>
+                </article>
+              </li>
+              <li class="prj-entry">
+                <article class="prj-case" data-prj-case="leonardo">
+                  <span class="prj-case-rule" aria-hidden="true"></span>
+                  <p class="prj-meta"><span class="prj-idx">02</span>site institucional · no ar</p>
+                  <h3 class="prj-name">Dr. Leonardo Guarçoni</h3>
+                  <p class="prj-seg">odontologia</p>
+                  <p class="prj-sum">Site para o consultório do cirurgião-dentista: tratamentos organizados, método apresentado com clareza e agendamento direto no WhatsApp.</p>
+                  <a class="prj-link" href="https://dr-leonardo-guarconi.vercel.app" target="_blank" rel="noopener">Ver o projeto no ar<svg class="prj-link-arrow" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 12 L12 2 M5 2 H12 V9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+                  <div class="prj-media" aria-hidden="false">
+                    <figure class="prj-media-main"><img src="/assets/projects/leonardo-main-760.webp" width="760" height="475" alt="Página inicial do site do Dr. Leonardo Guarçoni no desktop" loading="lazy" decoding="async"></figure>
+                    <figure class="prj-media-alt"><img src="/assets/projects/leonardo-mob-390.webp" width="390" height="844" alt="Versão mobile do site do Dr. Leonardo Guarçoni" loading="lazy" decoding="async"></figure>
+                  </div>
+                </article>
+              </li>
+              <li class="prj-entry">
+                <article class="prj-case" data-prj-case="aringleb">
+                  <span class="prj-case-rule" aria-hidden="true"></span>
+                  <p class="prj-meta"><span class="prj-idx">03</span>marca pessoal · no ar</p>
+                  <h3 class="prj-name">Alexander Ringleb</h3>
+                  <p class="prj-seg">hospitality · Miami</p>
+                  <p class="prj-sum">Página pessoal de um operador de hospitality em Miami: trajetória, imprensa e oportunidades de parceria organizadas num só endereço.</p>
+                  <a class="prj-link" href="https://aringleb.vercel.app" target="_blank" rel="noopener">Ver o projeto no ar<svg class="prj-link-arrow" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 12 L12 2 M5 2 H12 V9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+                  <div class="prj-media" aria-hidden="false">
+                    <figure class="prj-media-main"><img src="/assets/projects/aringleb-main-760.webp" width="760" height="475" alt="Seção editorial do site de Alexander Ringleb no desktop" loading="lazy" decoding="async"></figure>
+                    <figure class="prj-media-alt"><img src="/assets/projects/aringleb-mob-390.webp" width="390" height="844" alt="Versão mobile do site de Alexander Ringleb" loading="lazy" decoding="async"></figure>
+                  </div>
+                </article>
+              </li>
+            </ol>
           </div>
         </div>
       </section>
 
-      <!-- 05 · PROCESSO — progressão operacional (pinned no desktop, linear no mobile) -->
+      <!-- 05 · PROCESSO — três capítulos editoriais em stacking controlado
+           (desktop); fluxo vertical no mobile. Cada capítulo agrupa etapas
+           reais do método e transforma um motivo estrutural próprio. -->
       <section class="prc" aria-labelledby="prc-title">
         <div class="prc-intro">
+          <p class="prc-kicker" data-prc-kicker>Processo</p>
           <h2 class="prc-title" id="prc-title"><span class="prc-title-mask"><span class="prc-title-in" data-prc-title>Cada projeto começa entendendo o seu negócio.</span></span></h2>
           <p class="prc-lead" data-prc-lead>Antes de propor uma solução, entendemos a empresa: a marca, a oferta, o público, os materiais que você já tem e o problema que precisa resolver. A solução vem dessa leitura, não de um pacote pronto.</p>
         </div>
-        <div class="prc-scene" data-prc-scene>
-          <div class="prc-rail" aria-hidden="true">
-            <span class="prc-rail-num" data-prc-num>01</span>
-            <span class="prc-rail-total">/ 06</span>
-            <span class="prc-rail-track"><i class="prc-rail-fill" data-prc-fill></i></span>
-          </div>
-          <ol class="prc-steps" data-prc-steps role="list">
-            <li class="prc-step" data-prc-step><span class="prc-num" aria-hidden="true">01</span><h3 class="prc-step-name">Leitura</h3><p class="prc-step-desc">Entendemos o negócio, a marca, o público e o cenário atual.</p></li>
-            <li class="prc-step" data-prc-step><span class="prc-num" aria-hidden="true">02</span><h3 class="prc-step-name">Estrutura</h3><p class="prc-step-desc">Definimos o que precisa ser construído, conectado ou melhorado.</p></li>
-            <li class="prc-step" data-prc-step><span class="prc-num" aria-hidden="true">03</span><h3 class="prc-step-name">Criação</h3><p class="prc-step-desc">Organizamos mensagem, experiência e direção visual.</p></li>
-            <li class="prc-step" data-prc-step><span class="prc-num" aria-hidden="true">04</span><h3 class="prc-step-name">Implementação</h3><p class="prc-step-desc">Construímos com cuidado técnico, performance, responsividade e SEO.</p></li>
-            <li class="prc-step" data-prc-step><span class="prc-num" aria-hidden="true">05</span><h3 class="prc-step-name">Conexões</h3><p class="prc-step-desc">Integramos as ferramentas e automações necessárias para o projeto.</p></li>
-            <li class="prc-step" data-prc-step><span class="prc-num" aria-hidden="true">06</span><h3 class="prc-step-name">Validação</h3><p class="prc-step-desc">Testamos tudo antes da entrega.</p></li>
-          </ol>
-          <ol class="prc-trail" data-prc-trail aria-hidden="true">
-            <li>Leitura</li><li>Estrutura</li><li>Criação</li><li>Implementação</li><li>Conexões</li><li>Validação</li>
-          </ol>
+        <div class="prc-chapters" data-prc-chapters>
+          <article class="prc-ch prc-ch--1" data-prc-ch="1">
+            <div class="prc-ch-inner">
+              <div class="prc-ch-copy">
+                <p class="prc-ch-num" aria-hidden="true">01</p>
+                <h3 class="prc-ch-name"><span class="prc-ch-mask"><span class="prc-ch-in">Entender</span></span> <span class="prc-ch-mask"><span class="prc-ch-in prc-ch-em"><em>e estruturar.</em></span></span></h3>
+                <p class="prc-ch-desc">Entendemos o negócio, a marca, o público e o cenário atual — e definimos o que precisa ser construído, conectado ou melhorado.</p>
+                <p class="prc-ch-list" aria-label="Etapas do capítulo">leitura do negócio · marca e público · arquitetura · mensagem</p>
+              </div>
+              <div class="prc-ch-motif" aria-hidden="true">
+                <i class="prcm prcm-t1"></i><i class="prcm prcm-t2"></i><i class="prcm prcm-t3"></i><i class="prcm prcm-t4"></i><i class="prcm prcm-t5"></i>
+              </div>
+            </div>
+          </article>
+          <article class="prc-ch prc-ch--2" data-prc-ch="2">
+            <div class="prc-ch-inner">
+              <div class="prc-ch-copy">
+                <p class="prc-ch-num" aria-hidden="true">02</p>
+                <h3 class="prc-ch-name"><span class="prc-ch-mask"><span class="prc-ch-in">Criar</span></span> <span class="prc-ch-mask"><span class="prc-ch-in prc-ch-em"><em>e construir.</em></span></span></h3>
+                <p class="prc-ch-desc">Organizamos mensagem, experiência e direção visual — e construímos com cuidado técnico, performance, responsividade e SEO.</p>
+                <p class="prc-ch-list" aria-label="Etapas do capítulo">direção visual · design · implementação · responsividade · SEO técnico</p>
+              </div>
+              <div class="prc-ch-motif" aria-hidden="true">
+                <i class="prcm prcm-fr"></i><i class="prcm prcm-b1"></i><i class="prcm prcm-b2"></i><i class="prcm prcm-b3"></i>
+              </div>
+            </div>
+          </article>
+          <article class="prc-ch prc-ch--3" data-prc-ch="3">
+            <div class="prc-ch-inner">
+              <div class="prc-ch-copy">
+                <p class="prc-ch-num" aria-hidden="true">03</p>
+                <h3 class="prc-ch-name"><span class="prc-ch-mask"><span class="prc-ch-in">Publicar</span></span> <span class="prc-ch-mask"><span class="prc-ch-in prc-ch-em"><em>e conectar.</em></span></span></h3>
+                <p class="prc-ch-desc">Integramos formulários, WhatsApp e as ferramentas que o projeto pede, testamos tudo e publicamos.</p>
+                <p class="prc-ch-list" aria-label="Etapas do capítulo">validação · testes · integrações · publicação</p>
+              </div>
+              <div class="prc-ch-motif" aria-hidden="true">
+                <i class="prcm prcm-p1"></i><i class="prcm prcm-p2"></i><i class="prcm prcm-dot"></i><i class="prcm prcm-line"></i>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
-      <!-- 06 · ESTÚDIO — síntese e personalidade; pausa depois de projetos e processo -->
+      <!-- 06 · ESTÚDIO — rota visual única: headline → parágrafo → princípios.
+           Seção de desaceleração; sem pin, sem interação lúdica. -->
       <section class="std" id="estudio" aria-labelledby="std-title">
         <div class="std-inner">
           <p class="std-kicker" data-std-kicker>Estúdio — uma operação enxuta, com critério.</p>
-          <h2 class="std-title" id="std-title" data-std-title>
-            <span class="std-title-w" data-std-w>Presença digital</span>
-            <span class="std-title-w std-title-em" data-std-w><em>não é decoração.</em></span>
+          <h2 class="std-title" id="std-title">
+            <span class="std-mask"><span class="std-line" data-std-l1>Presença digital</span></span>
+            <span class="std-mask"><span class="std-line std-line-em" data-std-l2><em>não é decoração.</em></span></span>
           </h2>
           <p class="std-texto" data-std-texto>A Vólund desenha e constrói o que a sua marca mostra quando alguém resolve procurar por ela. Sem pacote automático: a gente lê o cenário e recomenda o que faz sentido para o momento.</p>
-          <ul class="std-princ" role="list">
-            <li class="std-p std-p--1" data-std-p>Cada projeto começa por leitura, <em>não por modelo pronto.</em></li>
-            <li class="std-p std-p--2" data-std-p>Design importa. E design bom também precisa funcionar.</li>
-            <li class="std-p std-p--3" data-std-p>Tecnologia explicada pelo benefício, não pela sigla.</li>
-            <li class="std-p std-p--4" data-std-p>Escopo proporcional ao problema. Sem pacote inflado.</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- 07 · CTA FINAL — grande link tipográfico, linguagem própria (nada do botão da hero) -->
-      <section class="close" id="contato" aria-labelledby="close-title">
-        <div class="close-inner">
-          <h2 class="close-title" id="close-title">
-            <span class="close-t-mask"><span class="close-t-in" data-close-l1>Conte o que precisa resolver.</span></span>
-            <span class="close-t-mask"><span class="close-t-in close-t-em" data-close-l2>A gente pensa o próximo passo com você.</span></span>
-          </h2>
-          <p class="close-apoio" data-close-apoio>Você apresenta o momento da empresa, o que já existe e onde quer chegar. A gente entende o cenário e indica uma direção clara para o projeto.</p>
-          <div class="close-mega-wrap" data-close-mega>
-            <a class="close-mega" href="https://wa.me/5527999555259?text=Ol%C3%A1!%20Conheci%20o%20site%20da%20V%C3%B3lund%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">
-              <span class="close-mega-text">
-                <span class="close-mega-roman">Falar sobre meu projeto</span>
-                <span class="close-mega-italic" aria-hidden="true">Falar sobre meu projeto</span>
-              </span>
-              <svg class="close-mega-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20 L20 4 M8 4 H20 V16" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
-              <span class="close-mega-line" aria-hidden="true"></span>
-            </a>
-            <p class="close-nota" data-close-nota>Conversa direta no WhatsApp.</p>
-          </div>
+          <ol class="std-princ" role="list">
+            <li class="std-p" data-std-p>
+              <span class="std-p-rule" aria-hidden="true"></span>
+              <span class="std-p-num" aria-hidden="true">01</span>
+              <p class="std-p-text">Cada projeto começa por leitura, <em>não por modelo pronto.</em></p>
+            </li>
+            <li class="std-p" data-std-p>
+              <span class="std-p-rule" aria-hidden="true"></span>
+              <span class="std-p-num" aria-hidden="true">02</span>
+              <p class="std-p-text">Escopo proporcional ao problema. <em>Sem pacote inflado.</em></p>
+            </li>
+            <li class="std-p" data-std-p>
+              <span class="std-p-rule" aria-hidden="true"></span>
+              <span class="std-p-num" aria-hidden="true">03</span>
+              <p class="std-p-text">Tecnologia explicada pelo benefício, <em>não pela sigla.</em></p>
+            </li>
+          </ol>
         </div>
       </section>
     </main>
 
-    <!-- 08 · FOOTER — fechamento compacto e arquitetônico; sem wordmark monumental -->
+    <!-- 07 · CTA + FOOTER — o convite vive na região superior do footer:
+         fundo em tinta, headline dominante, link tipográfico com contraste
+         alto em repouso. Nada deriva do botão da hero. -->
     <footer class="ft" aria-label="Rodapé">
       <div class="ft-inner">
+        <div class="ft-cta" id="contato">
+          <p class="ft-cta-eyebrow" data-cta-eyebrow><i class="ft-ember" aria-hidden="true"></i>Vamos conversar</p>
+          <h2 class="ft-cta-title" id="contato-title"><span class="ft-cta-mask"><span class="ft-cta-in" data-cta-title>Tem um projeto <em>em mente?</em></span></span></h2>
+          <p class="ft-cta-apoio" data-cta-apoio>Conte o momento da empresa e o que precisa resolver. A gente entende o cenário e indica um próximo passo claro.</p>
+          <a class="ft-cta-link" data-cta-link href="https://wa.me/5527999555259?text=Ol%C3%A1!%20Conheci%20o%20site%20da%20V%C3%B3lund%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">
+            <span class="ft-cta-label">Falar com a Vólund</span>
+            <svg class="ft-cta-arrow" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M3 15 L15 3 M6 3 H15 V12" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            <span class="ft-cta-line" aria-hidden="true"></span>
+          </a>
+        </div>
         <span class="ft-topline" data-ft-line aria-hidden="true"></span>
         <div class="ft-grid">
           <div class="ft-brand" data-ft-col>

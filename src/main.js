@@ -11,6 +11,7 @@ import { bindPointerField } from './scripts/pointer-field.js';
 import { initAtmosphere } from './scripts/atmosphere.js';
 import { initMonument } from './scripts/monument.js';
 import { initCtaSplit } from './scripts/cta.js';
+import { initSmoothScroll } from './scripts/smooth-scroll.js';
 import { initBelowFold } from './scripts/below-fold.js';
 
 initPreloader();
@@ -18,4 +19,5 @@ bindPointerField();
 initAtmosphere();
 initMonument();
 initCtaSplit();
+initSmoothScroll();
 initBelowFold();
