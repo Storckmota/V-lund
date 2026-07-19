@@ -2,7 +2,12 @@
 // matéria tipográfica atravessada por uma corrente de ar — sobe poucos
 // pixels, inclina de leve, volta com amortecimento. Vizinhos respondem
 // menos pela própria queda de influência com a distância.
+// Lê a posição amortecida do campo de ponteiro compartilhado: a mesma
+// pressão que percorre a superfície chega ao glifo com o mesmo atraso,
+// e o vetor de movimento dá um viés mínimo à inclinação.
 // Desktop com ponteiro fino apenas; sem reduced motion.
+
+import { stepPointerField } from './pointer-field.js';
 
 const RADIUS = 210; // raio de influência, px de tela
 const MAX_RISE = 9; // deslocamento máximo, px de tela
@@ -22,7 +27,6 @@ export function initMonument() {
 
   let svgRect = null;
   let unit = 1; // px de tela -> unidades do viewBox
-  const px = { x: -1e4, y: -1e4 };
 
   // centros dos glifos em unidades do viewBox (getBBox ignora transforms CSS)
   const centers = glyphs.map((g) => {
@@ -42,23 +46,28 @@ export function initMonument() {
   let inView = true;
   let idleFrames = 0;
 
-  const frame = () => {
+  const frame = (now) => {
     if (!svgRect) measure();
+    const pf = stepPointerField(now);
     let active = false;
 
     for (let i = 0; i < glyphs.length; i += 1) {
       const c = centers[i];
       const sx = svgRect.left + (c.cx / 1594) * svgRect.width;
       const sy = svgRect.top + (c.cy / 381) * svgRect.height;
-      const dx = px.x - sx;
-      const dy = px.y - sy;
+      const dx = pf.x - sx;
+      const dy = pf.y - sy;
       const d = Math.hypot(dx, dy);
 
       let f = Math.max(0, 1 - d / RADIUS);
       f = f * f * (3 - 2 * f); // smoothstep: vizinhos respondem menos
 
       const ty = -MAX_RISE * f;
-      const tr = Math.max(-MAX_TILT, Math.min(MAX_TILT, (-dx / RADIUS) * 1.6 * f * MAX_TILT * 2));
+      // posição dá o tombo base; o vetor do gesto soma um viés mínimo
+      const tr = Math.max(
+        -MAX_TILT,
+        Math.min(MAX_TILT, (-dx / RADIUS) * 1.6 * f * MAX_TILT * 2 + pf.vx * 0.02 * f),
+      );
       const ts = MAX_SCALE * f;
 
       const st = states[i];
@@ -91,9 +100,7 @@ export function initMonument() {
     raf = requestAnimationFrame(frame);
   };
 
-  const onPointer = (e) => {
-    px.x = e.clientX;
-    px.y = e.clientY;
+  const onPointer = () => {
     svgRect = svg.getBoundingClientRect();
     unit = svgRect.width > 0 ? 1594 / svgRect.width : 1;
     wake();

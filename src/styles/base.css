@@ -59,54 +59,68 @@ a {
   transform: none;
 }
 
-/* CTA dividido: corpo de tinta compacto + módulo de papel com a seta.
-   Um único link; o módulo é parte visual do mesmo alvo. */
+/* CTA dividido: módulo de papel com a seta à esquerda; no hover/focus o
+   módulo inteiro atravessa o corpo de tinta e assenta na extremidade
+   direita, com compensação discreta do texto. Só transform: o botão
+   nunca muda de dimensão. --cta-travel é medido em cta.js
+   (largura do botão − módulo − respiros laterais). */
 .btn-split {
   display: inline-flex;
   align-items: stretch;
   min-height: 52px;
   padding: 5px;
-  gap: 14px;
   background: var(--ink);
   color: var(--paper);
   font: 500 0.9375rem/1.2 var(--font-sans);
   letter-spacing: 0.015em;
   text-decoration: none;
-  border-radius: 9px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-.btn-split-label {
-  display: inline-flex;
-  align-items: center;
-  padding-left: 19px;
-}
-
 .btn-split-cap {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 42px;
   background: var(--paper);
   color: var(--ember-light);
-  border-radius: 5px;
-  transition: width var(--dur-micro) var(--ease-out);
+  border-radius: 3px;
+  /* aceleração curta, desaceleração longa: peça mudando de posição */
+  transition: transform 0.54s cubic-bezier(0.33, 0, 0.11, 1);
+}
+
+.btn-split-label {
+  display: inline-flex;
+  align-items: center;
+  /* o respiro à direita reserva o vão onde o módulo assenta no hover:
+     com a compensação de -8px, o texto nunca colide com o módulo */
+  padding: 0 42px 0 16px;
+  transition: transform 0.54s cubic-bezier(0.33, 0, 0.11, 1);
 }
 
 .btn-split-arrow {
   width: 15px;
   height: 11px;
-  transition: transform var(--dur-micro) var(--ease-out);
+  transition: transform 0.54s cubic-bezier(0.33, 0, 0.11, 1);
 }
 
 .btn-split:hover .btn-split-cap,
 .btn-split:focus-visible .btn-split-cap {
-  width: 52px;
+  transform: translateX(var(--cta-travel, 0px));
 }
 
+.btn-split:hover .btn-split-label,
+.btn-split:focus-visible .btn-split-label {
+  transform: translateX(-8px);
+}
+
+/* microdeslocamento interno: a seta permanece vinculada ao módulo */
 .btn-split:hover .btn-split-arrow,
 .btn-split:focus-visible .btn-split-arrow {
-  transform: translateX(3px);
+  transform: translateX(4px);
 }
 
 .ember-dot {
