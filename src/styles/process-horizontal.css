@@ -1,0 +1,200 @@
+/* PROCESSO — o scroll vertical é convertido em deslocamento horizontal.
+   Cards editoriais atravessam a viewport da direita para a esquerda e o
+   painel de encerramento resolve a seção antes de devolver o fluxo
+   vertical. Mobile: mesma sequência, na vertical, sem pin. */
+
+.prch {
+  --label: #6f6a5d;
+  position: relative;
+  background: var(--paper);
+  font-variation-settings: "opsz" 60;
+}
+
+.prch-viewport {
+  overflow: hidden;
+}
+
+.prch-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(28px, 4vw, 72px);
+  padding-inline: var(--gutter);
+}
+
+/* --- abertura da faixa --- */
+
+.prch-intro {
+  flex: none;
+  width: min(46vw, 620px);
+  padding-right: clamp(16px, 2vw, 40px);
+}
+
+.prch-label {
+  font: 400 0.75rem/1.5 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--label);
+}
+
+.prch-title {
+  margin-top: clamp(18px, 2.6vh, 30px);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.6vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.014em;
+  color: var(--ink);
+}
+
+.prch-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+.prch-in {
+  display: block;
+}
+
+.prch-em em {
+  font-style: italic;
+  color: var(--body);
+}
+
+/* --- cards editoriais --- */
+
+.prch-card {
+  position: relative;
+  flex: none;
+  width: min(38vw, 500px);
+  min-height: min(44svh, 400px);
+  display: grid;
+  align-content: end;
+  gap: clamp(14px, 2vh, 22px);
+  padding: clamp(28px, 4vh, 48px) clamp(24px, 3vw, 44px);
+  background: var(--paper-soft);
+  border: 1px solid var(--hairline);
+}
+
+.prch-card-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 2.8vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+}
+
+.prch-card-desc {
+  max-width: 34ch;
+  color: var(--body);
+  font-size: 1.0313rem;
+  line-height: 1.6;
+}
+
+.prch-card-tags {
+  font: 400 0.75rem/1.7 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--label);
+}
+
+/* hairline em brasa cresce conforme o card cruza a viewport */
+.prch-card-rule {
+  position: absolute;
+  left: clamp(24px, 3vw, 44px);
+  right: clamp(24px, 3vw, 44px);
+  top: clamp(24px, 3.4vh, 40px);
+  height: 2px;
+  background: var(--ember-light);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* --- painel de encerramento --- */
+
+.prch-end {
+  flex: none;
+  width: min(42vw, 560px);
+  display: grid;
+  gap: clamp(20px, 3vh, 32px);
+  padding-left: clamp(16px, 2.4vw, 48px);
+}
+
+.prch-end-mark {
+  width: clamp(56px, 7vw, 104px);
+  height: 2px;
+  background: var(--ember-light);
+  transform-origin: left;
+}
+
+.prch-end-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.2vw, 3rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.014em;
+  color: var(--ink);
+}
+
+/* ==========================================================
+   DESKTOP: faixa horizontal pinada
+   ========================================================== */
+
+@media (min-width: 900px) {
+  .prch.is-scene .prch-pin {
+    height: 100svh;
+    display: grid;
+    align-items: center;
+    overflow: clip;
+  }
+
+  .prch.is-scene .prch-track {
+    /* a largura real é medida pelo JS; o padding final garante que o
+       painel de encerramento chegue ao centro antes de soltar o pin */
+    padding-right: 22vw;
+    will-change: transform;
+  }
+}
+
+/* ==========================================================
+   MOBILE: mesma progressão, na vertical
+   ========================================================== */
+
+@media (max-width: 899px) {
+  .prch-pin {
+    padding: clamp(72px, 11vh, 128px) 0;
+  }
+
+  .prch-viewport {
+    overflow: visible;
+  }
+
+  .prch-track {
+    flex-direction: column;
+    align-items: stretch;
+    gap: clamp(24px, 4vh, 40px);
+  }
+
+  .prch-intro,
+  .prch-card,
+  .prch-end {
+    width: auto;
+  }
+
+  .prch-card {
+    min-height: 0;
+    align-content: start;
+  }
+
+  .prch-card-rule {
+    top: clamp(18px, 2.6vh, 26px);
+  }
+
+  .prch-end {
+    padding-left: 0;
+    padding-top: clamp(12px, 2vh, 20px);
+  }
+}

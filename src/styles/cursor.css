@@ -20,12 +20,12 @@
 
   /* áreas em tinta: versão paper, mesma forma e escala */
   .tese,
-  .ft {
+  .cta-block {
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 24 24'%3E%3Cpath d='M5.5 2.8 L5.5 20 L9.7 16.2 L12.2 21.6 L14.9 20.4 L12.4 15 L18.2 14.4 Z' fill='%23FAF8F4' stroke='%2317150F' stroke-width='1.1' stroke-linejoin='round'/%3E%3C/svg%3E") 5 3, default;
   }
 
   .tese :is(a, button, [role="button"]),
-  .ft :is(a, button, [role="button"]) {
+  .cta-block :is(a, button, [role="button"]) {
     cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24'%3E%3Cpath d='M5.5 2.8 L5.5 20 L9.7 16.2 L12.2 21.6 L14.9 20.4 L12.4 15 L18.2 14.4 Z' fill='%23FAF8F4' stroke='%2317150F' stroke-width='1.1' stroke-linejoin='round'/%3E%3C/svg%3E") 6 3, pointer;
   }
 }

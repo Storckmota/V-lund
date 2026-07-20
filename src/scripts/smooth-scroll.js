@@ -52,6 +52,23 @@ export function initSmoothScroll() {
 
   bindAnchors(reduce);
 
+  // O refresh automático no resize dispara no mesmo instante em que o
+  // gsap.matchMedia troca de contexto (ao cruzar 900px). Nesse intervalo
+  // existem cenas sendo revertidas e outras sendo criadas, e o refresh
+  // alcança gatilhos a meio caminho. Tirando 'resize' da lista automática
+  // e refrescando com debounce, a troca de contexto termina antes.
+  ScrollTrigger.config({
+    autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
+  });
+
+  let pendente = 0;
+  const refrescar = () => {
+    clearTimeout(pendente);
+    pendente = setTimeout(() => ScrollTrigger.refresh(), 220);
+  };
+  window.addEventListener('resize', refrescar, { passive: true });
+  window.addEventListener('orientationchange', refrescar, { passive: true });
+
   // recálculo das cenas depois de fontes e do load completo (imagens)
   document.fonts?.ready.then(() => ScrollTrigger.refresh());
   window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });

@@ -3,10 +3,8 @@
 // aqui toca a primeira dobra. Sem JS, todo o conteúdo permanece visível:
 // os estados iniciais de animação são aplicados somente via GSAP.
 
-import { initProjects } from './projects.js';
 import { initBelowFoldMotion } from './below-fold-motion.js';
 
 export function initBelowFold() {
-  initProjects();
   initBelowFoldMotion();
 }

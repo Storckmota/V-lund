@@ -3,11 +3,11 @@ html {
   overflow-x: clip;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
-}
+/* Sem scroll-behavior: smooth no CSS. Quem conduz o scroll suave é o
+   Lenis (src/scripts/smooth-scroll.js); as duas suavizações simultâneas
+   disputam a posição e fazem scrollIntoView e âncoras pararem no lugar
+   errado. Em reduced motion o Lenis é destruído e o scroll volta a ser
+   nativo — sem suavização, como esperado. */
 
 body {
   min-height: 100vh;

@@ -23,7 +23,12 @@ const LOBES = [
 const TEX = 22; // px CSS por texel do campo tonal
 const DARK = [95, 89, 76]; // matéria: entre muted e body, nunca preto
 const LIGHT = [250, 248, 244]; // abertura: o próprio papel
-const BASE_MAX = 0.085; // teto tonal da composição parada
+// Teto tonal da composição parada. A 0.085 a banda diagonal existia no
+// canvas mas ficava em ~5% de delta de luminância: em tela clara lia como
+// papel liso — origem da percepção de "o efeito sumiu". A composição é a
+// mesma; só a amplitude foi devolvida ao nível em que ela se apresenta
+// antes de qualquer movimento do ponteiro.
+const BASE_MAX = 0.175;
 const PRESS_DARK = 0.12; // adensamento máximo somado pela pressão
 const PRESS_LIGHT = 0.15; // abertura máxima atrás do gesto
 const DECAY = 0.94; // memória ~1s a 60fps
@@ -221,7 +226,7 @@ export function initAtmosphere() {
         data[p] = DARK[0];
         data[p + 1] = DARK[1];
         data[p + 2] = DARK[2];
-        data[p + 3] = Math.round(Math.min(net, 0.24) * 255);
+        data[p + 3] = Math.round(Math.min(net, 0.32) * 255);
       } else {
         data[p] = LIGHT[0];
         data[p + 1] = LIGHT[1];

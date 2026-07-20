@@ -1,0 +1,571 @@
+/* SERVIÇOS — sequência finita de painéis verticais.
+   Desktop: a seção é pinada e cada painel sobe cobrindo o anterior.
+   Mobile: mesma ordem, fluxo vertical, sem pin.
+   Os wireframes são estruturas de página reais desenhadas em CSS: cada um
+   comunica o serviço que representa (institucional = várias seções;
+   landing = funil num eixo; experiência = camadas e estados). */
+
+.svcp {
+  --label: #6f6a5d;
+  background: var(--paper);
+  position: relative;
+}
+
+.svcp-pin {
+  position: relative;
+}
+
+.svcp-track {
+  position: relative;
+}
+
+.svcp-panel {
+  background: var(--paper);
+  border-top: 1px solid var(--hairline);
+  padding: clamp(72px, 11vh, 128px) var(--gutter);
+}
+
+.svcp-panel--open {
+  border-top: 0;
+}
+
+/* alterna o fundo para que a passagem entre painéis seja perceptível */
+.svcp-panel:nth-child(even) {
+  background: var(--paper-soft);
+}
+
+/* --- painel de abertura --- */
+
+.svcp-open {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.svcp-label {
+  font: 400 0.75rem/1.5 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--label);
+}
+
+.svcp-open-title {
+  margin-top: clamp(18px, 2.4vh, 28px);
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 9.6vw, 8.6rem);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+}
+
+.svcp-open-sub {
+  margin-top: clamp(18px, 2.4vh, 28px);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.8vw, 2.2rem);
+  line-height: 1.3;
+  color: var(--body);
+}
+
+/* hairlines curtas ancoram o bloco: a abertura ocupa a viewport sem
+   virar uma tela vazia com três linhas soltas no meio */
+.svcp-open::before,
+.svcp-open::after {
+  content: "";
+  display: block;
+  width: clamp(56px, 9vw, 132px);
+  height: 1px;
+  margin: 0 auto;
+  background: var(--hairline);
+}
+
+.svcp-open::before {
+  margin-bottom: clamp(28px, 5vh, 64px);
+}
+
+.svcp-open::after {
+  margin-top: clamp(28px, 5vh, 64px);
+}
+
+.svcp-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+.svcp-in {
+  display: block;
+}
+
+.svcp-em em {
+  font-style: italic;
+}
+
+/* --- painéis de serviço --- */
+
+.svcp-body {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  column-gap: clamp(32px, 5vw, 96px);
+  align-items: center;
+}
+
+.svcp-copy {
+  max-width: 30em;
+}
+
+.svcp-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.6vw, 4rem);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.014em;
+  color: var(--ink);
+}
+
+.svcp-desc {
+  margin-top: clamp(18px, 2.6vh, 30px);
+  max-width: 44ch;
+  color: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+}
+
+/* --- painel final --- */
+
+/* o painel final ocupa a largura em duas colunas: o título assume o peso
+   e o complemento fica ao lado, subordinado — sem deixar meia viewport vazia */
+.svcp-floor {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  column-gap: clamp(32px, 5vw, 96px);
+  align-items: end;
+}
+
+.svcp-floor-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+}
+
+.svcp-floor-title .svcp-em em {
+  color: var(--ember-light);
+}
+
+.svcp-floor-text {
+  position: relative;
+  padding-top: clamp(18px, 2.6vh, 26px);
+  border-top: 1px solid var(--hairline);
+  max-width: 42ch;
+  color: var(--body);
+  font-size: 1rem;
+  line-height: 1.66;
+}
+
+/* ==========================================================
+   WIREFRAMES
+   ========================================================== */
+
+.wf {
+  --wf-line: #cfc8ba;
+  --wf-fill: #e6e0d3;
+  position: relative;
+  width: 100%;
+}
+
+.wf-page {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  max-height: min(66svh, 560px);
+  background: var(--paper);
+  border: 1px solid var(--wf-line);
+  display: grid;
+  /* a faixa de prova absorve a folga: o rodapé fica colado na base e
+     nenhuma região do wireframe abre um vão sem função */
+  grid-template-rows: auto auto auto auto minmax(0, 1fr) auto;
+  gap: 2.4%;
+  padding: 2.6% 3.2%;
+  overflow: hidden;
+}
+
+.svcp-panel:nth-child(even) .wf-page {
+  background: var(--paper);
+}
+
+/* ---- institucional: cabeçalho, hero, sobre, serviços, prova, rodapé ---- */
+
+.wf-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 2%;
+  border-bottom: 1px solid var(--wf-line);
+}
+
+.wf-logo {
+  width: 13%;
+  height: 8px;
+  background: var(--ink);
+}
+
+.wf-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.wf-nav i {
+  width: 26px;
+  height: 4px;
+  background: var(--wf-fill);
+}
+
+.wf-hero {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  padding: 3% 0 2%;
+}
+
+.wf-h {
+  display: block;
+  background: var(--ink);
+  height: 13px;
+}
+
+.wf-h--xl { width: 58%; }
+.wf-h--md { width: 40%; height: 11px; }
+
+.wf-t {
+  display: block;
+  width: 46%;
+  height: 5px;
+  background: var(--wf-fill);
+}
+
+.wf-t--sm { width: 32%; }
+
+.wf-row {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 3%;
+  align-items: center;
+}
+
+.wf-block {
+  height: 100%;
+  min-height: 46px;
+  background: var(--wf-fill);
+}
+
+.wf-lines {
+  display: grid;
+  gap: 6px;
+}
+
+.wf-lines i {
+  height: 4px;
+  background: var(--wf-fill);
+}
+
+.wf-lines i:nth-child(1) { width: 92%; }
+.wf-lines i:nth-child(2) { width: 78%; }
+.wf-lines i:nth-child(3) { width: 85%; }
+.wf-lines i:nth-child(4) { width: 54%; }
+
+.wf-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3%;
+}
+
+.wf-cell {
+  display: grid;
+  gap: 5px;
+  padding: 7% 6%;
+  border: 1px solid var(--wf-line);
+}
+
+.wf-cell i {
+  height: 7px;
+  width: 62%;
+  background: var(--ink);
+}
+
+.wf-cell b {
+  height: 4px;
+  width: 100%;
+  background: var(--wf-fill);
+}
+
+.wf-row--proof {
+  align-items: stretch;
+}
+
+.wf-row--proof .wf-shot {
+  min-height: 50px;
+  background: var(--wf-fill);
+  border: 1px solid var(--wf-line);
+}
+
+.wf-row--proof .wf-lines {
+  align-content: center;
+}
+
+.wf-foot {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3%;
+  align-content: end;
+  padding-top: 2%;
+  border-top: 1px solid var(--wf-line);
+}
+
+.wf-fcol {
+  display: grid;
+  gap: 5px;
+  align-content: start;
+}
+
+.wf-fcol i {
+  height: 4px;
+  background: var(--wf-fill);
+}
+
+.wf-fcol i:first-child { width: 70%; }
+.wf-fcol i:last-child { width: 46%; }
+
+/* ---- landing: funil de leitura num eixo único ---- */
+
+.wf-page--land {
+  grid-template-rows: repeat(5, auto);
+  gap: 3.4%;
+  justify-items: center;
+  padding: 4% 3.2%;
+}
+
+.wf-axis {
+  position: absolute;
+  top: 4%;
+  bottom: 4%;
+  left: 50%;
+  width: 1px;
+  background: var(--wf-line);
+}
+
+.wf-step {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+}
+
+.wf-step--offer .wf-h--xl { width: 64%; }
+.wf-step--offer .wf-t { width: 48%; }
+
+.wf-cta {
+  width: 26%;
+  height: 16px;
+  background: var(--ink);
+}
+
+.wf-cta--ember {
+  background: var(--ember-light);
+}
+
+.wf-step--bene {
+  grid-auto-flow: column;
+  gap: 10px;
+  width: 74%;
+}
+
+.wf-pill {
+  height: 26px;
+  border: 1px solid var(--wf-line);
+}
+
+.wf-quote {
+  width: 58%;
+  height: 22px;
+  background: var(--wf-fill);
+}
+
+.wf-step--obj {
+  width: 68%;
+  gap: 6px;
+}
+
+.wf-qa {
+  width: 100%;
+  height: 13px;
+  border-bottom: 1px solid var(--wf-line);
+}
+
+.wf-step--close .wf-h--md { width: 46%; }
+
+/* ---- experiência: camadas, estados e passagem entre cenas ---- */
+
+.wf--exp .wf-stack {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  max-height: min(66svh, 560px);
+}
+
+.wf-layer {
+  position: absolute;
+  display: grid;
+  align-content: end;
+  gap: 8px;
+  padding: 6%;
+  border: 1px solid var(--wf-line);
+  background: var(--paper);
+}
+
+.wf-layer i {
+  height: 5px;
+  background: var(--wf-fill);
+}
+
+.wf-layer--3 {
+  inset: 0 22% 24% 0;
+  opacity: 0.5;
+}
+
+.wf-layer--2 {
+  inset: 9% 11% 13% 11%;
+  opacity: 0.75;
+}
+
+.wf-layer--1 {
+  inset: 20% 0 0 24%;
+  box-shadow: none;
+}
+
+.wf-layer--1 i:nth-child(2) { width: 72%; }
+.wf-layer--1 i:nth-child(3) { width: 44%; }
+
+.wf-scene {
+  position: absolute;
+  inset: 6% 6% 40% 6%;
+  background: var(--wf-fill);
+}
+
+/* ponto de interação: onde o estado muda */
+.wf-hot {
+  position: absolute;
+  right: 8%;
+  bottom: 12%;
+  width: 14%;
+  aspect-ratio: 1;
+  border: 1px solid var(--ember-light);
+}
+
+.wf-hot::after {
+  content: "";
+  position: absolute;
+  inset: 34%;
+  background: var(--ember-light);
+}
+
+.wf-states {
+  position: absolute;
+  left: 24%;
+  bottom: -22px;
+  display: flex;
+  gap: 8px;
+}
+
+.wf-states u {
+  width: 22px;
+  height: 3px;
+  background: var(--wf-line);
+}
+
+.wf-states u.on {
+  background: var(--ember-light);
+}
+
+/* ==========================================================
+   DESKTOP: painéis sobrepostos, pin controlado
+   ========================================================== */
+
+@media (min-width: 900px) {
+  .svcp.is-scene .svcp-pin {
+    height: 100svh;
+    overflow: clip;
+  }
+
+  .svcp.is-scene .svcp-track {
+    height: 100%;
+  }
+
+  .svcp.is-scene .svcp-panel {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    align-content: center;
+    border-top: 0;
+    padding: clamp(48px, 8vh, 96px) var(--gutter);
+    will-change: transform;
+  }
+
+  /* a borda superior de cada painel entrando marca a passagem */
+  .svcp.is-scene .svcp-panel:not(:first-child)::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--hairline);
+  }
+}
+
+@media (max-width: 899px) {
+  .svcp-body {
+    grid-template-columns: 1fr;
+    row-gap: clamp(28px, 5vh, 44px);
+  }
+
+  .svcp-panel {
+    padding-block: clamp(56px, 9vh, 88px);
+  }
+
+  .wf-page,
+  .wf--exp .wf-stack {
+    max-height: none;
+    aspect-ratio: 5 / 4;
+  }
+
+  .wf-states {
+    bottom: -18px;
+  }
+
+  .svcp-open-title {
+    font-size: clamp(2.4rem, 12vw, 3.6rem);
+  }
+
+  .svcp-floor {
+    grid-template-columns: 1fr;
+    row-gap: clamp(24px, 4vh, 36px);
+    align-items: start;
+  }
+
+  .svcp-floor-text {
+    max-width: none;
+  }
+}

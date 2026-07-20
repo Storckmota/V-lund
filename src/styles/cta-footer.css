@@ -1,0 +1,367 @@
+/* CTA e FOOTER — duas seções distintas.
+   CTA: fundo papel, bloco em tinta, ação própria (nada da hero).
+   Footer: volta ao papel, com a rajada em SVG atravessando a faixa
+   superior. O contraste entre os dois marca o fim da ação comercial. */
+
+/* ==========================================================
+   CTA
+   ========================================================== */
+
+.cta {
+  background: var(--paper);
+  padding: clamp(72px, 11vh, 144px) var(--gutter) clamp(56px, 9vh, 112px);
+  font-variation-settings: "opsz" 60;
+}
+
+.cta-block {
+  max-width: 1180px;
+  margin: 0 auto;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: clamp(10px, 1.1vw, 18px);
+  padding: clamp(48px, 8vh, 112px) clamp(28px, 5vw, 96px);
+  text-align: center;
+  display: grid;
+  justify-items: center;
+}
+
+.cta-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  font: 400 0.75rem/1.5 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(250, 248, 244, 0.66);
+}
+
+.cta-ember {
+  width: 6px;
+  height: 6px;
+  margin-right: 12px;
+  background: var(--ember-dark);
+}
+
+.cta-title {
+  margin-top: clamp(20px, 3vh, 34px);
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6.4vw, 5.4rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+}
+
+.cta-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+.cta-in {
+  display: block;
+}
+
+.cta-em em {
+  font-style: italic;
+}
+
+.cta-text {
+  margin-top: clamp(20px, 3vh, 32px);
+  max-width: 48ch;
+  color: rgba(250, 248, 244, 0.72);
+  font-size: 1.0313rem;
+  line-height: 1.64;
+}
+
+/* botão próprio: bloco de papel sobre tinta, seta simples.
+   Sem módulo atravessando, sem a coreografia da hero. */
+.cta-btn {
+  margin-top: clamp(32px, 5vh, 56px);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 0 clamp(24px, 3vw, 40px);
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--ink);
+  font: 500 1rem/1 var(--font-sans);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.cta-btn-arrow {
+  width: 14px;
+  height: 14px;
+  color: var(--ember-light);
+  transition: transform 0.45s var(--ease-out), color 0.4s ease;
+}
+
+.cta-btn:hover,
+.cta-btn:focus-visible {
+  background: var(--ember-dark);
+  color: var(--paper);
+}
+
+.cta-btn:hover .cta-btn-arrow,
+.cta-btn:focus-visible .cta-btn-arrow {
+  color: var(--paper);
+  transform: translate(4px, -4px);
+}
+
+.cta-block :focus-visible {
+  outline-color: var(--paper);
+  outline-offset: 5px;
+}
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+
+.ft {
+  --label: #6f6a5d;
+  --gust-h: clamp(96px, 15vh, 180px);
+  position: relative;
+  background: var(--paper);
+  color: var(--body);
+  /* o respiro superior é a faixa onde a rajada corre: ela nunca cruza
+     texto, navegação ou contato */
+  padding: var(--gust-h) var(--gutter) clamp(28px, 4vh, 44px);
+  overflow: clip;
+  font-variation-settings: "opsz" 60;
+}
+
+.ft-gust {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--gust-h);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ft-gust svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ft-gust-p {
+  fill: var(--ink);
+}
+
+/* opacidades baixas: as camadas devem ler como deslocamento de ar, não
+   como traço desenhado. A brasa é o único acento e não domina a faixa. */
+.ft-gust-p--1 { opacity: 0.11; }
+.ft-gust-p--2 { opacity: 0.075; }
+.ft-gust-p--3 { fill: var(--ember-light); opacity: 0.26; }
+
+.ft-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+.ft-topline {
+  display: block;
+  height: 1px;
+  background: var(--hairline);
+}
+
+.ft-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr);
+  column-gap: clamp(24px, 4vw, 72px);
+  row-gap: 40px;
+  padding: clamp(40px, 6vh, 72px) 0 clamp(36px, 5.5vh, 68px);
+}
+
+.ft-brand {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+
+.ft-mark-mask {
+  display: block;
+  overflow: hidden;
+  width: clamp(118px, 12vw, 160px);
+}
+
+.ft-mark {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--ink);
+}
+
+.ft-tag {
+  font: 400 0.6875rem/1.6 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--label);
+}
+
+.ft-ember {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 10px;
+  background: var(--ember-light);
+  vertical-align: 10%;
+}
+
+.ft-label {
+  font: 400 0.6875rem/1.6 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--label);
+  margin-bottom: 10px;
+}
+
+.ft-nav,
+.ft-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ft-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  color: var(--ink);
+  font: 500 0.9375rem/1 var(--font-sans);
+  text-decoration: none;
+}
+
+.ft-link-arrow {
+  width: 10px;
+  height: 10px;
+  color: var(--ember-light);
+  transition: transform var(--dur-micro) var(--ease-out);
+}
+
+.ft-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 9px;
+  height: 1px;
+  background: var(--ember-light);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-micro) var(--ease-out);
+}
+
+.ft-link:hover::after,
+.ft-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.ft-link:hover .ft-link-arrow,
+.ft-link:focus-visible .ft-link-arrow {
+  transform: translate(2px, -2px);
+}
+
+.ft-num {
+  margin-top: 6px;
+  font-size: 0.875rem;
+  color: var(--label);
+}
+
+.ft-base {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 32px;
+  border-top: 1px solid var(--hairline);
+  padding-top: 20px;
+}
+
+.ft-meta {
+  font: 400 0.6875rem/1.6 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--label);
+}
+
+.ft-meta--desc {
+  color: var(--label);
+  opacity: 0.85;
+}
+
+.ft-top {
+  position: relative;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  color: var(--label);
+  font: 400 0.6875rem/1 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.ft-top-arrow {
+  width: 9px;
+  height: 11px;
+  transition: transform var(--dur-micro) var(--ease-out);
+}
+
+.ft-top:hover,
+.ft-top:focus-visible {
+  color: var(--ink);
+}
+
+.ft-top:hover .ft-top-arrow,
+.ft-top:focus-visible .ft-top-arrow {
+  transform: translateY(-3px);
+}
+
+/* ==========================================================
+   RESPONSIVO
+   ========================================================== */
+
+@media (max-width: 899px) {
+  .cta-block {
+    padding-inline: clamp(20px, 6vw, 40px);
+  }
+
+  .ft-grid {
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+  }
+
+  .ft-top {
+    margin-left: 0;
+  }
+
+  .ft-gust {
+    height: clamp(110px, 16vh, 170px);
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* reduced motion: a rajada permanece como forma estática */
+@media (prefers-reduced-motion: reduce) {
+  .ft-gust-p {
+    transition: none;
+  }
+}
