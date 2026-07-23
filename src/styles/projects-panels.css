@@ -1,120 +1,130 @@
-/* PROJETOS — cada projeto é um painel completo.
-   Desktop: seção pinada, o painel seguinte sobe de baixo e substitui toda
-   a composição. Mobile: sequência vertical, telas no fluxo, sem hover. */
+/* PROJETOS — galeria editorial com palco sticky.
+   Palco = exatamente duas superfícies: desktop (principal) + mobile, lado a
+   lado, com gap real e sem overlap. Nenhuma placa de fundo: profundidade vem
+   de sombra difusa aplicada direto nas mídias. Estado normal mostra os
+   pôsteres; hover/foco reproduz os walkthroughs (JS) e aprofunda a sombra.
+   Base (sem JS / reduced motion): telas estáticas no pôster, tudo legível. */
 
-.prjp {
+.prjv {
   --label: #6f6a5d;
   position: relative;
-  background: var(--paper-soft);
+  background: var(--paper);
+  padding-block: clamp(72px, 12vh, 148px);
+
+  /* profundidade de mídia — difusa, sutil no repouso, moderada no hover.
+     Distinta da elevação de recipiente usada em Serviços. */
+  --prjv-sh-rest:
+    0 2px 6px rgba(23, 21, 15, 0.05),
+    0 14px 32px -14px rgba(23, 21, 15, 0.16);
+  --prjv-sh-hover:
+    0 6px 16px rgba(23, 21, 15, 0.08),
+    0 28px 58px -18px rgba(23, 21, 15, 0.24);
+  --prjv-sh-rest-m:
+    0 2px 6px rgba(23, 21, 15, 0.08),
+    0 12px 28px -12px rgba(23, 21, 15, 0.20);
+  --prjv-sh-hover-m:
+    0 6px 16px rgba(23, 21, 15, 0.12),
+    0 26px 52px -16px rgba(23, 21, 15, 0.30);
 }
 
-.prjp-track {
-  position: relative;
-}
+/* --- abertura da seção --- */
 
-.prjp-panel {
-  background: var(--prjp-bg, var(--paper-soft));
-  border-top: 1px solid var(--hairline);
-  padding: clamp(72px, 11vh, 128px) var(--gutter);
-}
-
-.prjp-panel:first-child {
-  border-top: 0;
-}
-
-/* tonalidade de apoio de cada projeto: discreta, subordinada à paleta */
-.prjp-panel[data-prjp="allure"]   { --prjp-bg: #f3ecec; --prjp-tint: #e6d3d6; }
-.prjp-panel[data-prjp="leonardo"] { --prjp-bg: #f4efe4; --prjp-tint: #e8dfc9; }
-.prjp-panel[data-prjp="aringleb"] { --prjp-bg: #eef0e8; --prjp-tint: #dde2d2; }
-
-.prjp-inner {
+.prjv-intro {
   max-width: 1440px;
-  margin: 0 auto;
-  width: 100%;
+  margin: 0 auto clamp(44px, 8vh, 104px);
+  padding-inline: var(--gutter);
 }
 
-.prjp-head {
-  margin-bottom: clamp(28px, 4vh, 52px);
+.prjv-eyebrow {
+  margin: 0 0 clamp(14px, 2vh, 22px);
+  font: 400 0.8rem/1 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ember-light);
 }
 
-.prjp-section {
+.prjv-title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 400;
-  line-height: 1.04;
-  letter-spacing: -0.014em;
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
   color: var(--ink);
 }
 
-.prjp-mask {
-  display: block;
-  overflow: hidden;
-  padding-bottom: 0.14em;
-  margin-bottom: -0.14em;
+/* --- lista de projetos --- */
+
+.prjv-list {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-inline: var(--gutter);
 }
 
-.prjp-in {
-  display: block;
-}
-
-.prjp-body {
+.prjv-item {
   display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
-  column-gap: clamp(32px, 4.5vw, 88px);
-  align-items: center;
+  gap: clamp(24px, 4vh, 40px);
+  padding-block: clamp(44px, 7vh, 72px);
+  border-top: 1px solid var(--hairline);
 }
 
-.prjp-info {
+.prjv-item:first-child {
+  border-top: 0;
+}
+
+.prjv-text {
   display: grid;
-  gap: clamp(14px, 2vh, 22px);
+  gap: clamp(13px, 1.7vh, 20px);
   align-content: center;
 }
 
-.prjp-meta {
+.prjv-meta {
+  margin: 0;
   font: 400 0.75rem/1.6 var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.09em;
   color: var(--label);
 }
 
-.prjp-name {
+.prjv-name {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(2rem, 3.6vw, 3.1rem);
   font-weight: 400;
+  font-size: clamp(1.9rem, 3.4vw, 2.9rem);
   line-height: 1.06;
   letter-spacing: -0.012em;
   color: var(--ink);
 }
 
-.prjp-sum {
-  max-width: 40ch;
+.prjv-body {
+  margin: 0;
+  max-width: 46ch;
   color: var(--body);
   font-size: 1.0313rem;
   line-height: 1.62;
 }
 
-.prjp-link {
+.prjv-cta {
   justify-self: start;
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: 9px;
   min-height: 44px;
+  margin-top: clamp(2px, 1vh, 8px);
   color: var(--ink);
   font: 500 0.9375rem/1 var(--font-sans);
   text-decoration: none;
 }
 
-.prjp-link svg {
+.prjv-cta svg {
   width: 11px;
   height: 11px;
   color: var(--ember-light);
   transition: transform var(--dur-micro) var(--ease-out);
 }
 
-.prjp-link::after {
+.prjv-cta::after {
   content: "";
   position: absolute;
   left: 0;
@@ -127,184 +137,252 @@
   transition: transform var(--dur-micro) var(--ease-out);
 }
 
-.prjp-link:hover::after,
-.prjp-link:focus-visible::after {
+.prjv-cta:hover::after,
+.prjv-cta:focus-visible::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-.prjp-link:hover svg,
-.prjp-link:focus-visible svg {
+.prjv-cta:hover svg,
+.prjv-cta:focus-visible svg {
   transform: translate(2px, -2px);
 }
 
-/* --- área visual --- */
+/* --- palco: duas superfícies lado a lado, sem overlap --- */
 
-.prjp-visual {
+.prjv-stage {
   position: relative;
 }
 
-.prjp-shots {
+.prjv-scene {
   position: relative;
-  display: block;
-  padding: clamp(12px, 1.4vw, 22px);
-  background: var(--prjp-tint);
+  display: flex;
+  align-items: flex-end;            /* alinhamento pela base */
+  justify-content: flex-start;
+  gap: clamp(14px, 2.4vw, 34px);
 }
 
-.prjp-shot {
+.prjv-screen {
+  position: relative;
   margin: 0;
   overflow: hidden;
+  background: var(--paper-soft);
+  border-radius: 12px;
+  transition: box-shadow 0.45s var(--ease-out);
 }
 
-.prjp-shot img {
+.prjv-screen video {
   display: block;
   width: 100%;
-  height: auto;
-}
-
-.prjp-shot--main {
-  position: relative;
-  z-index: 1;
-  transform-origin: left center;
-  transition: transform 0.8s var(--ease-out);
-}
-
-/* telas secundárias: entram por regiões definidas, a principal abre espaço */
-.prjp-shot--inner {
-  position: absolute;
-  z-index: 2;
-  top: 12%;
-  right: -4%;
-  width: 44%;
-  outline: 1px solid rgba(23, 21, 15, 0.14);
-  opacity: 0;
-  transform: translateX(14%) translateY(6%);
-  transition: transform 0.7s var(--ease-out), opacity 0.42s ease;
-}
-
-.prjp-shot--mob {
-  position: absolute;
-  z-index: 3;
-  bottom: -6%;
-  right: 12%;
-  width: 15%;
-  outline: 1px solid rgba(23, 21, 15, 0.14);
-  opacity: 0;
-  transform: translateY(16%);
-  transition: transform 0.75s var(--ease-out) 0.09s, opacity 0.45s ease 0.09s;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .prjp-shots:hover .prjp-shot--main,
-  .prjp-shots:focus-visible .prjp-shot--main {
-    transform: translateX(-6%) scale(0.93);
-  }
-
-  .prjp-shots:hover .prjp-shot--inner,
-  .prjp-shots:focus-visible .prjp-shot--inner {
-    opacity: 1;
-    transform: translateX(0) translateY(0);
-  }
-
-  .prjp-shots:hover .prjp-shot--mob,
-  .prjp-shots:focus-visible .prjp-shot--mob {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* telas no fluxo: mobile, sem JS e reduced motion */
-.prjp-flow {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-  gap: 12px;
-  margin-top: 12px;
-}
-
-.prjp-flow-shot {
-  margin: 0;
-  overflow: hidden;
-  outline: 1px solid var(--hairline);
-  background: var(--paper);
-}
-
-.prjp-flow-shot img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.prjp-flow-shot--mob {
-  aspect-ratio: 390 / 470;
-}
-
-.prjp-flow-shot--mob img {
   height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  /* contain: o vídeo tem a proporção EXATA do container (desktop 16:10, mobile
+     390:844), então preenche sem faixa e sem distorção. Nunca cover nem fill:
+     cortariam ou esticariam a hero. */
+  object-fit: contain;
 }
 
-/* o painel só esconde as telas de fluxo quando a coreografia de hover
-   está ativa (classe aplicada por JS no contexto desktop + motion) */
+/* borda de vidro fina: nitidez sem chrome falso de navegador */
+.prjv-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(23, 21, 15, 0.07);
+  pointer-events: none;
+}
+
+.prjv-screen--desk {
+  flex: 0 0 70%;                    /* superfície principal */
+  aspect-ratio: 16 / 10;
+  box-shadow: var(--prjv-sh-rest);
+}
+
+.prjv-screen--mob {
+  flex: 0 0 25%;                    /* presença real, ao lado */
+  aspect-ratio: 390 / 844;
+  border-radius: 20px;
+  box-shadow: var(--prjv-sh-rest-m);
+}
+
+/* profundidade no hover/foco (CSS: funciona sem JS e em reduced motion) e
+   quando o JS engaja a reprodução (.is-engaged). SOMENTE sombra — sem zoom,
+   sem scale, sem translate: o enquadramento da mídia nunca muda. */
+.prjv-scene:hover .prjv-screen--desk,
+.prjv-item:focus-within .prjv-screen--desk,
+.prjv-item.is-engaged .prjv-screen--desk {
+  box-shadow: var(--prjv-sh-hover);
+}
+
+.prjv-scene:hover .prjv-screen--mob,
+.prjv-item:focus-within .prjv-screen--mob,
+.prjv-item.is-engaged .prjv-screen--mob {
+  box-shadow: var(--prjv-sh-hover-m);
+}
+
+/* ==========================================================
+   WALKTHROUGH — pôster próprio, estados de carga e resposta imediata ao
+   hover. Escopo fechado nos projetos convertidos ([data-prj="allure"],
+   [data-prj="leonardo"], [data-prj="aringleb"]). Todos compartilham a mesma
+   especificidade, então Alluré e Leonardo não mudam de resultado.
+   ========================================================== */
+
+/* camada de pôster: some só quando o primeiro frame já foi decodificado e
+   volta no mesmo quadro do pointerleave, sem esperar o seek */
+.prjv-item:is([data-prj="allure"], [data-prj="leonardo"], [data-prj="aringleb"]) .prjv-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 1;
+  transition: opacity 0.12s linear;
+  pointer-events: none;
+}
+
+.prjv-item:is([data-prj="allure"], [data-prj="leonardo"], [data-prj="aringleb"])[data-prjv-state="playing"] .prjv-poster {
+  opacity: 0;
+}
+
+/* três pontos discretos sobre a tela grande, só enquanto o par carrega */
+.prjv-item:is([data-prj="allure"], [data-prj="leonardo"], [data-prj="aringleb"]) .prjv-loading {
+  position: absolute;
+  left: 50%;
+  bottom: 12%;
+  display: flex;
+  gap: 6px;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: opacity 0.18s var(--ease-out);
+  pointer-events: none;
+}
+
+.prjv-item:is([data-prj="allure"], [data-prj="leonardo"], [data-prj="aringleb"])[data-prjv-state="loading"] .prjv-loading {
+  opacity: 1;
+}
+
+.prjv-item:is([data-prj="allure"], [data-prj="leonardo"], [data-prj="aringleb"]) .prjv-loading i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: 0 1px 3px rgba(23, 21, 15, 0.45);
+  animation: prjv-dot 1.05s ease-in-out infinite both;
+}
+
+.prjv-item:is([data-prj="allure"], [data-prj="leonardo"], [data-prj="aringleb"]) .prjv-loading i:nth-child(2) { animation-delay: 0.14s; }
+.prjv-item:is([data-prj="allure"], [data-prj="leonardo"], [data-prj="aringleb"]) .prjv-loading i:nth-child(3) { animation-delay: 0.28s; }
+
+@keyframes prjv-dot {
+  0%, 70%, 100% { opacity: 0.35; }
+  35%           { opacity: 1; }
+}
+
+/* apresentação do conjunto: cresce como bloco único, com o gap e as
+   proporções intactos. O <video> nunca é transformado — nada de zoom
+   interno, crop ou object-position deslocado. */
+.prjv-item:is([data-prj="allure"], [data-prj="leonardo"], [data-prj="aringleb"]) .prjv-scene {
+  transform-origin: 50% 60%;
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 @media (min-width: 900px) {
-  .prjp.has-panels .prjp-flow {
-    display: none;
+  .prjv-item:is([data-prj="allure"], [data-prj="leonardo"], [data-prj="aringleb"]) .prjv-stage:hover .prjv-scene,
+  .prjv-item:is([data-prj="allure"], [data-prj="leonardo"], [data-prj="aringleb"]):focus-within .prjv-scene {
+    transform: translateY(-3px) scale(1.012);
+  }
+}
+
+/* cursor contextual: mesma seta do site, com o sinal do estado ao lado.
+   Um cursor só, nenhum elemento seguidor. */
+@media (pointer: fine) {
+  .prjv-item:is([data-prj="allure"], [data-prj="leonardo"], [data-prj="aringleb"]) .prjv-stage {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='26' viewBox='0 0 40 24'%3E%3Cpath d='M5.5 2.8 L5.5 20 L9.7 16.2 L12.2 21.6 L14.9 20.4 L12.4 15 L18.2 14.4 Z' fill='%2317150F' stroke='%23FAF8F4' stroke-width='1.1' stroke-linejoin='round'/%3E%3Cpath d='M25 7.5 L34 12 L25 16.5 Z' fill='%23FAF8F4' stroke='%2317150F' stroke-width='1.1' stroke-linejoin='round'/%3E%3C/svg%3E") 5 3, pointer;
+  }
+
+  .prjv-item:is([data-prj="allure"], [data-prj="leonardo"], [data-prj="aringleb"])[data-prjv-state="loading"] .prjv-stage {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='26' viewBox='0 0 40 24'%3E%3Cpath d='M5.5 2.8 L5.5 20 L9.7 16.2 L12.2 21.6 L14.9 20.4 L12.4 15 L18.2 14.4 Z' fill='%2317150F' stroke='%23FAF8F4' stroke-width='1.1' stroke-linejoin='round'/%3E%3Cg fill='%23FAF8F4' stroke='%2317150F' stroke-width='0.8'%3E%3Ccircle cx='25' cy='12' r='1.9'/%3E%3Ccircle cx='30.5' cy='12' r='1.9'/%3E%3Ccircle cx='36' cy='12' r='1.9'/%3E%3C/g%3E%3C/svg%3E") 5 3, progress;
+  }
+
+  .prjv-item:is([data-prj="allure"], [data-prj="leonardo"], [data-prj="aringleb"])[data-prjv-state="playing"] .prjv-stage {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='21' height='21' viewBox='0 0 24 24'%3E%3Cpath d='M5.5 2.8 L5.5 20 L9.7 16.2 L12.2 21.6 L14.9 20.4 L12.4 15 L18.2 14.4 Z' fill='%2317150F' stroke='%23FAF8F4' stroke-width='1.1' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2, default;
   }
 }
 
 /* ==========================================================
-   DESKTOP: painéis empilhados
+   DESKTOP: duas colunas; enhanced adiciona palco sticky + revelação
    ========================================================== */
 
 @media (min-width: 900px) {
-  .prjp.is-scene .prjp-pin {
-    height: 100svh;
-    overflow: clip;
+  .prjv-item {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    column-gap: clamp(40px, 5vw, 96px);
+    align-items: center;
+    gap: 0;
   }
 
-  .prjp.is-scene .prjp-track {
-    height: 100%;
+  .prjv-js .prjv-item {
+    min-height: 118vh;
+    align-items: start;
+    padding-block: 0;
   }
 
-  .prjp.is-scene .prjp-panel {
-    position: absolute;
-    inset: 0;
+  .prjv-js .prjv-text,
+  .prjv-js .prjv-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
     display: grid;
     align-content: center;
-    border-top: 0;
-    padding: clamp(48px, 8vh, 96px) var(--gutter);
-    will-change: transform;
-  }
-
-  /* o título da seção pertence ao primeiro painel; nos seguintes a
-     área é reaproveitada pela informação do projeto */
-  .prjp.is-scene .prjp-panel:not(:first-child) .prjp-head {
-    display: none;
   }
 }
+
+/* revelação de entrada (apenas enhanced) — some sem JS/reduced motion */
+.prjv-js .prjv-text > *,
+.prjv-js .prjv-scene {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s var(--ease-out), transform 0.85s var(--ease-out);
+}
+
+.prjv-js .prjv-scene {
+  transform: translateY(34px) scale(0.985);
+}
+
+.prjv-js .prjv-item.is-seen .prjv-text > *,
+.prjv-js .prjv-item.is-seen .prjv-scene {
+  opacity: 1;
+  transform: none;
+}
+
+.prjv-js .prjv-item.is-seen .prjv-text > *:nth-child(2) { transition-delay: 0.06s; }
+.prjv-js .prjv-item.is-seen .prjv-text > *:nth-child(3) { transition-delay: 0.12s; }
+.prjv-js .prjv-item.is-seen .prjv-text > *:nth-child(4) { transition-delay: 0.18s; }
+.prjv-js .prjv-item.is-seen .prjv-scene { transition-delay: 0.08s; }
+
+/* ==========================================================
+   RESPONSIVO: lado a lado enquanto couber; empilha quando aperta
+   ========================================================== */
 
 @media (max-width: 899px) {
-  .prjp-body {
-    grid-template-columns: 1fr;
-    row-gap: clamp(24px, 4vh, 36px);
+  .prjv-stage {
+    margin-top: clamp(6px, 2vh, 14px);
   }
 
-  .prjp-shot--inner,
-  .prjp-shot--mob {
-    display: none;
-  }
-
-  .prjp-panel {
-    padding-block: clamp(56px, 9vh, 88px);
-  }
+  .prjv-screen--desk { flex-basis: 68%; }
+  .prjv-screen--mob { flex-basis: 27%; }
 }
 
-@media (max-width: 480px) {
-  .prjp-flow {
-    grid-template-columns: 1fr;
+/* sem espaço real p/ lado a lado: empilha — desktop primeiro, mobile abaixo,
+   ambos grandes, sem overlap */
+@media (max-width: 559px) {
+  .prjv-scene {
+    flex-direction: column;
+    align-items: stretch;
+    gap: clamp(14px, 4vw, 22px);
   }
 
-  .prjp-flow-shot--mob {
-    aspect-ratio: 390 / 300;
-  }
+  .prjv-screen--desk { flex-basis: auto; width: 100%; }
+  .prjv-screen--mob { flex-basis: auto; width: 62%; }
 }

@@ -75,7 +75,7 @@
       <nav class="site-nav" aria-label="Principal">
         <a class="site-nav-link" href="#projetos">Projetos</a>
         <a class="site-nav-link" href="#servicos">Serviços</a>
-        <a class="site-nav-link" href="#estudio">Estúdio</a>
+        <a class="site-nav-link" href="#metodo">Como trabalhamos</a>
       </nav>
       <div class="site-action">
         <a class="site-action-link" href="https://wa.me/5527999555259" target="_blank" rel="noopener">Iniciar um projeto<svg class="action-arrow" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 12 L12 2 M5 2 H12 V9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
@@ -127,131 +127,104 @@
         </div>
       </section>
 
-      <!-- SERVIÇOS — sequência finita de cinco painéis verticais.
-           Desktop: a seção é pinada e cada painel sobe cobrindo o anterior
-           (entrada, permanência legível, saída). Mobile: mesma ordem em
-           fluxo vertical, sem pin. Os wireframes são composições reais de
-           estrutura de página, construídas em CSS — sem ícones, mockups
-           de dispositivo ou formas sem significado. -->
+      <!-- SERVIÇOS — cinco painéis finitos. Desktop: seção pinada, cada
+           painel sobe de baixo e cobre o anterior, com permanência longa
+           para leitura. Mobile: mesma ordem em fluxo vertical, sem pin.
+           Sem wireframes: cada serviço é uma composição tipográfica que
+           carrega a ideia. Campos visuais são role="img" com rótulo. -->
       <section class="svcp" id="servicos" aria-labelledby="svcp-title">
         <div class="svcp-pin" data-svcp-pin>
           <div class="svcp-track" data-svcp-track>
 
-            <article class="svcp-panel svcp-panel--open" data-svcp-panel>
+            <!-- 1 · ABERTURA — gesto tipográfico monumental, sem numeração -->
+            <article class="svcp-panel svcp-panel--open" data-svcp-panel data-svcp-kind="open">
               <div class="svcp-open">
-                <p class="svcp-label" data-svcp-label>Serviços</p>
+                <p class="svcp-label" data-svcp-label><span class="svcp-label-dot" aria-hidden="true"></span>Serviços</p>
                 <h2 class="svcp-open-title" id="svcp-title">
-                  <span class="svcp-mask"><span class="svcp-in">O que entregamos</span></span>
+                  <span class="svcp-mask"><span class="svcp-in">O que</span></span>
+                  <span class="svcp-mask"><span class="svcp-in svcp-em"><em>entregamos.</em></span></span>
                 </h2>
-                <p class="svcp-open-sub">Nem toda página precisa da mesma estrutura.</p>
+                <p class="svcp-open-sub">Nem toda empresa precisa da mesma estrutura.</p>
               </div>
             </article>
 
-            <article class="svcp-panel" data-svcp-panel data-svcp-kind="inst">
-              <div class="svcp-body">
-                <div class="svcp-copy">
-                  <h3 class="svcp-name"><span class="svcp-mask"><span class="svcp-in">Site institucional</span></span></h3>
-                  <p class="svcp-desc">Para marcas que precisam traduzir identidade, organizar conteúdo, apresentar serviços e transmitir confiança.</p>
+            <!-- 2 · SITE INSTITUCIONAL — o benefício é a protagonista; o nome
+                 do serviço identifica sem competir. Composição aberta e
+                 assimétrica; a frase se resolve por máscara limpa. -->
+            <article class="svcp-panel svcp-svc" data-svcp-panel data-svcp-kind="inst">
+              <div class="svcp-svc-grid svcp-grid--inst">
+                <div class="svcp-svc-head">
+                  <h3 class="svcp-svc-name"><span class="svcp-mask"><span class="svcp-in">Site institucional</span></span></h3>
+                  <p class="svcp-svc-desc">Para empresas que precisam reunir identidade, serviços e provas em um só lugar. Um site para explicar o negócio, transmitir confiança e abrir caminho para o contato.</p>
                 </div>
-                <!-- wireframe: página institucional completa, várias seções -->
-                <div class="wf wf--inst" role="img" aria-label="Estrutura de um site institucional: cabeçalho com navegação, hero, apresentação, serviços, prova e rodapé">
-                  <div class="wf-page">
-                    <div class="wf-bar">
-                      <span class="wf-logo"></span>
-                      <span class="wf-nav"><i></i><i></i><i></i><i></i></span>
-                    </div>
-                    <div class="wf-hero">
-                      <span class="wf-h wf-h--xl"></span>
-                      <span class="wf-h wf-h--md"></span>
-                      <span class="wf-t"></span>
-                      <span class="wf-t wf-t--sm"></span>
-                    </div>
-                    <div class="wf-row wf-row--about">
-                      <span class="wf-block"></span>
-                      <span class="wf-lines"><i></i><i></i><i></i><i></i></span>
-                    </div>
-                    <div class="wf-grid">
-                      <span class="wf-cell"><i></i><b></b></span>
-                      <span class="wf-cell"><i></i><b></b></span>
-                      <span class="wf-cell"><i></i><b></b></span>
-                    </div>
-                    <div class="wf-row wf-row--proof">
-                      <span class="wf-shot"></span>
-                      <span class="wf-lines"><i></i><i></i></span>
-                    </div>
-                    <div class="wf-foot">
-                      <span class="wf-fcol"><i></i><i></i></span>
-                      <span class="wf-fcol"><i></i><i></i></span>
-                      <span class="wf-fcol"><i></i></span>
-                    </div>
+                <div class="svcp-svc-field svcp-field--inst">
+                  <p class="inst-statement">
+                    <span class="inst-line"><span class="inst-g">Tudo o que a empresa é,</span></span>
+                    <span class="inst-line"><span class="inst-g">reunido num </span><span class="inst-g inst-g--em"><em>só endereço.</em></span></span>
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <!-- 3 · LANDING PAGE — sequência que converge a uma única ação -->
+            <article class="svcp-panel svcp-svc" data-svcp-panel data-svcp-kind="land">
+              <div class="svcp-svc-grid">
+                <div class="svcp-svc-head">
+                  <p class="svcp-svc-meta">uma ação</p>
+                  <h3 class="svcp-svc-name"><span class="svcp-mask"><span class="svcp-in">Landing page</span></span></h3>
+                  <p class="svcp-svc-desc">Para uma oferta ou campanha com uma ação principal. Uma página com o argumento na ordem certa, conduzindo quem chega até o próximo passo sem desvio.</p>
+                </div>
+                <div class="svcp-svc-field svcp-field--funnel" role="img" aria-label="Uma leitura conduzida por etapas, atenção, argumento, prova e objeção, até uma única ação.">
+                  <ol class="funnel" role="list">
+                    <li class="funnel-step"><span class="funnel-tick" aria-hidden="true"></span><span class="funnel-w">Atenção</span></li>
+                    <li class="funnel-step"><span class="funnel-tick" aria-hidden="true"></span><span class="funnel-w">Argumento</span></li>
+                    <li class="funnel-step"><span class="funnel-tick" aria-hidden="true"></span><span class="funnel-w">Prova</span></li>
+                    <li class="funnel-step"><span class="funnel-tick" aria-hidden="true"></span><span class="funnel-w">Objeção</span></li>
+                  </ol>
+                  <p class="funnel-action"><span class="funnel-action-arrow" aria-hidden="true">→</span>Uma ação</p>
+                </div>
+              </div>
+            </article>
+
+            <!-- 4 · EXPERIÊNCIA WEB — a frase converge de direções opostas para
+                 o centro; entre as partes, um quadro tipográfico próprio da
+                 Vólund (a palavra WEB) nasce estreito, cresce e reorganiza a
+                 composição interna (vertical recortada -> horizontal, papel ->
+                 tinta, detalhe em brasa). Sem imagem de projeto. -->
+            <article class="svcp-panel svcp-svc" data-svcp-panel data-svcp-kind="exp">
+              <div class="svcp-exp">
+                <div class="exp-stage">
+                  <p class="exp-head"><span class="exp-w">Nem</span> <span class="exp-w">todo</span> <span class="exp-w">projeto</span> <span class="exp-w">cabe</span> <span class="exp-w">numa</span> <span class="exp-w">página</span> <span class="exp-w exp-w--em">comum.</span></p>
+                  <div class="exp-frame">
+                    <span class="exp-surface" aria-hidden="true"></span>
+                    <h3 class="exp-title svcp-svc-name">
+                      <span class="exp-title-line"><span class="exp-title-in">Experiências web</span></span>
+                      <span class="exp-title-line"><span class="exp-title-in">personalizadas</span></span>
+                    </h3>
+                    <span class="exp-web-mark" aria-hidden="true"></span>
                   </div>
                 </div>
-              </div>
-            </article>
-
-            <article class="svcp-panel" data-svcp-panel data-svcp-kind="land">
-              <div class="svcp-body">
-                <div class="svcp-copy">
-                  <h3 class="svcp-name"><span class="svcp-mask"><span class="svcp-in">Landing page</span></span></h3>
-                  <p class="svcp-desc">Para ofertas que precisam organizar um argumento, conduzir a leitura e levar a uma ação principal.</p>
-                </div>
-                <!-- wireframe: coluna única em funil, eixo de leitura e CTA repetido -->
-                <div class="wf wf--land" role="img" aria-label="Estrutura de uma landing page: oferta, ação principal, benefícios, prova, objeções e repetição da ação">
-                  <div class="wf-page wf-page--land">
-                    <span class="wf-axis" aria-hidden="true"></span>
-                    <div class="wf-step wf-step--offer">
-                      <span class="wf-h wf-h--xl"></span>
-                      <span class="wf-t"></span>
-                      <span class="wf-cta"></span>
-                    </div>
-                    <div class="wf-step wf-step--bene">
-                      <span class="wf-pill"></span><span class="wf-pill"></span><span class="wf-pill"></span>
-                    </div>
-                    <div class="wf-step wf-step--proof">
-                      <span class="wf-quote"></span>
-                      <span class="wf-t wf-t--sm"></span>
-                    </div>
-                    <div class="wf-step wf-step--obj">
-                      <span class="wf-qa"></span><span class="wf-qa"></span>
-                    </div>
-                    <div class="wf-step wf-step--close">
-                      <span class="wf-h wf-h--md"></span>
-                      <span class="wf-cta wf-cta--ember"></span>
-                    </div>
-                  </div>
+                <div class="exp-band">
+                  <p class="svcp-svc-desc">Para projetos que não cabem numa página convencional. Quando a navegação, a interação ou a funcionalidade exigem uma lógica própria, a estrutura é desenhada a partir do que cada projeto precisa comunicar e fazer.</p>
                 </div>
               </div>
             </article>
 
-            <article class="svcp-panel" data-svcp-panel data-svcp-kind="exp">
-              <div class="svcp-body">
-                <div class="svcp-copy">
-                  <h3 class="svcp-name"><span class="svcp-mask"><span class="svcp-in">Experiência web</span></span></h3>
-                  <p class="svcp-desc">Para marcas e projetos que precisam ir além de uma página convencional, combinando narrativa, interação e funcionalidades específicas em uma experiência construída sob medida.</p>
-                </div>
-                <!-- representação: camadas, estados e passagem entre cenas -->
-                <div class="wf wf--exp" role="img" aria-label="Estrutura de uma experiência web: camadas sobrepostas, estados de interação e passagem entre cenas">
-                  <div class="wf-stack">
-                    <span class="wf-layer wf-layer--3"><i></i><i></i></span>
-                    <span class="wf-layer wf-layer--2"><i></i><i></i><i></i></span>
-                    <span class="wf-layer wf-layer--1">
-                      <b class="wf-scene"></b>
-                      <i></i><i></i>
-                      <em class="wf-hot"></em>
-                    </span>
-                    <span class="wf-states" aria-hidden="true"><u></u><u class="on"></u><u></u></span>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="svcp-panel svcp-panel--floor" data-svcp-panel>
+            <!-- 5 · FECHAMENTO — motion textual: as palavras partem de tom muted
+                 e ganham contraste em ordem de leitura; "não são extras" ganha
+                 força e a última linha conclui em brasa. Palavras em spans
+                 inline: leitor de tela lê a frase uma vez, sem duplicação. -->
+            <article class="svcp-panel svcp-panel--floor" data-svcp-panel data-svcp-kind="floor">
               <div class="svcp-floor">
-                <h3 class="svcp-floor-title">
-                  <span class="svcp-mask"><span class="svcp-in">Design, clareza, SEO, performance e responsividade</span></span>
-                  <span class="svcp-mask"><span class="svcp-in svcp-em"><em>fazem parte de toda entrega.</em></span></span>
-                </h3>
-                <p class="svcp-floor-text">Quando o projeto pede mais controle, conectamos mensuração, formulários, WhatsApp, CRM e automações leves para organizar o que acontece depois da publicação. IA entra apenas quando resolve uma necessidade real.</p>
+                <p class="svcp-floor-title">
+                  <span class="floor-line"><span class="fw">Design,</span> <span class="fw">SEO,</span> <span class="fw">performance</span></span>
+                  <span class="floor-line"><span class="fw">e</span> <span class="fw">responsividade</span> <span class="fw fw--strong">não</span> <span class="fw fw--strong">são</span> <span class="fw fw--strong">extras.</span></span>
+                  <span class="floor-line floor-line--em"><span class="fw">Fazem</span> <span class="fw">parte</span> <span class="fw">de</span> <span class="fw">toda</span> <span class="fw">entrega.</span></span>
+                </p>
+                <div class="svcp-floor-aside">
+                  <p class="svcp-floor-kicker">Além do site</p>
+                  <p class="svcp-floor-text">Quando o projeto pede mais, conectamos mensuração, formulários, WhatsApp, blogs, chatbots, CRM, automações, aplicações de IA e sistemas digitais. Cada recurso entra pela função que cumpre.</p>
+                </div>
               </div>
             </article>
 
@@ -260,255 +233,158 @@
       </section>
 
 
-      <!-- PROJETOS — cada projeto é um painel completo.
-           Desktop: a seção é pinada e o próximo painel sobe de baixo,
-           substituindo toda a composição (imagem, texto, fundo, metadados).
-           Mobile: os três em sequência vertical, sem hover obrigatório.
+      <!-- PROJETOS — galeria editorial com palco sticky.
+           Cada projeto: coluna de texto + palco visual (tela desktop + tela
+           mobile) com walkthrough em vídeo real. Desktop: o palco fica sticky
+           e centraliza enquanto o texto passa; ao entrar o próximo projeto,
+           o palco troca por revelação de scroll. Hover/foco: reproduz o vídeo
+           e aprofunda a sombra; o mobile ganha presença real. Touch: o vídeo
+           toca quando o projeto entra em vista, toque alterna play/pause.
+           Sem JS / reduced motion: telas estáticas no pôster, tudo legível.
 
            CONTRATO — para adicionar um projeto, duplicar um
-           <article class="prjp-panel" data-prjp-panel data-prjp="slug"> com:
-             .prjp-name        título
-             .prjp-meta        metadados na mesma ordem dos demais
-                               (categoria · formato · status)
-             .prjp-sum         descrição curta
-             .prjp-link        link real
-             .prjp-shot--main  hero do projeto (1440 + 390 via srcset)
-             .prjp-shot--inner tela interna real (hover/foco)
-             .prjp-shot--mob   hero mobile real (hover/foco)
-           Tema cromático opcional: --prjp-tint no seletor [data-prjp="slug"]
-           em projects-panels.css. A ordem no DOM define a ordem dos painéis. -->
-      <section class="prjp" id="projetos" aria-labelledby="prjp-title">
-        <div class="prjp-pin" data-prjp-pin>
-          <div class="prjp-track" data-prjp-track>
+           <article class="prjv-item" data-prjv-item data-prj="slug"> com:
+             .prjv-meta   segmento · tipo · status
+             .prjv-name   nome do projeto
+             .prjv-body   descrição curta
+             .prjv-cta    link real para o projeto no ar
+             telas: /assets/projects/<slug>-desktop.(webm|mp4) + -mobile.*
+                    e os pôsteres <slug>-desktop-poster.webp / -mobile-poster.webp
+           A ordem no DOM define a ordem da galeria. -->
+      <section class="prjv" id="projetos" aria-labelledby="prjv-title">
+        <div class="prjv-intro">
+          <p class="prjv-eyebrow">Projetos</p>
+          <h2 class="prjv-title" id="prjv-title">Trabalhos no ar.</h2>
+        </div>
 
-            <article class="prjp-panel" data-prjp-panel data-prjp="allure">
-              <div class="prjp-inner">
-                <div class="prjp-head">
-                  <h2 class="prjp-section" id="prjp-title"><span class="prjp-mask"><span class="prjp-in">Projetos</span></span></h2>
-                </div>
-                <div class="prjp-body">
-                  <div class="prjp-info">
-                    <p class="prjp-meta">registro de marcas · one page · no ar</p>
-                    <h3 class="prjp-name"><span class="prjp-mask"><span class="prjp-in">Alluré Branding</span></span></h3>
-                    <p class="prjp-sum">A marca já tinha nível; o site não acompanhava. Direção visual criada do zero e composição própria para o celular.</p>
-                    <a class="prjp-link" href="https://allure-pink.vercel.app" target="_blank" rel="noopener">
-                      <span>Ver o projeto no ar</span>
-                      <svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 12 L12 2 M5 2 H12 V9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
-                    </a>
-                  </div>
-                  <div class="prjp-visual">
-                    <a class="prjp-shots" href="https://allure-pink.vercel.app" target="_blank" rel="noopener" aria-label="Abrir o site da Alluré Branding em nova aba">
-                      <figure class="prjp-shot prjp-shot--main">
-                        <img src="/assets/projects/allure-hero-1440.webp" width="1440" height="900" alt="Hero do site da Alluré Branding" loading="lazy" decoding="async">
-                      </figure>
-                      <figure class="prjp-shot prjp-shot--inner" aria-hidden="true">
-                        <img src="/assets/projects/allure-inner-1440.webp" width="1440" height="900" alt="" loading="lazy" decoding="async">
-                      </figure>
-                      <figure class="prjp-shot prjp-shot--mob" aria-hidden="true">
-                        <img src="/assets/projects/allure-hero-390.webp" width="390" height="844" alt="" loading="lazy" decoding="async">
-                      </figure>
-                    </a>
-                    <div class="prjp-flow">
-                      <figure class="prjp-flow-shot"><img src="/assets/projects/allure-inner-1440.webp" width="1440" height="900" alt="Seção interna do site da Alluré Branding" loading="lazy" decoding="async"></figure>
-                      <figure class="prjp-flow-shot prjp-flow-shot--mob"><img src="/assets/projects/allure-hero-390.webp" width="390" height="844" alt="Versão mobile do site da Alluré Branding" loading="lazy" decoding="async"></figure>
-                    </div>
-                  </div>
-                </div>
+        <div class="prjv-list">
+
+          <article class="prjv-item" data-prjv-item data-prj="allure" aria-labelledby="prjv-allure">
+            <div class="prjv-text">
+              <p class="prjv-meta">registro de marcas · site institucional · no ar</p>
+              <h3 class="prjv-name" id="prjv-allure">Alluré</h3>
+              <p class="prjv-body">A Alluré já entregava uma experiência de alto nível, mas o site não refletia isso. Criamos uma direção editorial própria para apresentar o serviço com mais presença, clareza e confiança.</p>
+              <a class="prjv-cta" href="https://allure-pink.vercel.app" target="_blank" rel="noopener">
+                <span>Ver o projeto no ar</span>
+                <svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 12 L12 2 M5 2 H12 V9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+              </a>
+            </div>
+            <div class="prjv-stage" aria-hidden="true">
+              <div class="prjv-scene">
+                <figure class="prjv-screen prjv-screen--desk">
+                  <video class="prjv-vid" data-prjv-vid muted playsinline preload="none" width="960" height="600" tabindex="-1">
+                    <source src="/assets/projects/allure/allure-desktop.mp4" type="video/mp4">
+                    <source src="/assets/projects/allure/allure-desktop.webm" type="video/webm">
+                  </video>
+                  <img class="prjv-poster" data-prjv-poster src="/assets/projects/allure/allure-desktop-poster.webp" width="960" height="600" alt="" loading="lazy" decoding="async">
+                  <span class="prjv-loading" data-prjv-loading aria-hidden="true"><i></i><i></i><i></i></span>
+                </figure>
+                <figure class="prjv-screen prjv-screen--mob">
+                  <video class="prjv-vid" data-prjv-vid muted playsinline preload="none" width="390" height="844" tabindex="-1">
+                    <source src="/assets/projects/allure/allure-mobile.mp4" type="video/mp4">
+                    <source src="/assets/projects/allure/allure-mobile.webm" type="video/webm">
+                  </video>
+                  <img class="prjv-poster" data-prjv-poster src="/assets/projects/allure/allure-mobile-poster.webp" width="390" height="844" alt="" loading="lazy" decoding="async">
+                </figure>
               </div>
-            </article>
+            </div>
+          </article>
 
-            <article class="prjp-panel" data-prjp-panel data-prjp="leonardo">
-              <div class="prjp-inner">
-                <div class="prjp-body">
-                  <div class="prjp-info">
-                    <p class="prjp-meta">odontologia · site institucional · no ar</p>
-                    <h3 class="prjp-name"><span class="prjp-mask"><span class="prjp-in">Dr. Leonardo Guarçoni</span></span></h3>
-                    <p class="prjp-sum">Site do consultório: tratamentos organizados, método apresentado com clareza e agendamento direto no WhatsApp.</p>
-                    <a class="prjp-link" href="https://dr-leonardo-guarconi.vercel.app" target="_blank" rel="noopener">
-                      <span>Ver o projeto no ar</span>
-                      <svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 12 L12 2 M5 2 H12 V9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
-                    </a>
-                  </div>
-                  <div class="prjp-visual">
-                    <a class="prjp-shots" href="https://dr-leonardo-guarconi.vercel.app" target="_blank" rel="noopener" aria-label="Abrir o site do Dr. Leonardo Guarçoni em nova aba">
-                      <figure class="prjp-shot prjp-shot--main">
-                        <img src="/assets/projects/leonardo-hero-1440.webp" width="1440" height="900" alt="Hero do site do Dr. Leonardo Guarçoni" loading="lazy" decoding="async">
-                      </figure>
-                      <figure class="prjp-shot prjp-shot--inner" aria-hidden="true">
-                        <img src="/assets/projects/leonardo-inner-1440.webp" width="1440" height="900" alt="" loading="lazy" decoding="async">
-                      </figure>
-                      <figure class="prjp-shot prjp-shot--mob" aria-hidden="true">
-                        <img src="/assets/projects/leonardo-hero-390.webp" width="390" height="844" alt="" loading="lazy" decoding="async">
-                      </figure>
-                    </a>
-                    <div class="prjp-flow">
-                      <figure class="prjp-flow-shot"><img src="/assets/projects/leonardo-inner-1440.webp" width="1440" height="900" alt="Seção interna do site do Dr. Leonardo Guarçoni" loading="lazy" decoding="async"></figure>
-                      <figure class="prjp-flow-shot prjp-flow-shot--mob"><img src="/assets/projects/leonardo-hero-390.webp" width="390" height="844" alt="Versão mobile do site do Dr. Leonardo Guarçoni" loading="lazy" decoding="async"></figure>
-                    </div>
-                  </div>
-                </div>
+          <article class="prjv-item" data-prjv-item data-prj="leonardo" aria-labelledby="prjv-leonardo">
+            <div class="prjv-text">
+              <p class="prjv-meta">odontologia · site institucional · no ar</p>
+              <h3 class="prjv-name" id="prjv-leonardo">Dr. Leonardo Guarçoni</h3>
+              <p class="prjv-body">O Dr. Leonardo precisava reunir tratamentos, filosofia e trajetória em uma presença única. Estruturamos o conteúdo para facilitar a compreensão e conduzir o agendamento ao WhatsApp.</p>
+              <a class="prjv-cta" href="https://dr-leonardo-guarconi.vercel.app" target="_blank" rel="noopener">
+                <span>Ver o projeto no ar</span>
+                <svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 12 L12 2 M5 2 H12 V9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+              </a>
+            </div>
+            <div class="prjv-stage" aria-hidden="true">
+              <div class="prjv-scene">
+                <figure class="prjv-screen prjv-screen--desk">
+                  <video class="prjv-vid" data-prjv-vid muted playsinline preload="none" width="960" height="600" tabindex="-1">
+                    <source src="/assets/projects/leonardo/leonardo-desktop.mp4" type="video/mp4">
+                    <source src="/assets/projects/leonardo/leonardo-desktop.webm" type="video/webm">
+                  </video>
+                  <img class="prjv-poster" data-prjv-poster src="/assets/projects/leonardo/leonardo-desktop-poster.webp" width="960" height="600" alt="" loading="lazy" decoding="async">
+                  <span class="prjv-loading" data-prjv-loading aria-hidden="true"><i></i><i></i><i></i></span>
+                </figure>
+                <figure class="prjv-screen prjv-screen--mob">
+                  <video class="prjv-vid" data-prjv-vid muted playsinline preload="none" width="390" height="844" tabindex="-1">
+                    <source src="/assets/projects/leonardo/leonardo-mobile.mp4" type="video/mp4">
+                    <source src="/assets/projects/leonardo/leonardo-mobile.webm" type="video/webm">
+                  </video>
+                  <img class="prjv-poster" data-prjv-poster src="/assets/projects/leonardo/leonardo-mobile-poster.webp" width="390" height="844" alt="" loading="lazy" decoding="async">
+                </figure>
               </div>
-            </article>
+            </div>
+          </article>
 
-            <article class="prjp-panel" data-prjp-panel data-prjp="aringleb">
-              <div class="prjp-inner">
-                <div class="prjp-body">
-                  <div class="prjp-info">
-                    <p class="prjp-meta">hospitality · marca pessoal · no ar</p>
-                    <h3 class="prjp-name"><span class="prjp-mask"><span class="prjp-in">Alexander Ringleb</span></span></h3>
-                    <p class="prjp-sum">Página de um operador de hospitality em Miami: trajetória, imprensa e oportunidades de parceria num só endereço.</p>
-                    <a class="prjp-link" href="https://aringleb.vercel.app" target="_blank" rel="noopener">
-                      <span>Ver o projeto no ar</span>
-                      <svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 12 L12 2 M5 2 H12 V9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
-                    </a>
-                  </div>
-                  <div class="prjp-visual">
-                    <a class="prjp-shots" href="https://aringleb.vercel.app" target="_blank" rel="noopener" aria-label="Abrir o site de Alexander Ringleb em nova aba">
-                      <figure class="prjp-shot prjp-shot--main">
-                        <img src="/assets/projects/aringleb-hero-1440.webp" width="1440" height="900" alt="Hero do site de Alexander Ringleb" loading="lazy" decoding="async">
-                      </figure>
-                      <figure class="prjp-shot prjp-shot--inner" aria-hidden="true">
-                        <img src="/assets/projects/aringleb-inner-1440.webp" width="1440" height="900" alt="" loading="lazy" decoding="async">
-                      </figure>
-                      <figure class="prjp-shot prjp-shot--mob" aria-hidden="true">
-                        <img src="/assets/projects/aringleb-hero-390.webp" width="390" height="844" alt="" loading="lazy" decoding="async">
-                      </figure>
-                    </a>
-                    <div class="prjp-flow">
-                      <figure class="prjp-flow-shot"><img src="/assets/projects/aringleb-inner-1440.webp" width="1440" height="900" alt="Seção interna do site de Alexander Ringleb" loading="lazy" decoding="async"></figure>
-                      <figure class="prjp-flow-shot prjp-flow-shot--mob"><img src="/assets/projects/aringleb-hero-390.webp" width="390" height="844" alt="Versão mobile do site de Alexander Ringleb" loading="lazy" decoding="async"></figure>
-                    </div>
-                  </div>
-                </div>
+          <article class="prjv-item" data-prjv-item data-prj="aringleb" aria-labelledby="prjv-aringleb">
+            <div class="prjv-text">
+              <p class="prjv-meta">hospitalidade · marca pessoal · no ar</p>
+              <h3 class="prjv-name" id="prjv-aringleb">Alexander Ringleb</h3>
+              <p class="prjv-body">Alexander precisava reunir trajetória, imprensa e oportunidades de parceria em um único endereço. Criamos uma narrativa editorial em inglês para apresentar sua experiência em hospitalidade e atuação em Miami.</p>
+              <a class="prjv-cta" href="https://aringleb.vercel.app" target="_blank" rel="noopener">
+                <span>Ver o projeto no ar</span>
+                <svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 12 L12 2 M5 2 H12 V9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+              </a>
+            </div>
+            <div class="prjv-stage" aria-hidden="true">
+              <div class="prjv-scene">
+                <figure class="prjv-screen prjv-screen--desk">
+                  <video class="prjv-vid" data-prjv-vid muted playsinline preload="none" width="960" height="600" tabindex="-1">
+                    <source src="/assets/projects/aringleb/aringleb-desktop.mp4" type="video/mp4">
+                    <source src="/assets/projects/aringleb/aringleb-desktop.webm" type="video/webm">
+                  </video>
+                  <img class="prjv-poster" data-prjv-poster src="/assets/projects/aringleb/aringleb-desktop-poster.webp" width="960" height="600" alt="" loading="lazy" decoding="async">
+                  <span class="prjv-loading" data-prjv-loading aria-hidden="true"><i></i><i></i><i></i></span>
+                </figure>
+                <figure class="prjv-screen prjv-screen--mob">
+                  <video class="prjv-vid" data-prjv-vid muted playsinline preload="none" width="390" height="844" tabindex="-1">
+                    <source src="/assets/projects/aringleb/aringleb-mobile.mp4" type="video/mp4">
+                    <source src="/assets/projects/aringleb/aringleb-mobile.webm" type="video/webm">
+                  </video>
+                  <img class="prjv-poster" data-prjv-poster src="/assets/projects/aringleb/aringleb-mobile-poster.webp" width="390" height="844" alt="" loading="lazy" decoding="async">
+                </figure>
               </div>
-            </article>
+            </div>
+          </article>
 
-          </div>
         </div>
       </section>
 
-      <!-- PROCESSO — muda a direção do movimento: o scroll continua
-           vertical e o conteúdo atravessa a viewport da direita para a
-           esquerda. Ao fim, o painel de encerramento resolve a seção e o
-           pin é liberado. Mobile: os mesmos cards em sequência vertical. -->
-      <section class="prch" aria-labelledby="prch-title">
-        <div class="prch-pin" data-prch-pin>
-          <div class="prch-viewport">
-            <div class="prch-track" data-prch-track>
+      <!-- COMO TRABALHAMOS — folha editorial única que substitui Processo e
+           Estúdio. Abertura assimétrica (label, headline e texto principal em
+           oposição) e três núcleos como linhas editoriais horizontais sobre a
+           mesma grade de 12 colunas. Sem cards, sem imagens, sem numeração: a
+           presença vem de escala, alinhamento, espaço e ritmo. A brasa entra só
+           como sinal funcional na hairline. Repouso (sem JS / reduced motion):
+           o estado final, tudo legível. -->
+      <section class="cw" id="metodo" aria-labelledby="cw-title">
+        <header class="cw-head">
+          <p class="cw-label"><span class="cw-label-dot" aria-hidden="true"></span>Como trabalhamos</p>
+          <h2 class="cw-title" id="cw-title" data-cw-headline>Cada projeto se constrói do zero, a partir do seu negócio.</h2>
+          <p class="cw-lead" data-cw-lead>Primeiro entendemos o que sua marca precisa comunicar. Depois, organizamos conteúdo, direção visual e tecnologia para construir uma presença digital que traduza sua marca e funcione para o seu negócio.</p>
+        </header>
 
-              <div class="prch-intro">
-                <p class="prch-label">Processo</p>
-                <h2 class="prch-title" id="prch-title">
-                  <span class="prch-mask"><span class="prch-in">Cada projeto começa</span></span>
-                  <span class="prch-mask"><span class="prch-in prch-em"><em>entendendo o seu negócio.</em></span></span>
-                </h2>
-              </div>
-
-              <article class="prch-card" data-prch-card>
-                <h3 class="prch-card-name"><span class="prch-mask"><span class="prch-in">Entender e estruturar</span></span></h3>
-                <p class="prch-card-desc">A gente lê o negócio, a marca, o público e o momento atual para definir o que precisa ser construído.</p>
-                <p class="prch-card-tags">negócio · público · arquitetura · mensagem</p>
-                <span class="prch-card-rule" aria-hidden="true"></span>
-              </article>
-
-              <article class="prch-card" data-prch-card>
-                <h3 class="prch-card-name"><span class="prch-mask"><span class="prch-in">Criar e construir</span></span></h3>
-                <p class="prch-card-desc">Mensagem, direção visual e experiência são desenhadas juntas e implementadas com cuidado técnico.</p>
-                <p class="prch-card-tags">direção visual · design · desenvolvimento · responsividade · performance</p>
-                <span class="prch-card-rule" aria-hidden="true"></span>
-              </article>
-
-              <article class="prch-card" data-prch-card>
-                <h3 class="prch-card-name"><span class="prch-mask"><span class="prch-in">Publicar e conectar</span></span></h3>
-                <p class="prch-card-desc">Depois da validação, o projeto vai ao ar com as integrações necessárias para transformar acesso em contato.</p>
-                <p class="prch-card-tags">testes · publicação · formulários · WhatsApp · mensuração</p>
-                <span class="prch-card-rule" aria-hidden="true"></span>
-              </article>
-
-              <div class="prch-end" data-prch-end>
-                <span class="prch-end-mark" aria-hidden="true"></span>
-                <p class="prch-end-title">
-                  <span class="prch-mask"><span class="prch-in">Projeto validado.</span></span>
-                  <span class="prch-mask"><span class="prch-in prch-em"><em>Pronto para ir ao ar.</em></span></span>
-                </p>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ESTÚDIO — bloco superior único (headline à esquerda, parágrafo à
-           direita) e três tópicos abaixo. Em ponteiro fino, cada tópico
-           revela um preview construído com telas reais dos projetos; em
-           touch e teclado a descrição e o preview ficam no fluxo. -->
-      <section class="estd" id="estudio" aria-labelledby="estd-title">
-        <div class="estd-inner">
-
-          <div class="estd-block">
-            <p class="estd-label">Estúdio</p>
-            <div class="estd-block-grid">
-              <h2 class="estd-title" id="estd-title">
-                <span class="estd-mask"><span class="estd-in">Uma operação enxuta,</span></span>
-                <span class="estd-mask"><span class="estd-in estd-em"><em>com critério.</em></span></span>
-              </h2>
-              <p class="estd-text">A Vólund não adapta sua marca a um modelo pronto. Cada projeto parte do negócio, da identidade e do momento da empresa para construir uma presença digital própria, do zero.</p>
-            </div>
-          </div>
-
-          <ul class="estd-topics" data-estd-topics role="list">
-            <li class="estd-topic" data-estd-topic="zero">
-              <button class="estd-trigger" type="button" aria-expanded="false" aria-controls="estd-d-zero">
-                <span class="estd-topic-name">Construído do zero</span>
-                <span class="estd-topic-sign" aria-hidden="true"></span>
-              </button>
-              <div class="estd-detail" id="estd-d-zero">
-                <p class="estd-topic-desc">A estrutura, a direção visual e as interações não vêm de um template reaproveitado.</p>
-                <figure class="estd-preview">
-                  <span class="estd-preview-frame">
-                    <img src="/assets/projects/allure-hero-1440.webp" width="1440" height="900" alt="Hero da Alluré Branding" loading="lazy" decoding="async">
-                    <img src="/assets/projects/leonardo-hero-1440.webp" width="1440" height="900" alt="Hero do Dr. Leonardo Guarçoni" loading="lazy" decoding="async">
-                    <img src="/assets/projects/aringleb-hero-1440.webp" width="1440" height="900" alt="Hero de Alexander Ringleb" loading="lazy" decoding="async">
-                  </span>
-                  <figcaption>Três projetos, três estruturas distintas.</figcaption>
-                </figure>
-              </div>
+        <div class="cw-tript" data-cw-tript>
+          <span class="cw-tript-rule" aria-hidden="true"></span>
+          <ul class="cw-cols" role="list">
+            <li class="cw-col" data-cw-col>
+              <h3 class="cw-col-title" data-cw-col-title>Leitura</h3>
+              <p class="cw-col-text" data-cw-col-text>A forma vem depois. Seu negócio, seu público e seu objetivo definem a estrutura. Não começamos por um modelo pronto.</p>
             </li>
-
-            <li class="estd-topic" data-estd-topic="direcao">
-              <button class="estd-trigger" type="button" aria-expanded="false" aria-controls="estd-d-direcao">
-                <span class="estd-topic-name">Direção próxima</span>
-                <span class="estd-topic-sign" aria-hidden="true"></span>
-              </button>
-              <div class="estd-detail" id="estd-d-direcao">
-                <p class="estd-topic-desc">Cada decisão é construída a partir do momento real da empresa e explicada com clareza durante o projeto.</p>
-                <figure class="estd-preview">
-                  <span class="estd-preview-frame estd-preview-frame--solo">
-                    <img src="/assets/projects/leonardo-inner-1440.webp" width="1440" height="900" alt="Seção de método do site do Dr. Leonardo Guarçoni" loading="lazy" decoding="async">
-                  </span>
-                  <figcaption>O método do cliente, apresentado passo a passo.</figcaption>
-                </figure>
-              </div>
+            <li class="cw-col" data-cw-col>
+              <h3 class="cw-col-title" data-cw-col-title>Direção</h3>
+              <p class="cw-col-text" data-cw-col-text>Conteúdo, design e desenvolvimento avançam sob uma mesma direção, com decisões claras ao longo do projeto.</p>
             </li>
-
-            <li class="estd-topic" data-estd-topic="tecnologia">
-              <button class="estd-trigger" type="button" aria-expanded="false" aria-controls="estd-d-tecnologia">
-                <span class="estd-topic-name">Tecnologia com função</span>
-                <span class="estd-topic-sign" aria-hidden="true"></span>
-              </button>
-              <div class="estd-detail" id="estd-d-tecnologia">
-                <p class="estd-topic-desc">Performance, SEO, integrações e automações entram quando melhoram a experiência ou a operação.</p>
-                <figure class="estd-preview">
-                  <span class="estd-preview-frame estd-preview-frame--pair">
-                    <img src="/assets/projects/allure-hero-390.webp" width="390" height="844" alt="Versão mobile da Alluré Branding" loading="lazy" decoding="async">
-                    <img src="/assets/projects/leonardo-hero-390.webp" width="390" height="844" alt="Versão mobile do Dr. Leonardo Guarçoni" loading="lazy" decoding="async">
-                  </span>
-                  <figcaption>Composição própria para o celular e contato direto.</figcaption>
-                </figure>
-              </div>
+            <li class="cw-col" data-cw-col>
+              <h3 class="cw-col-title" data-cw-col-title>Tecnologia</h3>
+              <p class="cw-col-text" data-cw-col-text>Usamos tecnologias atuais para criar sites rápidos, fluidos e preparados para evoluir com o seu negócio.</p>
             </li>
           </ul>
-
         </div>
       </section>
       <!-- CTA — seção própria sobre papel, com um bloco em tinta.
@@ -531,47 +407,55 @@
       </section>
     </main>
 
-    <!-- FOOTER — seção própria, sobre papel. A rajada de vento em SVG
-         atravessa a faixa superior e dissipa; o conteúdo institucional
-         permanece legível em repouso. -->
-    <footer class="ft" aria-label="Rodapé">
-      <!-- Rajada: dois paths compatíveis (mesma contagem de comandos) que o
-           GSAP interpola sem plugin pago. Nasce estreita na borda esquerda,
-           ganha corpo, afina e dissipa à direita. Decorativa. -->
-      <div class="ft-gust" data-ft-gust aria-hidden="true">
-        <svg viewBox="0 0 1600 200" preserveAspectRatio="none" focusable="false">
-          <path class="ft-gust-p ft-gust-p--1" data-gust-a
-            d="M-40 104 C 200 96, 340 62, 580 58 C 820 54, 1000 88, 1240 74 C 1400 64, 1510 44, 1640 34 L 1640 44 C 1510 56, 1400 76, 1240 86 C 1000 100, 820 66, 580 70 C 340 74, 200 108, -40 116 Z"/>
-          <path class="ft-gust-p ft-gust-p--2" data-gust-b
-            d="M-40 134 C 210 130, 350 108, 600 102 C 840 96, 1020 122, 1260 112 C 1420 105, 1520 90, 1640 82 L 1640 89 C 1520 98, 1420 113, 1260 120 C 1020 131, 840 105, 600 111 C 350 117, 210 139, -40 143 Z"/>
-          <path class="ft-gust-p ft-gust-p--3" data-gust-c
-            d="M-40 74 C 170 70, 310 44, 540 40 C 780 36, 950 60, 1170 50 C 1350 42, 1470 26, 1640 16 L 1640 21 C 1470 32, 1350 48, 1170 56 C 950 66, 780 42, 540 46 C 310 50, 170 76, -40 80 Z"/>
+    <!-- FOOTER — superfície full-bleed em tinta (#17150F), sem cantos
+         arredondados, distinta do CTA arredondado e do papel base. A tinta
+         sobe do papel conduzida por uma faixa de brasa curva e assimétrica na
+         borda superior (.ftx-blade). Campo funcional pequeno, masthead VÓLUND
+         como assinatura na metade inferior, faixa utilitária no rodapé; sem
+         listas, sem cards. O footer é a agente do gesto; o CTA fica estável.
+         Repouso (sem JS / reduced motion): tinta já assentada, brasa recolhida,
+         conteúdo legível. -->
+    <footer class="ftx" aria-label="Rodapé">
+      <!-- superfície que sobe: tinta cheia + lâmina de brasa na borda condutora.
+           Uma única curva ampla, crista deslocada para a direita; a esquerda
+           parte baixa e é conduzida. preserveAspectRatio none: acompanha a
+           largura da viewport. -->
+      <div class="ftx-rise" data-ftx-rise aria-hidden="true">
+        <div class="ftx-ink"></div>
+        <svg class="ftx-blade" data-ftx-blade viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false">
+          <path class="ftx-blade-ink" d="M0 46 C 440 46, 780 12, 1080 8 C 1270 6, 1360 20, 1440 34 L 1440 120 L 0 120 Z"/>
+          <path class="ftx-blade-line" d="M0 46 C 440 46, 780 12, 1080 8 C 1270 6, 1360 20, 1440 34"/>
         </svg>
       </div>
-      <div class="ft-inner">
-        <span class="ft-topline" data-ft-line aria-hidden="true"></span>
-        <div class="ft-grid">
-          <div class="ft-brand" data-ft-col>
-            <span class="ft-mark-mask"><svg class="ft-mark" viewBox="0 0 1594 381" aria-label="Vólund" role="img" focusable="false"><use href="#vwordmark"/></svg></span>
-            <p class="ft-tag"><i class="ft-ember" aria-hidden="true"></i>estúdio de presença digital</p>
-          </div>
-          <nav class="ft-nav" aria-label="Navegação do rodapé" data-ft-col>
-            <p class="ft-label" aria-hidden="true">navegação</p>
-            <a class="ft-link" href="#projetos">Projetos</a>
-            <a class="ft-link" href="#servicos">Serviços</a>
-            <a class="ft-link" href="#estudio">Estúdio</a>
-            <a class="ft-link" href="#contato">Contato</a>
-          </nav>
-          <div class="ft-contact" data-ft-col>
-            <p class="ft-label" aria-hidden="true">contato</p>
-            <a class="ft-link" href="https://wa.me/5527999555259?text=Ol%C3%A1!%20Conheci%20o%20site%20da%20V%C3%B3lund%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">WhatsApp<svg class="ft-link-arrow" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 12 L12 2 M5 2 H12 V9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
-            <span class="ft-num">+55 27 99955-5259</span>
-          </div>
+
+      <!-- campo orgânico atual do background; a iluminação do wordmark e da
+           hairline usa as camadas LED internas recuperadas da versão antiga. -->
+      <canvas class="ftx-canvas" data-ftx-canvas aria-hidden="true"></canvas>
+
+      <div class="ftx-inner">
+        <div class="ftx-top" data-ftx-top>
+          <p class="ftx-desc"><i class="ftx-ember" aria-hidden="true"></i>Estúdio de presença digital</p>
+          <address class="ftx-reach">
+            <a class="ftx-reach-link" href="https://wa.me/5527999555259?text=Ol%C3%A1!%20Conheci%20o%20site%20da%20V%C3%B3lund%20e%20quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener">
+              <span>WhatsApp</span>
+              <svg class="ftx-reach-arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2.5 13.5 L13.5 2.5 M5.5 2.5 H13.5 V10.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            </a>
+          </address>
         </div>
-        <div class="ft-base" data-ft-base>
-          <p class="ft-meta">© 2026 Vólund</p>
-          <p class="ft-meta ft-meta--desc">sites, landing pages e experiências web</p>
-          <a class="ft-top" href="#topo">voltar ao topo<svg class="ft-top-arrow" viewBox="0 0 12 14" aria-hidden="true" focusable="false"><path d="M6 13 V2 M1.5 6.5 L6 2 L10.5 6.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+
+        <a class="ftx-mast-link" href="#topo" aria-label="Vólund, ir ao topo" data-ftx-mast>
+          <span class="ftx-mast-mask">
+            <span class="ftx-mast-stack" data-ftx-mast-stack>
+              <svg class="ftx-mast ftx-mast--paper" viewBox="0 0 1594 381" aria-hidden="true" focusable="false"><use href="#vwordmark"/></svg>
+              <svg class="ftx-mast ftx-mast--ember" viewBox="0 0 1594 381" aria-hidden="true" focusable="false"><use href="#vwordmark"/></svg>
+            </span>
+          </span>
+        </a>
+
+        <div class="ftx-base" data-ftx-base>
+          <p class="ftx-meta">© 2026 Vólund</p>
+          <a class="ftx-meta" href="https://wa.me/5527999555259" target="_blank" rel="noopener">+55 27 99955-5259</a>
+          <a class="ftx-top-link" href="#topo">Voltar ao topo<svg class="ftx-top-arrow" viewBox="0 0 12 14" aria-hidden="true" focusable="false"><path d="M6 13 V2 M1.5 6.5 L6 2 L10.5 6.5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
         </div>
       </div>
     </footer>

@@ -24,7 +24,7 @@
 .svcp,
 .prjp,
 .prch,
-.estd,
+.cw,
 .cta,
 .ft {
   font-variation-settings: "opsz" 60;
@@ -33,7 +33,7 @@
 /* âncoras: header é absoluto, margem pequena só para respiro */
 #servicos,
 #projetos,
-#estudio,
+#metodo,
 #contato {
   scroll-margin-top: 24px;
 }

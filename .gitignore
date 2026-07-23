@@ -6,3 +6,9 @@ docs/screenshots/
 *.log
 .DS_Store
 Thumbs.db
+# QA e arquivos temporários
+.tmp/
+.qa-screenshots/
+
+# Saídas intermediárias de gravação
+tools/video-recording/output/

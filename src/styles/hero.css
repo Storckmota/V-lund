@@ -112,7 +112,16 @@
   max-width: none;
   height: auto;
   color: var(--ink);
-  margin-bottom: -1.6vw;
+  /* A margem negativa afunda a palavra abaixo da base da hero (clip).
+     Como .hero-monument é flex, no mobile o svg é encolhido de 112vw para
+     ~100vw (largura do container). O translateY reergue o wordmark inteiro
+     acima do fim da seção e ainda abre uma faixa de papel abaixo da palavra,
+     em vez de cortá-la. calc() = duas partes: -9.03% anula o quanto o glifo
+     mais baixo passava da base (corte zero, palavra inteira visível); o clamp
+     acrescenta o respiro em papel, responsivo à altura da viewport. Layout
+     intacto (H1/copy/CTA fixos), largura, escala e wrapper animado preservados. */
+  margin-bottom: -5.9vw;
+  transform: translateY(calc(-9.03% - clamp(24px, 5svh, 44px)));
 }
 
 /* Glifos do monumento: reagem localmente ao ponteiro (monument.js). */
@@ -201,15 +210,12 @@
 
   .monument-wordmark {
     width: 97vw;
-    margin-bottom: -1.1vw;
-  }
-}
-
-/* Telas largas e baixas: preserva a largura do monumento,
-   aumentando o corte na base em vez de esmagar a copy. */
-@media (min-width: 900px) and (max-height: 820px) {
-  .monument-wordmark {
-    margin-bottom: -6.5vw;
+    /* No desktop o svg (97vw) cabe no container sem encolher: o glifo mais
+       baixo passa 6.78% da altura do svg abaixo da base. -6.78% zera isso e
+       o clamp abre o respiro em papel (maior em telas altas, menor nas baixas
+       para não aproximar a palavra do CTA). */
+    margin-bottom: -5.2vw;
+    transform: translateY(calc(-6.78% - clamp(26px, 3.8svh, 60px)));
   }
 }
 

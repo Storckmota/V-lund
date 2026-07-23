@@ -1,0 +1,351 @@
+/* PROJETOS — Rodada B v2: galeria em tinta.
+   Reconstrução da embalagem editorial. Serviços termina no papel; Projetos é
+   uma sala escura (#17150F). Camada de override sobre projects-panels.css:
+   carrega DEPOIS, então vence por ordem com igual/maior especificidade.
+
+   ZONA CONGELADA: nada aqui toca o sistema de mídia. .prjv-scene e descendentes
+   (.prjv-screen/video/poster/loading/cursor/sombra/escala/estados) seguem
+   governados por projects-panels.css. Este arquivo só reposiciona .prjv-stage
+   como um bloco único e reveste o entorno editorial. */
+
+.prjv {
+  --prjv-ink: #17150f;          /* tinta oficial da sala */
+  --prjv-ink-2: #100e0a;        /* baixa da tinta, para profundidade */
+  --prjv-paper: #faf8f4;
+  --prjv-muted: #938c7d;        /* muted claro derivado de #8B8578 */
+  --prjv-rule: rgba(250, 248, 244, 0.12);
+  --prjv-ember: #c45543;
+  --prjv-ember-deep: #a03d2d;
+  /* altura das folhas de limiar/saída = exatamente o espaçador da seção, para
+     que o papel cubra só o vazio superior/inferior e nunca a copy */
+  --prjv-lead-h: clamp(200px, 44vh, 520px);
+  --prjv-tail-h: clamp(200px, 40vh, 460px);
+}
+
+/* --- sala escura ---------------------------------------------------------- */
+.prjv {
+  position: relative;
+  overflow: clip;               /* barra qualquer overflow horizontal das camadas */
+  background:
+    radial-gradient(120% 80% at 50% 0%, var(--prjv-ink) 0%, var(--prjv-ink-2) 100%);
+  color: var(--prjv-paper);
+  /* respiro de capítulo, sem virar hero full-screen */
+  padding-top: var(--prjv-lead-h);
+  padding-bottom: var(--prjv-tail-h);
+}
+
+/* --- grão fino, realmente perceptível, só nas áreas de tinta -------------- */
+.prjv::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: overlay;       /* na tinta, ruído cinza acende speckle visível */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  background-repeat: repeat;
+}
+
+/* --- campos de luz ambiental (atrás de tudo) ------------------------------
+   Uma faixa sticky de viewport carrega três atmosferas empilhadas; o JS
+   cruza-fade conforme o projeto ativo entra na região principal. */
+.prjv-atmos {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: clip;
+}
+
+.prjv-atmos-vp {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.prjv-amb {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  mix-blend-mode: screen;        /* as cores existem como luz sobre a tinta */
+  transform-origin: center;
+  will-change: opacity, transform;
+  filter: saturate(1.02);
+}
+
+/* Abertura/encerramento: brasa da própria Vólund. Núcleo definido, sem névoa
+   marrom espalhada; presença de marca, não mancha. Nenhuma cor de cliente. */
+.prjv-amb--intro {
+  background:
+    radial-gradient(30% 26% at 50% 39%, rgba(200, 92, 72, 0.36), transparent 64%),
+    radial-gradient(18% 15% at 50% 39%, rgba(196, 85, 67, 0.3), transparent 60%);
+}
+
+/* Halos dos projetos: núcleo ATRÁS do conjunto desktop+mobile de cada case,
+   com convicção mas contidos — a base tinta permanece dominante. Alluré e
+   Aringleb à direita (mídia à direita), Leonardo à esquerda (mídia à esquerda). */
+.prjv-amb--allure {
+  background:
+    radial-gradient(30% 40% at 74% 48%, rgba(178, 52, 84, 0.5), transparent 62%),
+    radial-gradient(18% 22% at 84% 72%, rgba(120, 34, 64, 0.3), transparent 66%);
+}
+.prjv-amb--leonardo {
+  /* cobre/terracota reconhecível: maior luminosidade e área que o vinho */
+  background:
+    radial-gradient(34% 44% at 26% 48%, rgba(200, 112, 58, 0.5), transparent 64%),
+    radial-gradient(20% 24% at 15% 72%, rgba(156, 82, 40, 0.32), transparent 68%);
+}
+.prjv-amb--aringleb {
+  /* pine mais luminoso, com nuance dourada muito discreta */
+  background:
+    radial-gradient(32% 42% at 72% 48%, rgba(46, 122, 88, 0.48), transparent 63%),
+    radial-gradient(16% 20% at 30% 26%, rgba(150, 120, 54, 0.16), transparent 70%);
+}
+
+/* --- limiar: tinta inunda o papel de Serviços na entrada ------------------
+   .prjv-lead é uma folha de papel que cobre a banda superior da seção. O JS
+   encolhe a folha por scroll: a borda inferior arredondada sobe e a sala de
+   tinta é revelada. Sem JS/reduced motion, a folha fica em altura zero. */
+.prjv-lead {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--prjv-lead-h);
+  z-index: 3;                    /* acima da atmosfera: o papel não se tinge */
+  background: var(--prjv-paper);
+  border-bottom-left-radius: clamp(24px, 6vw, 96px);
+  border-bottom-right-radius: clamp(24px, 6vw, 96px);
+  transform: scaleY(1);
+  transform-origin: top center;  /* recua para cima; cantos achatam ao sumir */
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* --- saída: papel de Processo retorna pela base --------------------------- */
+.prjv-tail {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--prjv-tail-h);
+  z-index: 3;
+  background: var(--prjv-paper);
+  border-top-left-radius: clamp(24px, 6vw, 96px);
+  border-top-right-radius: clamp(24px, 6vw, 96px);
+  transform: scaleY(0);
+  transform-origin: bottom center;  /* sobe pela base ao encerrar a sala */
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* conteúdo acima das camadas ambientais/limiar */
+.prjv > .prjv-intro,
+.prjv > .prjv-list {
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================================================================
+   ABERTURA EDITORIAL — presença de capítulo, assimetria, espaço negativo
+   ========================================================================= */
+/* abertura de capítulo: centralizada, eyebrow e headline no mesmo eixo,
+   ocupando largura e com espaço negativo simétrico dos dois lados */
+.prjv-intro {
+  position: relative;
+  max-width: var(--content-max-width);
+  margin: 0 auto clamp(96px, 18vh, 210px);
+  padding-inline: var(--gutter);
+  text-align: center;
+}
+
+.prjv-eyebrow {
+  margin: 0 auto var(--section-heading-gap);
+  font: 400 var(--type-label)/1 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.34em;
+  /* papel claro levemente muted: legível sobre a brasa, sem sumir na atmosfera.
+     A brasa fica na luz ambiental, não no texto. */
+  color: rgba(250, 248, 244, 0.88);
+}
+
+.prjv-title {
+  margin: 0 auto;
+  max-width: 18ch;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--type-section-display);
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  text-wrap: balance;           /* frase inteira no desktop, quebra boa no mobile */
+  color: var(--prjv-paper);
+}
+
+/* headline centralizada: inner da máscara centra dentro da linha */
+.prjv-ed .prjv-title .prjv-mline { text-align: center; }
+
+/* máscara de linha para o reveal por subida (montada no JS) */
+.prjv-ed .prjv-mline {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.04em;        /* não clipa ascendente/descendente */
+}
+.prjv-ed .prjv-mline > span {
+  display: inline-block;
+  will-change: transform;
+}
+
+.prjv-ed .prjv-eyebrow { will-change: transform, opacity; }
+
+/* =========================================================================
+   LISTA E CASES
+   ========================================================================= */
+.prjv-list {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+/* separação vem sobretudo de espaço/atmosfera; hairline é só detalhe claro */
+.prjv-item {
+  border-top: 1px solid var(--prjv-rule);
+  padding-block: clamp(72px, 15vh, 168px);
+}
+.prjv-item:first-child { border-top: 0; }
+
+/* cores para leitura sobre a tinta */
+.prjv-meta { color: var(--prjv-muted); }
+.prjv-name { color: var(--prjv-paper); }
+.prjv-body { color: rgba(250, 248, 244, 0.7); }
+.prjv-cta { color: var(--prjv-paper); }
+.prjv-cta svg { color: var(--prjv-ember); }
+
+/* nomes ganham presença — display maior num sistema coerente */
+.prjv-name {
+  font-size: clamp(2.4rem, 4.6vw, 3.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+/* máscara para os nomes dos cases (montada no JS) */
+.prjv-ed .prjv-name .prjv-mline { padding-block: 0.05em; }
+
+/* =========================================================================
+   DESKTOP — composições relacionadas mas distintas por case
+   ========================================================================= */
+@media (min-width: 900px) {
+  /* dispensa o palco preso (pin) da versão anterior: fluxo editorial aberto */
+  .prjv-js .prjv-item {
+    min-height: 0;
+    padding-block: clamp(96px, 18vh, 220px);
+    align-items: center;
+    gap: 0;
+  }
+  .prjv-js .prjv-text,
+  .prjv-js .prjv-stage {
+    position: static;
+    height: auto;
+    display: grid;
+    align-content: center;
+  }
+
+  /* Alluré — texto à esquerda, mídia à direita, entrada clássica */
+  .prjv-item[data-prj="allure"] {
+    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+    column-gap: clamp(48px, 6vw, 120px);
+  }
+
+  /* Dr. Leonardo — composição invertida: mídia à esquerda, texto à direita */
+  .prjv-item[data-prj="leonardo"] {
+    grid-template-columns: minmax(0, 1.14fr) minmax(0, 0.86fr);
+    column-gap: clamp(48px, 6vw, 120px);
+  }
+  .prjv-item[data-prj="leonardo"] .prjv-stage { order: 1; }
+  .prjv-item[data-prj="leonardo"] .prjv-text  { order: 2; }
+  .prjv-item[data-prj="leonardo"] .prjv-stage { margin-top: clamp(8px, 3vh, 40px); }
+
+  /* Alexander Ringleb — faixa superior ampla (nome+meta), texto complementar
+     numa coluna e mídia à direita. .prjv-text vira contents para distribuir
+     seus filhos na grade do item. */
+  .prjv-item[data-prj="aringleb"] {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    column-gap: clamp(48px, 6vw, 120px);
+    row-gap: clamp(28px, 5vh, 64px);
+    grid-template-areas:
+      "meta  meta"
+      "name  name"
+      "body  stage"
+      "cta   stage";
+    align-items: start;
+  }
+  .prjv-item[data-prj="aringleb"] .prjv-text  { display: contents; }
+  .prjv-item[data-prj="aringleb"] .prjv-meta  { grid-area: meta; }
+  .prjv-item[data-prj="aringleb"] .prjv-name  {
+    grid-area: name;
+    font-size: clamp(3rem, 6.4vw, 5.4rem);   /* faixa superior mais expressiva */
+    max-width: 18ch;
+  }
+  .prjv-item[data-prj="aringleb"] .prjv-body  { grid-area: body; align-self: start; }
+  .prjv-item[data-prj="aringleb"] .prjv-cta   { grid-area: cta; align-self: start; }
+  .prjv-item[data-prj="aringleb"] .prjv-stage { grid-area: stage; align-self: center; }
+}
+
+/* revelação de entrada do palco (panels): reaproveitada, sem competir com o
+   reveal de texto do GSAP. O texto é dirigido pelo JS editorial. */
+.prjv-js .prjv-text > * {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* =========================================================================
+   REDUCED MOTION — estado final imediato
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .prjv-ed .prjv-mline > span,
+  .prjv-ed .prjv-eyebrow,
+  .prjv-item .prjv-meta,
+  .prjv-item .prjv-name,
+  .prjv-item .prjv-body,
+  .prjv-item .prjv-cta {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .prjv-lead { transform: scaleY(0) !important; }
+  .prjv-tail { transform: scaleY(0) !important; }
+  /* atmosfera estática: só a brasa Vólund, discreta, sem scrub nem cor de cliente */
+  .prjv-amb--intro { opacity: 1; }
+}
+
+/* =========================================================================
+   MOBILE — ordem clara (texto antes da mídia), textura e atmosfera contidas
+   ========================================================================= */
+@media (max-width: 899px) {
+  .prjv {
+    --prjv-lead-h: clamp(120px, 30vh, 300px);
+    --prjv-tail-h: clamp(120px, 26vh, 260px);
+  }
+  .prjv::before { opacity: 0.34; }
+
+  .prjv-title {
+    font-size: clamp(2.6rem, 12.5vw, 4rem);
+    max-width: 14ch;
+    text-wrap: balance;
+  }
+
+  /* nenhuma inversão confusa: sempre texto e depois mídia */
+  .prjv-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: none;
+    gap: clamp(26px, 5vh, 44px);
+  }
+  .prjv-item[data-prj] .prjv-text  { display: grid; order: 1; }
+  .prjv-item[data-prj] .prjv-stage { order: 2; margin-top: 0; }
+  .prjv-item[data-prj="aringleb"] .prjv-name { font-size: clamp(2.4rem, 11vw, 3.4rem); }
+
+  /* atmosfera simplificada: campo único mais discreto */
+  .prjv-amb { inset: -6% -4%; }
+}

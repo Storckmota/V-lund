@@ -1,138 +1,183 @@
-// PROJETOS — painéis completos. O painel seguinte sobe de baixo e
-// substitui toda a composição do anterior (imagem, texto, fundo, meta).
-// Desktop: seção pinada com overscroll controlado. Mobile e reduced
-// motion: sequência vertical, telas no fluxo, nada depende de hover.
+// PROJETOS — reprodução das mídias.
+// Regra dura: scroll NÃO inicia vídeo. O IntersectionObserver só antecipa o
+// download; play acontece por intenção: hover, foco de teclado ou toque.
+// Desktop e mobile do mesmo projeto iniciam/param/resetam juntos; as durações
+// são iguais na origem (15s), então terminam juntos sem seek de sincronismo.
+// Sem loop: ao terminar, o vídeo fica no último frame. Só um projeto toca por
+// vez. Reduced motion: sem reprodução (pôster + profundidade por CSS no hover).
+//
+// Estados no item, em data-prjv-state: idle | loading | ready | playing |
+// resetting | error. O CSS lê esse atributo para cursor, sombra e pôster.
+// Toda intenção carrega um token; sair do hover invalida o token e nenhum
+// callback atrasado consegue iniciar ou esconder pôster depois disso.
 
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { adiado } from './scene-utils.js';
-
-gsap.registerPlugin(ScrollTrigger);
-
-const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
 export function initProjectPanels() {
-  const section = $('.prjp');
+  const section = document.querySelector('.prjv');
   if (!section) return;
 
-  const panels = $$('[data-prjp-panel]', section);
-  if (panels.length < 2) return;
+  const items = $$('[data-prjv-item]', section);
+  if (!items.length) return;
 
-  const mm = gsap.matchMedia();
+  // reduced motion: layout estático, pôsteres, profundidade no hover é CSS
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  mm.add(
-    {
-      desktop: '(min-width: 900px)',
-      motionOK: '(prefers-reduced-motion: no-preference)',
-    },
-    (ctx) => {
-      const { desktop, motionOK } = ctx.conditions;
-      if (!motionOK) return undefined;
-      // adiado: ao cruzar 900px o contexto desktop ainda desfaz o pin
-      if (!desktop) return adiado(() => sequenciaVertical(panels));
+  section.classList.add('prjv-js');
 
-      section.classList.add('is-scene', 'has-panels');
-      const pin = $('[data-prjp-pin]', section);
+  const vids = (item) => $$('[data-prjv-vid]', item);
+  const setState = (item, state) => { item.dataset.prjvState = state; };
 
-      gsap.set(panels, { zIndex: (i) => i + 1 });
-      gsap.set(panels.slice(1), { yPercent: 100 });
+  let current = null;
+  let session = 0;
+  // touchMode: ativado no primeiro toque real. Desativa os handlers de hover
+  // (mouse) — dispositivos touch controlam por toque. Desktop com mouse nunca
+  // emite touchstart, então o hover continua ativo.
+  let touchMode = false;
 
-      const MOVE = 0.44;
-      const HOLD = 0.56;
-      const steps = panels.length - 1;
+  items.forEach((item) => setState(item, 'idle'));
 
-      const tl = gsap.timeline({
-        defaults: { ease: 'none' },
-        scrollTrigger: {
-          trigger: pin,
-          start: 'top top',
-          end: `+=${steps * 92}%`,
-          pin: true,
-          scrub: 0.55,
-          invalidateOnRefresh: true,
-          fastScrollEnd: true,
-          anticipatePin: 1,
-          refreshPriority: 10,
-        },
-      });
+  const rewind = (v) => { try { v.currentTime = 0; } catch (e) { /* noop */ } };
+  const isReady = (v) => v.readyState >= 3;
 
-      panels.forEach((panel, i) => {
-        if (i === 0) return;
-        const at = (i - 1) * (MOVE + HOLD);
-        tl.to(panel, { yPercent: 0, duration: MOVE, ease: 'power2.inOut' }, at);
-        // o painel que sai recua: a substituição fica legível como troca
-        tl.to(
-          panels[i - 1],
-          { yPercent: -14, scale: 0.96, duration: MOVE, ease: 'power2.inOut' },
-          at,
-        );
-        tl.from($$('.prjp-in', panel), { yPercent: 115, duration: MOVE * 0.6, stagger: 0.07 }, at + MOVE * 0.45);
-        tl.from($('.prjp-meta', panel), { autoAlpha: 0, x: -20, duration: MOVE * 0.5 }, at + MOVE * 0.5);
-        tl.from($('.prjp-sum', panel), { autoAlpha: 0, y: 22, duration: MOVE * 0.55 }, at + MOVE * 0.6);
-        tl.from($('.prjp-link', panel), { autoAlpha: 0, y: 18, duration: MOVE * 0.5 }, at + MOVE * 0.7);
-        tl.from($('.prjp-shots', panel), {
-          clipPath: 'inset(100% 0 0 0)',
-          duration: MOVE * 0.8,
-          ease: 'power2.out',
-        }, at + MOVE * 0.4);
-        tl.to({}, { duration: HOLD }, at + MOVE);
-      });
+  // Primeiro frame decodificado de verdade. Sem isso o pôster sai antes de o
+  // vídeo ter imagem e aparece um flash vazio.
+  const firstFrame = (v) => new Promise((resolve) => {
+    if ('requestVideoFrameCallback' in v) {
+      v.requestVideoFrameCallback(() => resolve());
+      return;
+    }
 
-      // primeiro painel: entra antes do pin travar
-      const primeiro = panels[0];
-      gsap.from($$('.prjp-in', primeiro), {
-        yPercent: 115,
-        duration: 0.95,
-        stagger: 0.08,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: pin, start: 'top 72%', once: true },
-      });
-      gsap.from([$('.prjp-meta', primeiro), $('.prjp-sum', primeiro), $('.prjp-link', primeiro)], {
-        autoAlpha: 0,
-        y: 22,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: pin, start: 'top 72%', once: true },
-      });
-      gsap.from($('.prjp-shots', primeiro), {
-        clipPath: 'inset(100% 0 0 0)',
-        duration: 1.1,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: pin, start: 'top 72%', once: true },
-      });
-
-      return () => {
-        section.classList.remove('is-scene', 'has-panels');
-        gsap.set(panels, { clearProps: 'all' });
-      };
-    },
-  );
-}
-
-function sequenciaVertical(panels) {
-  const feitos = [];
-  panels.forEach((panel) => {
-    const tl = gsap.timeline({
-      defaults: { ease: 'power3.out' },
-      scrollTrigger: { trigger: panel, start: 'top 82%', once: true },
-    });
-    tl.from($$('.prjp-in', panel), { yPercent: 115, duration: 0.85, stagger: 0.08 }, 0);
-    tl.from($('.prjp-meta', panel), { autoAlpha: 0, x: -18, duration: 0.6 }, 0.1);
-    tl.from([$('.prjp-sum', panel), $('.prjp-link', panel)].filter(Boolean), {
-      autoAlpha: 0,
-      y: 20,
-      duration: 0.7,
-      stagger: 0.09,
-    }, 0.25);
-    tl.from($('.prjp-shots', panel), {
-      clipPath: 'inset(100% 0 0 0)',
-      duration: 0.95,
-      ease: 'power2.out',
-    }, 0.3);
-    tl.from($$('.prjp-flow-shot', panel), { autoAlpha: 0, y: 24, duration: 0.7, stagger: 0.1 }, 0.55);
-    feitos.push(tl);
+    const done = () => { v.removeEventListener('timeupdate', done); resolve(); };
+    v.addEventListener('timeupdate', done, { once: true });
+    window.setTimeout(done, 400);
   });
-  return () => feitos.forEach((t) => t.scrollTrigger?.kill());
+
+  const preloadPair = (item) => {
+    const media = vids(item);
+    if (!media.length) return;
+    if (item.dataset.prjvPreloaded === '1') return;
+    item.dataset.prjvPreloaded = '1';
+
+    media.forEach((v) => {
+      v.preload = 'auto';
+      v.load();
+      v.addEventListener('canplaythrough', () => {
+        if (item.dataset.prjvState !== 'idle') return;
+        if (media.every(isReady)) setState(item, 'ready');
+      });
+    });
+  };
+
+  const start = (item) => {
+    if (current && current !== item) stop(current);   // exclusividade
+    current = item;
+
+    const token = ++session;
+    const media = vids(item);
+    if (!media.length) return;
+
+    preloadPair(item);
+    media.forEach((v) => { v.pause(); rewind(v); });   // sempre da hero
+    setState(item, media.every(isReady) ? 'ready' : 'loading');
+
+    const waitPair = Promise.all(media.map((v) => (isReady(v)
+      ? Promise.resolve()
+      : new Promise((resolve, reject) => {
+        const ok = () => { cleanup(); resolve(); };
+        const fail = () => { cleanup(); reject(new Error('media error')); };
+        const cleanup = () => {
+          v.removeEventListener('canplay', ok);
+          v.removeEventListener('error', fail);
+        };
+        v.addEventListener('canplay', ok, { once: true });
+        v.addEventListener('error', fail, { once: true });
+      }))));
+
+    waitPair
+      .then(() => {
+        // cursor já saiu, ou outro projeto assumiu: intenção morre aqui
+        if (token !== session || current !== item) return undefined;
+        media.forEach(rewind);
+        return Promise.all(media.map((v) => v.play()));
+      })
+      .then(() => {
+        if (token !== session || current !== item) return undefined;
+        return Promise.all(media.map(firstFrame));
+      })
+      .then(() => {
+        if (token !== session || current !== item) return;
+        setState(item, 'playing');                     // só agora o pôster sai
+      })
+      .catch((err) => {
+        if (token !== session) return;
+        console.warn('[projetos] playback interrompido:', err && err.message);
+        stop(item, 'error');
+      });
+  };
+
+  const stop = (item, endState = 'idle') => {
+    session += 1;                                      // mata intenção pendente
+    const media = vids(item);
+
+    setState(item, endState === 'error' ? 'error' : 'resetting');
+    media.forEach((v) => v.pause());
+
+    // o pôster volta no mesmo quadro; o seek acontece atrás dele
+    window.requestAnimationFrame(() => {
+      media.forEach(rewind);
+      if (item.dataset.prjvState === 'resetting') {
+        setState(item, media.length && media.every(isReady) ? 'ready' : 'idle');
+      }
+    });
+
+    if (current === item) current = null;
+  };
+
+  // Aquecimento: bem antes da seção entrar em vista, o par baixa inteiro.
+  // NUNCA reproduz — o hover encontra os dois já decodificáveis.
+  const warm = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      en.target.classList.add('is-seen');
+      preloadPair(en.target);
+      warm.unobserve(en.target);
+    });
+  }, { rootMargin: '1000px 0px 1000px 0px', threshold: 0 });
+  items.forEach((item) => warm.observe(item));
+
+  // primeiro toque real -> modo touch: encerra qualquer hover fantasma
+  document.addEventListener('touchstart', () => {
+    if (!touchMode) { touchMode = true; if (current) stop(current); }
+  }, { capture: true, passive: true });
+
+  items.forEach((item) => {
+    const stage = item.querySelector('.prjv-stage') || item;
+
+    // mouse: hover controla; ignorado em modo touch
+    stage.addEventListener('pointerenter', (e) => { if (!touchMode && e.pointerType === 'mouse') start(item); });
+    stage.addEventListener('pointerleave', (e) => { if (!touchMode && e.pointerType === 'mouse') stop(item); });
+
+    // touch: toque no palco alterna play/pause; nunca intercepta o CTA
+    stage.addEventListener('click', (e) => {
+      if (!touchMode) return;
+      if (e.target.closest('a')) return;
+      if (current === item) stop(item); else start(item);
+    });
+
+    // foco de teclado produz o mesmo destaque que o hover
+    item.addEventListener('focusin', () => start(item));
+    item.addEventListener('focusout', (e) => { if (!item.contains(e.relatedTarget)) stop(item); });
+  });
+
+  // ao sair da seção, nada continua tocando em segundo plano (só pausa)
+  const exitGuard = new IntersectionObserver((entries) => {
+    entries.forEach((en) => { if (!en.isIntersecting && current === en.target) stop(en.target); });
+  }, { threshold: 0 });
+  items.forEach((item) => exitGuard.observe(item));
+
+  // troca de aba: pausar; ao voltar não reinicia sozinho
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && current) stop(current);
+  });
 }

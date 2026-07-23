@@ -1,0 +1,166 @@
+/* COMO TRABALHAMOS — folha editorial única. Abertura assimétrica aprovada
+   (label, headline à esquerda, texto à direita mais baixo) e, abaixo, um
+   tríptico editorial horizontal: três colunas iguais (Leitura, Direção,
+   Tecnologia) sob uma hairline compartilhada com sinal de brasa. Uma única
+   composição, não três cards. Superfície contínua de papel. A presença vem de
+   escala, alinhamento, ritmo e movimento. Repouso (sem JS / reduced motion) já
+   é o estado final: tudo visível e legível. */
+
+.cw {
+  --cw-max: var(--content-max-width);
+  --cw-rule: #e4e0d6;
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  /* a pausa inferior marca a passagem para o CTA de conversão */
+  padding: clamp(72px, 9vh, 108px) var(--gutter) clamp(96px, 14vh, 128px);
+  overflow-x: clip;
+}
+@media (min-width: 700px) {
+  .cw { padding-bottom: clamp(120px, 16vh, 180px); }
+}
+@media (min-width: 1024px) {
+  .cw { padding-bottom: clamp(150px, 20vh, 240px); }
+}
+
+/* --- abertura: label, headline e texto principal em oposição --- */
+.cw-head {
+  max-width: var(--cw-max);
+  margin: 0 auto clamp(52px, 8vh, 100px);
+}
+
+.cw-label {
+  display: flex;
+  align-items: center;
+  margin: 0 0 clamp(26px, 4vh, 44px);
+  font: 400 0.75rem/1.5 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+}
+.cw-label-dot {
+  width: 6px;
+  height: 6px;
+  margin-right: var(--s-2);
+  background: var(--ember-light);
+}
+
+.cw-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.3rem, 5.4vw, 4.7rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-wrap: balance;
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 40, "wght" 400;
+  font-feature-settings: "liga" 1, "dlig" 0, "swsh" 0;
+}
+
+.cw-lead {
+  margin: clamp(22px, 3vh, 32px) 0 0;
+  max-width: 42ch;
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.1vw, 1.15rem);
+  line-height: 1.62;
+  color: var(--body);
+}
+
+/* --- tríptico: três colunas iguais sob uma hairline compartilhada --- */
+.cw-tript {
+  max-width: var(--cw-max);
+  margin: 0 auto;
+}
+
+.cw-tript-rule {
+  display: block;
+  height: 1px;
+  margin-bottom: clamp(26px, 4vh, 46px);
+  background: var(--cw-rule);
+  transform-origin: left center;
+}
+
+.cw-cols {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.cw-col {
+  min-width: 0;
+}
+
+.cw-col-title {
+  margin: 0 0 clamp(12px, 1.8vh, 18px);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.55rem, 2.2vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.014em;
+  color: var(--ink);
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 40, "wght" 400;
+  font-feature-settings: "liga" 1, "dlig" 0, "swsh" 0;
+}
+
+.cw-col-text {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 0.9vw, 1.125rem);
+  line-height: 1.6;
+  color: var(--body);
+}
+
+/* ==========================================================
+   DESKTOP: tríptico em três colunas na grade de 12; títulos e parágrafos
+   alinhados na mesma base, mesmo sistema. Sem borda por coluna.
+   ========================================================== */
+@media (min-width: 900px) {
+  .cw-head {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: clamp(24px, 3vw, 56px);
+    align-items: end;
+  }
+  .cw-label { grid-column: 1 / -1; }
+  .cw-title { grid-column: 1 / span 8; }
+  .cw-lead {
+    grid-column: 9 / -1;
+    margin: 0;
+    align-self: end;
+    padding-bottom: clamp(4px, 1.2vh, 14px);
+  }
+
+  .cw-cols {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: clamp(24px, 3vw, 56px);
+  }
+  .cw-col-text { max-width: 34ch; }
+}
+
+/* ==========================================================
+   MOBILE / ESTREITO: fluxo vertical, uma hairline separa cada coluna.
+   O conteúdo determina a altura; sem colunas artificiais, sem cards.
+   ========================================================== */
+@media (max-width: 899px) {
+  .cw-lead { max-width: none; }
+  .cw-col-text { max-width: none; }
+
+  .cw-col + .cw-col {
+    margin-top: clamp(26px, 4vh, 38px);
+    padding-top: clamp(26px, 4vh, 38px);
+    border-top: 1px solid var(--hairline);
+  }
+}
+
+/* ==========================================================
+   REDUCED MOTION — repouso já é o estado final; nada depende de animação
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .cw-tript-rule { transform: none !important; }
+}

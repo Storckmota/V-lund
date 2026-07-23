@@ -1,28 +1,56 @@
-/* CTA e FOOTER — duas seções distintas.
-   CTA: fundo papel, bloco em tinta, ação própria (nada da hero).
-   Footer: volta ao papel, com a rajada em SVG atravessando a faixa
-   superior. O contraste entre os dois marca o fim da ação comercial. */
+/* CTA e FOOTER — duas superfícies deliberadamente distintas.
+   CTA: painel de conversão em tinta, arredondado, flutuando sobre papel,
+        com moldura simétrica e um corredor de papel abaixo.
+   Footer: superfície full-bleed em tinta (#17150F), sem cantos arredondados,
+        que sobe do papel conduzida por uma faixa de brasa curva na borda. */
 
 /* ==========================================================
-   CTA
-   ========================================================== */
-
+   CTA — painel reduzido, centralizado, moldura simétrica
+   ==========================================================
+   A moldura vem de padding simétrico no campo de papel (.cta), nunca de
+   width: calc(): assim a scrollbar não produz assimetria lateral. O
+   padding-bottom maior é o corredor de papel que separa o CTA do footer. */
 .cta {
   background: var(--paper);
-  padding: clamp(72px, 11vh, 144px) var(--gutter) clamp(56px, 9vh, 112px);
+  padding: clamp(28px, 4vh, 36px) clamp(16px, 3vw, 40px) clamp(72px, 9vh, 110px);
   font-variation-settings: "opsz" 60;
 }
 
 .cta-block {
-  max-width: 1180px;
-  margin: 0 auto;
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  width: 100%;
+  margin-inline: auto;
+  min-height: clamp(500px, 84svh, 760px);
   background: var(--ink);
   color: var(--paper);
-  border-radius: clamp(10px, 1.1vw, 18px);
-  padding: clamp(48px, 8vh, 112px) clamp(28px, 5vw, 96px);
+  border-radius: clamp(12px, 1.4vw, 22px);
+  padding: clamp(48px, 8vh, 108px) clamp(28px, 5vw, 88px);
   text-align: center;
   display: grid;
+  place-content: center;
   justify-items: center;
+}
+
+/* granulação estática monocromática — retira o preto digital chapado, dá
+   materialidade. Ruído procedural local (feTurbulence dessaturado), fino e
+   uniforme, sem animação, sem reação ao cursor. mix-blend overlay: o cinza
+   médio do ruído é neutro, então a cor principal da tinta não muda; só as
+   variações finas do grão aparecem. z-index -1 (via isolation): entre o fundo
+   e o conteúdo. border-radius: inherit respeita os cantos. Intensidade ~2–3%
+   percebida — se for notada à primeira vista, está forte demais. */
+.cta-block::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  opacity: 0.32;
+  mix-blend-mode: overlay;
+  pointer-events: none;
 }
 
 .cta-eyebrow {
@@ -117,238 +145,312 @@
 }
 
 /* ==========================================================
-   FOOTER
-   ========================================================== */
+   FOOTER — superfície full-bleed em tinta (#17150F)
+   ==========================================================
+   Encerramento institucional. Distinto do CTA: sem cantos arredondados,
+   sangra de ponta a ponta e sobe do papel conduzida por uma faixa de brasa
+   curva. Campo funcional pequeno no topo, masthead VÓLUND como centro de
+   gravidade na metade inferior, faixa utilitária no rodapé. Sem listas,
+   sem cards, sem repetição do CTA.
 
-.ft {
-  --label: #6f6a5d;
-  --gust-h: clamp(96px, 15vh, 180px);
+   Estado de repouso (sem JS / reduced motion): a superfície de tinta já
+   cobre o footer (.ftx-ink em transform: none), a faixa de brasa fica
+   invisível (recolhida acima do topo), o conteúdo está legível. */
+.ftx {
+  --ftx-ink: #17150f;
+  --wgx: -9999;
+  --wgy: -9999;
+  --hgx: -9999;
+  --gi: 0;
+  --gw: 500;
+  --gh: 190;
+  --vx: 0;
+  --vy: 0;
+
   position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: clamp(460px, 62svh, 680px);
+  padding: clamp(46px, 6.5vh, 76px) var(--gutter) clamp(26px, 4vh, 40px);
+  /* papel: só aparece no intervalo curto em que a tinta sobe */
   background: var(--paper);
-  color: var(--body);
-  /* o respiro superior é a faixa onde a rajada corre: ela nunca cruza
-     texto, navegação ou contato */
-  padding: var(--gust-h) var(--gutter) clamp(28px, 4vh, 44px);
-  overflow: clip;
-  font-variation-settings: "opsz" 60;
+  color: var(--paper);
 }
 
-.ft-gust {
+/* Campo orgânico atual. O canvas permanece acima do conteúdo; o recorte dos
+   glifos deixa as duas camadas SVG visíveis sem alterar o campo do fundo.
+   Em repouso (sem JS / reduced motion) fica em branco. */
+.ftx-canvas {
   position: absolute;
-  top: 0;
+  inset: 0;
+  z-index: 2;
+  display: block;
+  pointer-events: none;
+  mix-blend-mode: normal;
+}
+
+/* superfície que sobe — agente do gesto. Contém a tinta cheia (.ftx-ink) e a
+   lâmina de brasa (.ftx-blade) na borda condutora. Em repouso: assentada
+   (transform: none) cobrindo o footer; a lâmina fica acima do topo e é
+   cortada pelo overflow. */
+.ftx-rise {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.ftx-ink {
+  position: absolute;
+  inset: 0;
+  background: var(--ftx-ink);
+}
+
+/* lâmina de brasa: a borda superior curva e assimétrica da tinta que sobe.
+   Uma única curva ampla, crista deslocada para a direita. A parte inferior da
+   lâmina também é tinta — emenda sem costura com .ftx-ink; o filete de brasa
+   apenas traça a borda condutora. preserveAspectRatio none: a curva acompanha
+   a largura da viewport. Invisível em repouso (recolhida pelo overflow). */
+.ftx-blade {
+  position: absolute;
   left: 0;
   right: 0;
-  height: var(--gust-h);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.ft-gust svg {
-  display: block;
+  bottom: 100%;
+  margin-bottom: -1px;
   width: 100%;
-  height: 100%;
+  height: clamp(64px, 9vh, 118px);
+  display: block;
+}
+.ftx-blade-ink {
+  fill: var(--ftx-ink);
+}
+.ftx-blade-line {
+  fill: none;
+  stroke: var(--ember-dark);
+  stroke-width: 3;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
 }
 
-.ft-gust-p {
-  fill: var(--ink);
-}
-
-/* opacidades baixas: as camadas devem ler como deslocamento de ar, não
-   como traço desenhado. A brasa é o único acento e não domina a faixa. */
-.ft-gust-p--1 { opacity: 0.11; }
-.ft-gust-p--2 { opacity: 0.075; }
-.ft-gust-p--3 { fill: var(--ember-light); opacity: 0.26; }
-
-.ft-inner {
+.ftx-inner {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
+  width: 100%;
   max-width: 1360px;
   margin: 0 auto;
 }
 
-.ft-topline {
-  display: block;
-  height: 1px;
-  background: var(--hairline);
+/* campo superior funcional: descritor + acesso direto. Utilitário, pequeno,
+   nunca um segundo CTA. margin-top: auto puxa a faixa para perto do campo
+   central (não isolada no extremo superior). */
+.ftx-top {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px 40px;
 }
-
-.ft-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr);
-  column-gap: clamp(24px, 4vw, 72px);
-  row-gap: 40px;
-  padding: clamp(40px, 6vh, 72px) 0 clamp(36px, 5.5vh, 68px);
-}
-
-.ft-brand {
-  display: grid;
-  gap: 18px;
-  align-content: start;
-}
-
-.ft-mark-mask {
-  display: block;
-  overflow: hidden;
-  width: clamp(118px, 12vw, 160px);
-}
-
-.ft-mark {
-  display: block;
-  width: 100%;
-  height: auto;
-  color: var(--ink);
-}
-
-.ft-tag {
-  font: 400 0.6875rem/1.6 var(--font-mono);
+.ftx-desc {
+  display: inline-flex;
+  align-items: center;
+  font: 400 0.75rem/1.5 var(--font-mono);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--label);
+  letter-spacing: 0.14em;
+  color: rgba(250, 248, 244, 0.66);
 }
-
-.ft-ember {
+.ftx-ember {
   display: inline-block;
   width: 6px;
   height: 6px;
   margin-right: 10px;
-  background: var(--ember-light);
-  vertical-align: 10%;
+  background: var(--ember-dark);
 }
-
-.ft-label {
-  font: 400 0.6875rem/1.6 var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--label);
-  margin-bottom: 10px;
+.ftx-reach {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 20px;
+  font-style: normal;
 }
-
-.ft-nav,
-.ft-contact {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.ft-link {
-  position: relative;
+.ftx-reach-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  min-height: 42px;
-  color: var(--ink);
-  font: 500 0.9375rem/1 var(--font-sans);
+  font: 500 0.9375rem/1.2 var(--font-sans);
+  letter-spacing: 0.01em;
+  color: var(--paper);
   text-decoration: none;
 }
-
-.ft-link-arrow {
-  width: 10px;
-  height: 10px;
-  color: var(--ember-light);
-  transition: transform var(--dur-micro) var(--ease-out);
+.ftx-reach-arrow {
+  width: 13px;
+  height: 13px;
+  color: var(--ember-dark);
+  transition: transform 0.45s var(--ease-out);
+}
+.ftx-reach-link:hover .ftx-reach-arrow,
+.ftx-reach-link:focus-visible .ftx-reach-arrow {
+  transform: translate(3px, -3px);
 }
 
-.ft-link::after {
-  content: "";
+/* assinatura principal: masthead VÓLUND. Centro de gravidade, logo abaixo da
+   faixa superior, um pouco abaixo do centro vertical (as auto-margens de .ftx-top
+   e .ftx-base cercam o grupo). Escala ~84% da largura útil, legível, sem corte.
+   Assinatura de encerramento — nunca o monumento da hero. */
+.ftx-mast-link {
+  display: block;
+  /* largura explícita num flex column: sem margin-inline auto o item ancora em
+     flex-start (esquerda) e o wordmark desloca ~105px para a esquerda. auto
+     centraliza o conjunto visível das letras em relação ao footer/viewport. */
+  margin: clamp(20px, 3.2vh, 40px) auto 0;
+  width: min(84%, 1200px);
+  text-decoration: none;
+}
+.ftx-mast-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.04em;
+}
+/* Duas camadas perfeitamente sobrepostas: base em papel + brasa. O reveal
+   vertical de entrada move a pilha inteira. */
+.ftx-mast-stack {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+.ftx-mast {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--paper);
+}
+.ftx-mast--ember {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 9px;
-  height: 1px;
-  background: var(--ember-light);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--dur-micro) var(--ease-out);
+  inset: 0;
+  color: var(--ember-dark);
+  opacity: var(--gi);
+  transform: translate3d(calc(var(--vx) * 1px), calc(var(--vy) * 1px), 0);
+  -webkit-mask: radial-gradient(
+    calc(var(--gw) * 0.6px) calc(var(--gh) * 0.72px) at calc(var(--wgx) * 1px)
+      calc(var(--wgy) * 1px),
+    #000 0%,
+    #000 24%,
+    transparent 72%
+  );
+  mask: radial-gradient(
+    calc(var(--gw) * 0.6px) calc(var(--gh) * 0.72px) at calc(var(--wgx) * 1px)
+      calc(var(--wgy) * 1px),
+    #000 0%,
+    #000 24%,
+    transparent 72%
+  );
+  will-change: opacity, transform;
 }
 
-.ft-link:hover::after,
-.ft-link:focus-visible::after {
-  transform: scaleX(1);
-}
-
-.ft-link:hover .ft-link-arrow,
-.ft-link:focus-visible .ft-link-arrow {
-  transform: translate(2px, -2px);
-}
-
-.ft-num {
-  margin-top: 6px;
-  font-size: 0.875rem;
-  color: var(--label);
-}
-
-.ft-base {
+/* faixa inferior: uma linha utilitária. © · número verificado · voltar ao topo.
+   margin-top: auto empurra a faixa para o rodapé; junto com o margin-top: auto
+   de .ftx-top, cerca o grupo assinatura e mantém a composição concentrada. */
+.ftx-base {
+  position: relative;
+  margin-top: auto;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 12px 32px;
-  border-top: 1px solid var(--hairline);
   padding-top: 20px;
 }
-
-.ft-meta {
+/* hairline base + segmento de brasa que a rajada acende ao atravessar. */
+.ftx-base::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(250, 248, 244, 0.14);
+}
+.ftx-base::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: calc(var(--hgx) * 1px);
+  width: calc(var(--gw) * 1px);
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, var(--ember-dark) 50%, transparent);
+  opacity: calc(var(--gi) * 0.6);
+  pointer-events: none;
+}
+.ftx-meta {
   font: 400 0.6875rem/1.6 var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--label);
+  color: rgba(250, 248, 244, 0.6);
 }
-
-.ft-meta--desc {
-  color: var(--label);
-  opacity: 0.85;
+a.ftx-meta {
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
-
-.ft-top {
-  position: relative;
+a.ftx-meta:hover,
+a.ftx-meta:focus-visible {
+  color: var(--paper);
+}
+.ftx-top-link {
   margin-left: auto;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  min-height: 42px;
-  color: var(--label);
+  min-height: 44px;
   font: 400 0.6875rem/1 var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  color: rgba(250, 248, 244, 0.6);
   text-decoration: none;
   transition: color 0.3s ease;
 }
-
-.ft-top-arrow {
+.ftx-top-arrow {
   width: 9px;
   height: 11px;
   transition: transform var(--dur-micro) var(--ease-out);
 }
-
-.ft-top:hover,
-.ft-top:focus-visible {
-  color: var(--ink);
+.ftx-top-link:hover,
+.ftx-top-link:focus-visible {
+  color: var(--paper);
+}
+.ftx-top-link:hover .ftx-top-arrow,
+.ftx-top-link:focus-visible .ftx-top-arrow {
+  transform: translateY(-3px);
 }
 
-.ft-top:hover .ft-top-arrow,
-.ft-top:focus-visible .ft-top-arrow {
-  transform: translateY(-3px);
+.ftx :focus-visible {
+  outline-color: var(--ember-dark);
+  outline-offset: 4px;
 }
 
 /* ==========================================================
    RESPONSIVO
    ========================================================== */
 
+/* tablet e abaixo: corredor e moldura do CTA mais curtos */
 @media (max-width: 899px) {
-  .cta-block {
-    padding-inline: clamp(20px, 6vw, 40px);
+  .cta {
+    padding: clamp(24px, 3.5vh, 32px) clamp(16px, 3vw, 32px) clamp(40px, 7vh, 64px);
   }
-
-  .ft-grid {
-    grid-template-columns: 1fr;
-    row-gap: 40px;
+  .ftx {
+    min-height: 0;
+    padding-top: clamp(44px, 7vh, 68px);
   }
-
-  .ft-top {
+  .ftx-mast-link {
+    width: min(88%, 640px);
+  }
+  .ftx-base {
+    gap: 10px 24px;
+  }
+  .ftx-top-link {
     margin-left: 0;
-  }
-
-  .ft-gust {
-    height: clamp(110px, 16vh, 170px);
   }
 }
 
@@ -357,11 +459,13 @@
     width: 100%;
     justify-content: center;
   }
-}
-
-/* reduced motion: a rajada permanece como forma estática */
-@media (prefers-reduced-motion: reduce) {
-  .ft-gust-p {
-    transition: none;
+  .ftx-top {
+    gap: 14px 24px;
+  }
+  .ftx-reach {
+    gap: 16px;
+  }
+  .ftx-mast-link {
+    width: 100%;
   }
 }

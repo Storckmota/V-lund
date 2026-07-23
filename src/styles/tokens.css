@@ -9,9 +9,24 @@
   --ember-light: #a03d2d;
   --ember-dark: #c45543;
 
+  /* stone paper / warm mineral — superfície de encerramento do footer:
+     mais escura que o papel base, mais clara que a tinta. Nunca fundo dominante. */
+  --stone: #ccc3b0;
+  --stone-line: #b0a58d;
+  --stone-label: #5c5443;
+
   --font-display: "Fraunces", Georgia, serif;
   --font-sans: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "Space Mono", "Courier New", monospace;
+
+  /* escala tipográfica de seção — base reutilizável para abertura de capítulo.
+     Não competir com a hero principal; auditoria global posterior. */
+  --type-section-display: clamp(3.4rem, 8.4vw, 6.6rem);
+  --type-label: clamp(0.78rem, 0.9vw, 0.9rem);
+
+  /* espaçamento de abertura de seção */
+  --content-max-width: 1440px;
+  --section-heading-gap: clamp(18px, 2.6vh, 32px);
 
   --s-1: 8px;
   --s-2: 13px;
